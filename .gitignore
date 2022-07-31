@@ -1,0 +1,10 @@
+__pycache__/
+*.log
+*.swp*
+*.gz
+*.bz2
+*.xz
+plugged/*
+plugin/*
+log/*
+

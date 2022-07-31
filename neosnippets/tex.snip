@@ -1,0 +1,1116 @@
+snippet     latexdocc
+abbr        \documentclass[uplatex,dvipdfmx,autodetect-engine,ja=standard,fleqn,a4paper,12pt]{bxjsarticle}
+options    word, indent
+   \documentclass[uplatex,dvipdfmx]{jsarticle}${0}
+snippet     docc
+abbr        \documentclass[ ... ]{bxjsarticle}
+options    word, indent
+    \documentclass[ja=standard,fleqn,a4paper,12pt]{ltjsarticle}
+    \usepackage{luatexja}
+    % まずはLuaTeXの日本語フォント設定の読み込み
+    \usepackage{luatexja-fontspec}${0}
+snippet     doc
+abbr        \begin{document}...\end{document}
+options    word, indent
+   \begin{document}${0}\end{document}
+snippet     title
+abbr        \title{}..\author{}..\date{}..\maketitle
+options    word, indent
+    \title{${1}}
+    \author{${2}}
+    \date{${3}}
+    \maketitle${0}
+snippet     np
+alias       npage
+abbr        改ページ \newpage
+options    word, indent
+   \newpage${0}
+snippet     deffont
+alias       defaultfont
+abbr        default font setting
+options    word, indent
+    % フォントエンコーディング
+    % デフォルトのフォントエンコーディングは7ビットのOT1である
+    % 現在は8ビットエンコーディングのT1が使用される。
+    \usepackage[T1]{fontenc}                % 8ビットエンコーディング T1
+    % T1に納め切らない記号はTS1エンコーディングに納められこれらの文字群をTC(Text Companion)という。
+    % これらを使用するにはtextcompパッケージをインストールする。
+    \usepackage{textcomp}                   % 追加フォントを使う(記号など) TS1
+    % ソースファイルの文字コード
+    \usepackage[utf8]{inputenc}             % ファイルのエンコーディング
+    % ボールド・エクストラボールド(Extra Bold)
+    % \textbf{}や\bfseries{}はボールドに出力する命令だがデフォルトではbx(ExtraBold)で出力される。
+    % これを変更する。bx(Extra Bold)を使用したければ{\fontseries{bx}\selectfont ...}を使用する。
+    \renewcommand{\bfdefault}{b}
+    \usepackage[sc]{mathpazo}
+    \usepackage{textcomp,mathcomp}                   % 追加フォントを使う(記号など) TS1
+    \usepackage{otf}                        % 使える漢字の数を増やす
+    \usepackage{ascmac}                     % \yenで円記号が出力できる${0}
+    % デフォルトのセリフ・サンセリフ・タイプライタフォント設定
+    %\renewcommand{\rmdefault}{qcs}          % デフォルトのセリフ(ローマン)体 New Century Schoolbook
+    %\renewcommand{\sfdefault}{qhv}          % デフォルトのサンセリフ体 TeX Gyre Heros
+    %\renewcommand{\ttdefault}{zi4}         % デフォルトのタイプライタ体(等幅フォント)
+snippet     upfont
+alias       luatexfont
+abbr        luatex font default usepackage.
+options    word, indent
+    % 欧文フォント基本設定
+    %\usepackage[no-math]{fontspec}
+    \usepackage{fontspec}
+    % まずはLuaTeXの日本語フォント設定の読み込み
+    % 欧文基本14書体の中のPostScript記号用フォント
+    % Symbol, ZapfDingbatsフォントを使う
+    \usepackage{pifont}
+    % 欧文その他の設定
+    % 日本語フォントの設定
+    % 使える漢字を増やす otfパッケージ
+    % \CID 命令を使いたいので...
+    %\ifthenelse{\boolean{xetex}}{
+        % XeLaTeXではzxotfを読み込む
+    %    \usepackage{zxotf}
+    %}{\ifthenelse{\boolean{luatex}}{
+        % LuaLaTeXではluatexja-otfを読み込む
+    %    \usepackage{luatexja-otf}
+    %}{\ifthenelse{\boolean{upTeX}}{
+        % upLaTeXではuplatexオプション付でotf
+    %    \usepackage[uplatex]{otf}
+        % uplatexでは一部の文字が扱えない不具合に対処するパッケージ
+        % OTFパッケージより後に読み込む
+    %    \usepackage[prefernoncjk]{pxcjkcat}
+    %}{%else (pLaTeXと仮定する)
+        % pLaTeXではオプション無しでotf
+    %    \usepackage{otf}
+    %}}}
+    \usepackage{ascmac}                     % \yenで円記号が出力できる
+    % 欧文のフォントファミリの設定
+    % 欧文のフォントファミリの設定
+    % 数式フォント
+    % 数式フォントをFourier-GUTenberg で Utopia を New Century Schoolbook(ファミリ名 fnc) に置き換えたものです。
+    \usepackage{fouriernc}
+    \usepackage{tgtermes}
+    \usepackage{cabin}
+    \usepackage{zi4}
+    % TeXGyreTerms-Regular              Serif体
+    \setmainfont{texgyretermes-regular.otf}
+    \setsansfont{TeXGyreHeros}          % SansSerif体
+    \setmonofont{inconsolatazi4}        % Type Writer体
+snippet     upjfont
+abbr        日本語フォント設定 LuaLaTeX
+options    word, indent
+    % まずはLuaTeXの日本語フォント設定の読み込み
+    \usepackage{luatexja-fontspec}
+    %% 和文フォント
+    \usepackage[deluxe]{luatexja-preset}
+    % 原ノ味 明朝
+    % \setmainjfont[
+    %     Kerning=On,
+    %     CharacterWidth=AlternateProportional,
+    %     YokoFeatures={JFM=prop},
+    %     Script=Default,
+    %     BoldFont=HaranoAjiMincho-Bold
+    % ]{HaranoAjiMincho-Regular}         % 明朝体
+    % ヒラギノ明朝 P
+    %\setmainjfont[
+    %    Kerning=On,
+    %    CharacterWidth=Proportional,
+    %    YokoFeatures={JFM=prop},
+    %    Script=Default
+    %]{Hiragino-Mincho-ProN.ttc}         % 明朝体
+    % 源の明朝 
+    \setmainjfont[
+        Kerning=On,
+        CharacterWidth=Proportional,
+        YokoFeatures={JFM=myprop},
+        Script=Default,
+        BoldFont=SourceHanSerifJP-Bold.otf
+    ]{SourceHanSerifJP-Regular.otf}         % 明朝体
+    \setsansjfont[
+        Kerning=On,
+        CharacterWidth=Proportional,
+        YokoFeatures={JFM=prop},
+        Script=Default,
+        BoldFont=GenShinGothic-P-Bold.ttf
+    ]{GenShinGothic-P-Normal.ttf}          % ゴシック体
+    % \setmonojfont{}        % 等幅フォント体
+    \setxkanjiskip{0.1\zw minus 0.1\zw}${0}
+snippet     sec
+abbr        \section{....}
+options    word, indent
+   \section{${0}}
+snippet     subsec
+abbr        \subsection{}
+options    word, indent
+   \subsection{${0}}
+snippet     quo
+abbr        \begin{quotation}...\end{quotation}
+options    word, indent
+    \begin{quotation}${0}\end{quotation}
+snippet     quote
+abbr        \begin{quote}...\end{quote}
+options    word, indent
+    \begin{quote}${0}\end{quote}
+snippet     verb
+abbr        \begin{verbatim}...\end{verbatim}
+options    word, indent
+   \begin{verbatim}${0}\end{verbatim}
+snippet     vb
+abbr        \verb|...|
+options    word, indent
+   \verb|${0}|
+snippet     ln
+abbr        \newline
+options    word, indent
+    \newline${0}
+snippet     up
+abbr        \usepackage{...}
+options    word, indent
+   \usepackage{${0}}
+snippet     gt
+abbr        \textgt{...}
+options    word, indent
+   \textgt{${1:TARGET}}${0}
+snippet     fleft
+abbr        要素を左寄せ \\begin{flushleft}...\end{flushleft}
+options    word, indent
+   \begin{flushleft}${0:TARGET}\end{flushleft}
+snippet     fright
+abbr        要素を右寄せ \\begin{flushright}...\end{flushright}
+options    word, indent
+   \begin{flushright}${0:TARGET}\end{flushright}
+snippet     center
+abbr        要素を中央に \\begin{center}...\end{center}
+options    word, indent
+    \begin{center} ${0:TARGET} \end{center}
+snippet     ul
+alias       itemize
+abbr        \\begin{itemize}....\end{itemize}
+options    word, indent
+   \begin{itemize}
+        \item ${0}
+    \end{itemize}
+snippet     litem
+abbr        \\renewcommand{\labelitem...}{...}
+options    word, indent
+   \renewcommand{\labelitem${1:i}}{${0}}
+snippet     ol
+alias       enum
+abbr        \begin{enumerate}...\end{enumerate}
+options    word, indent
+    \begin{enumerate}[label=${1:\arabic*}]
+        \item ${0}
+    \end{enumerate}
+snippet     desc
+abbr        \\begin{description}...\end{description}
+options    word, indent
+    \begin{description}
+        \item ${0}
+    \end{description}
+snippet     item
+abbr        \item[..] .....
+options    word, indent
+    \item[${1}]  ${0}
+snippet     upenum
+abbr        箇条書きパッケージenumitem \usepackage[shortlabels]{enumitem}
+options    word, indent
+    \usepackage[shortlabels]{enumitem}${0}
+snippet     tex
+abbr        \TeX
+options    word, indent
+   \TeX{}${0}
+snippet     latex
+abbr        \LaTeX
+options    word, indent
+   \LaTeX{}${0}
+snippet     fln
+abbr        forcing line
+options    word, indent
+    \mbox{} \\ ${0}
+snippet     hs
+abbr        \hspace*{...}
+options     word, indent
+    \hspace${1:#:*}{${2}}${0}
+snippet     vs
+abbr        \vspace*{...}
+options     word, indent
+    \vspace${1:#:*}{${0}}
+snippet     fnote
+abbr        \footnote{...}
+options     word, indent
+   \footnote{${1}} ${0}
+snippet     uline
+abbr        \underline{....}
+options     word, indent
+    \underline{${1}} ${0}
+snippet     hr
+abbr        \hrulefill 
+options     word, indent
+    \hrulefill ${0}
+snippet     dothr
+abbr        \dotfill 
+options     word, indent
+    \dotfill ${0}
+snippet     fbox
+abbr        \fbox{...}
+options     word, indent
+    \fbox{${1}}${0}
+snippet     framebox
+alias       fb
+abbr        \framebox[size][c|l|r]{...}
+options     word, indent
+    \framebox[${1:#:size}][${2:c}]{${3}}${0}
+snippet     fboxsep
+abbr        \setlength{\fboxsep}{size} \setlength{\fboxrule}{size}
+options     word, indent
+    \setlength{\fboxsep}{${1:#:size}}
+    \setlength{\fboxrule}{${2:#:size}}${0}
+snippet     ruby
+abbr        \ruby{漢字}{カナ}
+options     word, indent
+    \ruby{${1:#:kannji}}{${2:#:kana}}${0}
+snippet     newcom
+alias       nc
+abbr        \newcommand{...}{....}
+options     word, indent
+    \newcommand{${1}}{${0}}
+snippet     recom
+alias       rc
+abbr        \renewcommand{\コマンド名}{...}
+options     word, indent
+    \renewcommand{${1}}{${0}}
+snippet     newenv
+abbr        \newenvironment{...}{....}{.....}
+options     word, indent
+    \newenvironment{${1}}{${0}}{}
+snippet     env
+abbr        \begin{...}..\end{...}
+options     word, indent
+    \begin{${1}}${0}\end{$1}
+snippet     it
+abbr        \textit{...}
+options     word, indent
+    \textit{${0:TARGET}}
+snippet     nb
+abbr        \nobreak
+options     word, indent
+    \nobreak${0}
+snippet     exp
+abbr        累乗 math exponentiation
+options     word, indent
+    ${1}^{${2}}${0}
+snippet     do
+abbr        temp symbol
+options     word, indent
+    ${1}\textdegree${0}
+snippet     $do
+abbr        math temp symbol
+options     word, indent
+    ${1}^{\circ}${0}
+snippet     $[
+abbr        別行立て数式 \[ .... \]
+options     word, indent
+    \[ ${0} \]
+snippet     equ
+abbr        番号付き別行立て数式 \begin{equation}...\end{equation}
+options     word, indent
+    \begin{equation}${0}\end{equation}
+snippet     equ*
+abbr        番号なし別行立て数式 \begin{equation*}...\end{equation*}
+options     word, indent
+    \begin{equation*}${0}\end{equation*}
+snippet     gather
+abbr        複数別行立て数式 \begin{gather}...\end{gather}
+options     word, indent
+    \begin{gather}${0}\end{gather}
+snippet     gather*
+abbr        複数別行立て数式 \begin{gather*}...\end{gather*}
+options     word, indent
+    \begin{gather*}${0}\end{gather*}
+snippet     align
+abbr        複数別行立て数式 \begin{align}...\end{align}
+options     word, indent
+    \begin{align}${0}\end{align}
+snippet     alignat
+abbr        複数別行立て数式 空きを自分で制御 \begin{alignat}...\end{alignat}
+options     word, indent
+    \begin{alignat}{${1}}${0}\end{alignat}
+snippet     mathindent
+abbr        別行立て数式の左端からの距離の指定 \setlength{\mathindent}{...}
+options     word, indent
+    \setlength{\mathindent}{${1:#:2zw}}${0}
+snippet     frac
+abbr        分数 \frac{分子}{分母}
+options     word, indent
+    \frac{${1}}{${2}}${0}
+snippet     sqrt
+abbr        平方根 \sqrt{...}
+options     word, indent
+    \sqrt{${0}}
+snippet     ams
+abbr        \usepackage{amsmath}
+alias       amsmath
+options     word, indent
+    \usepackage{amsmath}
+    \usepackage{amssymb}${0}
+snippet     bra
+alias       brackets
+abbr        数式内括弧 ( ... ) \left( ... \right)
+options     word, indent
+    \left( ${0:TARGET} \right)
+snippet     kakko
+alias       lr
+abbr        数式内様々な文字の括弧(||{}..) \left ... \right
+options     word, indent
+    \left${1} ${0} \right${2}
+snippet     biglr
+abbr        数式内様々な文字の括弧(||{}..) \bigl ... \bigr
+options     word, indent
+    \bigl${1} ${0} \bigr${2}
+snippet     Biglr
+abbr        数式内様々な文字の括弧(||{}..) \bigl ... \bigr
+options     word, indent
+    \Bigl${1} ${0} \Bigr$1
+snippet     brace
+abbr        数式内波括弧 { ... } \left\{ ... \right\}
+options     word, indent
+    \left\{ ${0} \right\}
+snippet     upimg
+abbr        \usepackage[hiresbb]{graphicx,xcolor}
+options     word, indent
+    % グラフィックパッケージ
+    \usepackage[hiresbb]{graphicx}
+    % LaTeXで色を使用するパッケージ xcolor
+    \usepackage{xcolor}
+    % 色の定義 色を名前で指定できるパケージ
+    % pythonプログラム create_latex_color_name_sty.pyで自動作成したスタイルファイル
+    \usepackage{defcolor}
+    % .を複数含んでいたり空白を含むファイル名に対してlatexはデフォルトではエラー
+    % grffileパッケージで対処する。
+    % しかし\includegraphics命令のみ対応しており、その他の場面では使えない。
+    % extendedcharsで日本語のファイル名に対応していると思う。
+    \usepackage[extendedchars]{grffile}
+    % 枠付きボックスを柔軟に作成するパッケージ
+    \usepackage{tcolorbox}
+    % tcolorboxのライブラリ
+    % breakable     ボックスがページまたぎに対応する 
+    % skins         ボックスに影を作る際にskinライブラリが必要
+    \tcbuselibrary{breakable,raster,skins}${0}
+snippet      img
+abbr        LaTeX画像出力命令 \includegraphics[...]{画像ファイル名}
+options     word, indent
+    \includegraphics[width=${1}cm,height=${2}cm,keepaspectratio]{${3:#:imgfilename}}${0}
+snippet     imgpath
+abbr        LaTeX画像用ディレクトリーの指定 \graphicspath{{path/},{path/},.....}
+options     word, indent
+    \graphicspath{{${1:#:path/}}}${0}
+snippet     cc
+alias       textcolor
+abbr        文字列の色の命令 \color[HTML]{RGB16進指定}{...}
+options     word, indent
+    {\color[HTML]{${0}} }
+snippet     pagecc
+abbr        ページの背景色 \pagecolor[HTML]{RGB16進指定}{...}
+options     word, indent
+    \pagecolor[HTML]{${0}}
+snippet     ccbox
+abbr        文字の背景の色 \colorbox[HTML]{RGB16進指定}{...}
+options     word, indent
+    \colorbox[HTML]{${0}}{}
+snippet     fccbox
+abbr        文字の背景の色 \fcolorbox[HTML]{枠の色 RGB16進指定}{背景の色 RGB16進指定}{...}
+options     word, indent
+    \fcolorbox[HTML]{${0}}{}{}
+snippet     upmdframed
+abbr        mdframed 枠囲みパッケージ \usepackage{tikz} \usepackage[framemethod=tikz]{mdframed}
+options     word, indent
+    \usepackage{tikz}
+    \usepackage[framemethod=tikz]{mdframed}${0}
+snippet     mddefine
+abbr        mdframedの個々の枠囲みの定義 \mdfdefinestyle{スタイル名}{...}
+options     word, indent
+   \mdfdefinestyle{${1}}%
+   {frametitle=${0},linecolor=black,linewidth=pt,backgroundcolor=}
+snippet     mdframed
+abbr        mdframed 枠囲み \begin{mdframed}[style=...] ... \end{mdframed}
+options     word, indent
+    \begin{mdframed}[style=${1}]
+    ${0:TARGET}
+    \end{mdframed}
+snippet     uptable
+abbr        テーブル関連のパッケージ \usepackage{array,booktabs}
+options     word, indent
+    % 表組みパッケージ
+    \usepackage{array,booktabs}
+    \usepackage{colortbl}
+    \usepackage{tabularx}
+    % 表のすべての行の行送りの設定
+    % 0.8なら通常の行送りの80%で1.2なら120%
+    \renewcommand{\arraystretch}{${1}}${0}
+snippet     tabular
+alias       tab
+abbr        表 \begin{tabular}{列指定}...\end{tabular}
+options     word, indent
+    \begin{tabular}{@{}${1}@{}}${0}\end{tabular}
+snippet     tabularx
+abbr        横幅の定まった表 \begin{tabularx}{横幅}{列指定}...\end{tabularx}
+options     word, indent
+    \begin{tabularx}{@{}${1}@{}}${0}\end{tabularx}
+snippet     hl
+abbr        表 LaTeX標準横罫線 \hline
+options     word, indent
+    \hline${0}
+snippet     lnhl
+abbr        表 LaTeX標準横罫線 改行付き \\ \hline
+options     word, indent
+    \\ \hline${0}
+snippet     mcol
+alias       multicolumn
+abbr        列の結合 \multicolumn{結合する列数}{揃える位置}{...}
+options     word, indent
+    \multicolumn{${1:#:columnnum}}{${2:#:lcr}}{${0:TARGET}}
+snippet     colcc
+alias       columncolor
+abbr        列の背景色 \columncolor[HTML]{RGB}
+options     word, indent
+    |>{\columncolor[HTML]{${1}}}${0}
+snippet     cols
+alias       tabcolsep
+abbr        列間隔の指定 \setlength{\tabcolsep}{サイズ}
+options     word, indent
+    \setlength{\tabcolsep}{${1}pt}${0}
+snippet     rulew
+alias       rulewidth
+abbr        表の罫線の太さ \setlength{\arrayrulewidth}{サイズ}
+options     word, indent
+    \setlength{\arrayrulewidth}{${1}pt}
+snippet     comsp
+alias       commandspacenum
+abbr        １個分の数字のスペースを空ける命令 \renewcommand{~}{\phantom{0}}
+options     word, indent
+    \renewcommand{~}{\phantom{0}}${0}
+snippet     colpc
+alias       colwidthcenter
+abbr        表の列の幅 中央揃え >{\centering}p{サイズ(cm)}
+options     word, indent
+    >{\centering}p{${1}cm}${0}
+snippet     colpr
+alias       colwidthright
+abbr        表の列の幅 右揃え >{\raggedleft}p{サイズ(cm)}
+options     word, indent
+    >{\raggedleft}p{${1}cm}${0}
+snippet     colpl
+alias       colwidthleft
+abbr        表の列の幅 左揃え >p{サイズ(cm)}
+options     word, indent
+    >p{${1}cm}${0}
+snippet     figure
+abbr        図・表の自動配置 \begin{figure}...\end{figure}
+options     word, indent
+    \begin{figure}[H]
+        \centering
+        ${0:TARGET}
+        \caption[${1}]{${2}}
+        \label{${3}}
+    \end{figure}%
+snippet     table
+abbr        表の自動配置 \begin{table}....\end{table}
+options     word, indent
+    \begin{table}[${1:h}]
+        \caption[${2}]{${3}}
+        \label{${4}}
+        \centering
+        ${0:TARGET}
+    \end{table}%
+snippet     minipage
+alias       minip
+abbr        図などを左右に配置 \begin{minipage}...\end{minipage}
+options     word, indent
+    % \columnwidthは版面の幅で0.4\columntwidthで版面の0.4倍の大きさ
+    \begin{minipage}{${1:#:0.4}\columnwidth}
+        \centering
+        ${0:TARGET}
+        \caption{${2}}
+        \label{${3}}
+    \end{minipage}
+snippet     colw
+alias       cw
+abbr        版面の幅 \columntwidth
+options     word, indent
+    \columnwidth${0}
+snippet     subfigure
+alias       subfig
+abbr        図などを左右に配置 \begin{subfigure}...\end{subfigure}
+options     word, indent
+    \begin{subfigure}{${1:#:0.4}\columnwidth}
+        \caption{${2}}
+        \centering
+        \label{${3}}
+        ${0:TARGET}
+    \end{subfigure}
+snippet     upfigure
+alias       upfig
+abbr        図や表などの配置パケージ \usepackage{float} \usepackage{subcaption}
+options     word, indent
+    % 図・表パッケージ
+    % 図・表を配置するfigure環境に図を表示する位置を指定する際、
+    % H 必ずここに出力する のオプションを追加する
+    % \begin{figure}[H] ... \end{gigure}
+    \usepackage{float}
+    % 従来のsubfigure, subfig環境を置き換えるパッケージ
+    \usepackage{subcaption}
+    \usepackage{afterpage}
+    % 図の回り込みパッケージ wrapfigure環境
+    \usepackage{wrapfig}${0}
+snippet     wrapfigure 
+alias       wfig
+abbr        図の回り込み \begin{wrapfigure}{配置位置(lr)}{幅}....\end{wrapfigure}
+options     word, indent
+    \begin{wrapfigure}{${1:#:r}}{${2:#:5zw}}
+        \vspace*{-\intextsep}
+        ${0:TARGET}
+    \end{wrapfigure}
+snippet     wraptable 
+alias       wraptab
+abbr        テーブルの回り込み \begin{wraptable}{配置位置(lr)}{幅}....\end{wraptable}
+options     word, indent
+    \begin{wraptable}{${1:#:r}}{${2:#:5zw}}
+        \vspace*{-\intextsep}
+        ${0}
+    \end{wraptable}
+snippet     marginpar
+alias       mpar
+abbr        欄外の配置 \marginpar{...}
+options     word, indent
+    \marginpar{${0}}
+snippet     lb
+alias       label
+abbr        ラベル \label{...}
+options     word, indent
+    \label{${1:#:label}}${0}
+snippet     pr
+alias       pageref
+abbr        ページ番号の参照 \pageref{ラベル名}
+options     word, indent
+    \pageref{${1:#:labelname}}${0}
+snippet     ref
+abbr        章・節番号の参照 \ref{ラベル名}
+options     word, indent
+    \ref{${1:#:labelname}}${0}
+snippet     tabcon
+alias       tablecontents
+abbr        目次 目次・図目次・表目次 \tableofcontents \listoffigures \listoftables
+options     word, indent
+    % 目次・図目次・表目次
+    \tableofcontents
+    \listoffigures
+    \listoftables
+    % 目次をどこまで出力するか
+    % \section{...}までなら\setcounter{tocdepth}{1}\subsection{...}なら\setcounter{tocdepth}{2}
+    \setcounter{tocdepth}{3}${0}
+snippet     makeindex
+alias       makeidx
+abbr        索引パケージと作成命令 \usepackage{makeidx} \makeindex
+options     word, indent
+    % 索引
+    % 索引作成パッケージ
+    \usepackage{makeidx}
+    % 索引作成命令
+    \makeindex
+    % 索引を出力する
+    \printindex${0}
+snippet     ind
+alias       index
+abbr        索引作成 \index{....}
+options     word, indent
+    $1\index{${1}}${0}
+snippet     idx
+abbr        索引作成 \index{選択範囲の文字列}選択範囲の文字列
+options     word, indent
+    $1\index{${1:TARGET}}${0}
+snippet     upyen
+abbr        円記号出力パッケージ \usepackage{ascmac}
+options     word, indent
+    \usepackage{ascmac}${0}
+snippet     aurl
+alias       ahref
+abbr        URLのリンクを作成。 \href{"URL"}{"テキスト"} <a href="URL">テキスト</a>に相当
+options     word, indent
+    \href{${1:#:url}}{${2:#:text}}${0}
+snippet     hypersetup
+abbr        Hypertextの設定 リンクの色など \hypersetup{ .... }
+options     word, indent
+    %% リンクをカラーにするとデフォルトのボックス型から
+    %% リンクテキストに色がつくだけになる(colorlinksオプション)。
+    \hypersetup{%
+    bookmarksnumbered=true,%
+    bookmarksopen=true,%
+    pdftitle={${0}},% タイトル 
+    pdfsubject={},% サブタイトル
+    pdfauthor={},% 著者
+    pdfkeywords={},% キーワード
+    setpagesize=false,%
+    colorlinks=true,%
+    linkcolor=blue,%
+    anchorcolor=black,%
+    citecolor=blue,%
+    urlcolor=blue%
+    }
+snippet     atarget
+abbr        文書内リンクの参照元 \hypertarget{名前}{テキスト} <a name="名前">テキスト</a>に相当
+options     word, indent
+    \hypertarget{${1:#:name}}{${2:#:text}}${0}
+snippet     alink
+abbr        文書内リンク　\hyperlink{名前}{テキスト} <a name="#名前">テキスト</a>
+options     word, indent
+    \hyperlink{${1:#:name}}{${2:#:text}}${0}
+snippet     bookmarks
+abbr        文書内にブックマーク(しおり)情報をつける設定 
+options     word, indent
+    %%ブックマーク
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    pdftitle={${0}},
+    pdfsubject={},
+    pdfauthor={},
+    pdfkeywords={},
+    colorlinks=true,
+    bookmarksnumbered=true,
+    urlcolor=blue,
+    linkcolor=blue,
+    anchorcolor=blue,
+snippet     indexitemtab
+alias       indtab
+abbr        第２・第３レベルの索引後の字下げを設定するマクロ再定義 \makeatletter \renewcommand{\subitem}{\@idxitem \hspace*{空白}}\renewcommand{\subsubitem}{\@idxitem \hspace*{空白}} \makeatother
+options     word, indent
+    \makeatletter
+        \renewcommand{\subitem}{\@idxitem \hspace*{${1}zw}}
+        \renewcommand{\subsubitem}{\@idxitem \hspace*{${2}zw}}
+    \makeatother
+    ${0}
+snippet     biblist
+alias       biblio
+abbr        文献リスト \begin{thebibliography}{参考文献につける番号の桁数}...\end{thebibliography}
+options     word, indent
+    \begin{thebibliography}{${1:99}}${0}
+    \end{thebibliography}
+snippet     cite
+alias       ct
+abbr        文献の参照 ~\cite{参照名}
+options     word, indent
+    ~\cite{${1:#:bookrefname}}${0}
+snippet     upcite
+alias       upbibtex
+abbr        和文用文献参照番号再定義
+options     word, indent
+    % BibTeX関連 パッケージと設定
+    % 引用番号が鉤括弧([1])の設定
+    % 複数の文献を参照すると[1,2,3]のようになるがこれを[1-3]のように出力するパッケージ
+    \usepackage{cite}
+    % \inhibitglue は全角文字間のスペースを抑制する命令
+    % 左かっこを全角［に
+    \renewcommand{\citeleft}{\inhibitglue ［}
+    % 右かっこを全角に］
+    \renewcommand{\citeright}{］ \inhibitglue}
+    % 引用番号と補助情報の区切りを全角、に
+    \renewcommand{\citemid}{、}
+    % 引用番号の区切りを全角、に
+    \renewcommand{\citepunct}{、\inhibitglue}
+    %% 引用番号が括弧(1))の設定
+    %% 引用番号を上付きにするパッケージ
+    % \usepackage{overcite}
+    %% 上付きの引用番号に括弧をつける
+    % \renewcommand\citeform[1]{#1)}
+    %% 上付きの引用番号は複数あるとこのままでは1)2)ののようになる。
+    %% 3,4)のようにするため以下を定義する。
+    % \makeatletter
+    %    \def\@cite#1{\textsuperscript{#1)}}
+    % \makeatother
+    % 上の設定は引用番号の[1]を変えるだけで参考文献の
+    % 引用番号を変えるには以下のようにする。
+    % 全角[]の括弧
+    \def\@biblabel#1{\inhibitglue ［#1］ \inhibitglue}
+    % 参考文献の上付きの括弧
+    % \def\@biblabel#1{\textsuperscript{#1)}}${0}
+snippet     ig
+alias       inhibitg
+abbr        全角文字間の余分なグルー(スペース)を抑制 \inhibitglue
+options     word, indent
+    \inhibitglue${0}
+snippet     makeat
+abbr        LaTeX内部コマンド再定義 \makeatletter...\makeatother
+options     word, indent
+    \makeatletter
+        ${0:TARGET}
+    \makeatother
+snippet     bib
+alias       bibtex
+abbr        BIBTeX形式の文献リストを参照する 
+options     word, indent
+    \bibliographystyle{jplain}
+    \bibliography{${1:#:bibfname}}${0}
+snippet     rm
+alias       textrm
+abbr        フォント変更 フォントファミリー セリフ体(ローマン体) \textrm{ ... }
+options     word, indent
+    \textrm{${0}}
+snippet     sf
+alias       textsf
+abbr        フォント変更 フォントファミリー サンセリフ体 \textsf{ ... }
+options     word, indent
+    \textsf{${0}}
+snippet     tt
+alias       texttt
+abbr        フォント変更 フォントファミリー タイプライタ体 \texttt{ ... }
+options     word, indent
+    \texttt{${0}}
+snippet     fw
+alias       fontseries
+abbr        フォント変更 フォントシリーズ(weight) {\fontseries{${1:bx}}\selectfont}
+options     word, indent
+    {\fontseries{${1:bx}}\selectfont ${0}}
+snippet     fontsize
+alias       fsize
+abbr        フォント変更 フォントサイズ \fontsize{フォントサイズ}{行送り}\fontselect
+options     word, indent
+    {\fontsize{${1}pt}{${2}pt}\selectfont ${0}}
+snippet     usefont
+abbr        フォント変更 LaTeXフォント５要素を指定して変更 {\usefont{T1}{フォントファミリー}{シリーズ}{シェープ} ${0}}
+options    word, indent
+    {\usefont{T1}{${1:#:famiry}}{${2:#:series}}{${3:#:shape}} ${0}}
+snippet     bf
+alias       textbf
+abbr        フォントボールド \textbf{ ... }
+options     word, indent
+    \textbf{${0}}
+snippet     selectfont
+abbr        フォント変更 フォント五要素すべて指定して変更 {\fontencoding{T1}\fontfamily{...}%\fontseries{..}\fontshape{..}% \fontsize{..pt}{..pt}\selectfont }
+    {\fontencoding{T1}\fontfamily{${1}}%
+     \fontseries{${2:b}}\fontshape{${3:it}}%
+     \fontsize{${4}pt}{${5}pt}\selectfont ${0}}
+snippet     dlist
+alias       dinglist
+abbr        特殊な記号付き箇条書き 記号のフォントにZapfDingbatsを使用する \begin{dinglist}{"16進}...\end{dinglist}
+options     word, indent
+    \begin{dinglist}{"${1}}${0}\end{dinglist}
+snippet     dautolist
+alias       dingautolist
+abbr        特殊な連番記号付き箇条書き 記号のフォントにZapfDingbatsを使用する \begin{dingautolist}{"${1:C0}}${0}\end{dingautolist}
+options     word, indent
+    \begin{dingautolist}{"${1:C0}}${0}\end{dingautolist}
+snippet     margin
+abbr        ページの上下・左右マージン \setlength{\oddsidemargin}{-10.4truemm} \setlength{\topmargin}{-10.4truemm}
+options     word, indent
+    % 指定したいマージンの幅から1インチ(25.4mm)を引いた値
+    % 例えば15mmにしたい場合は 15.0 - 25.4= -10.4mm なので-10.4truemm
+    % 単位にtrueを付けるのは
+    % [改訂第6版] LaTeX2ε美文書作成入門 第14章 ページレイアウト 265p を参照。
+    \setlength{\oddsidemargin}{${1}truemm}
+    \setlength{\topmargin}{${2}truemm}${0}
+snippet     header
+abbr        ヘッダーの高さ・ヘッダ本文の間隔の指定 
+options     word, indent
+    \setlength{\headheight}{${1}mm}
+    \setlength{\headsep}{${2}mm}${0}
+snippet     textwh
+alias       textwidthheight
+abbr        本文の幅・高さ 
+options     word, indent
+    \setlength{\textwidth}{${1}zw}
+    % 本文を38行分の高さにする場合は
+    % \textheight = 37 * \baselineskip + \topskip
+    % 詳しくは [改訂第6版] LaTeX2ε美文書作成入門 第14章 ページレイアウト 269p を参照。
+    \setlength{\textheight}{${2}\baselineskip}
+    \addtolength{\textheight}{\topskip}${0}
+snippet     glue
+abbr        日本語文字間のグルー(glue) 
+options     word, indent
+    {\setlength{\kanjiskip}{${1:0zw plus 0.15zw minus 0.05zw}}${0}\par}
+snippet     upmath
+abbr        math package
+options     word, indent
+    % 数式で使用するパッケージ
+    % AMSパッケージとAMSFonts amssymbがAMSFontsパッケージ
+    % \usepackage{amsmath,amssymb}
+    % amsmathパッケージをさらに拡張し、不具合を修正したmathtoolsパッケージ
+    % mathtoolsパッケージは内部でamsmathを読み込んでいる。
+    \usepackage{mathtools,amssymb}
+    % 標準の数式フォンとは\small,\largeを使っても拡大縮小されない。
+    % exscaleパッケージを使用してこの問題を回避する。
+    \usepackage{exscale}
+    % ギリシア文字の小文字はイタリック体だがこれを立体にしたい時は
+    % upgreekパッケージを使用する。\up...で立体にしたいギリシア文字を指定する。
+    % 例えば\mu(uの小文字)は\upmuと指定する。
+    \usepackage{upgreek}
+    % SI単位系例えば10 -6乗などのマイクロなどのを使用するときのパッケージ
+    % \si{\micro}でマイクロは出力できる。
+    \usepackage{siunitx}
+    % 数式モードで使う大文字の筆記体のフォント
+    \usepackage{eucal}
+    % 物理でハミルトニアンやグランジニアンなどのHやLを括弧よく出力するには
+    % RSFS（Ralph Smith’s Formal Script)フォントを使用します。
+    % mathrsfsパッケージを使い、出力したい場所に\mathscr{H}のようにします.
+    \usepackage{mathrsfs}
+    % RSFSが大胆に思うのならばrsfsoパッケージを使用することもできる。
+    % 出力する時は\mathcal{H}のように使用する。
+    \usepackage{rsfso}
+    % okumacroパッケージ
+    % \GEQQ,\LEQQ命令で>=,<=の文字が綺麗に出力できる.
+    \usepackage{bxokumacro}
+    % textcompの数式モードパッケージ
+    % 注意: 通常はComputerModernフォントが使用されるが[ppl]と指定することで
+    % フォントをPlatinoにできる。しかしコンパイルが通らない為、ここでは[ppl]を使用しない。
+    % \usepackage[ppl]{mathcomp}
+    \usepackage{mathcomp}
+    % 数式で使用するマクロのユーティリティー
+    \usepackage{mathutil}
+    % \usepackage{mathptmx}
+    % \usepackage{mathpazo}
+    % \usepackage{newpxtext, newpxmath}
+    % \usepackage[math]{anttor}
+    % \usepackage{ccfonts,eulervm}
+    % \usepackage{kpfonts}
+    % \usepackage{mathabx}
+    % yhmathフォント
+    % 根号と括弧などのフォント。普通はComputer Modernの数式フォントと組み合わせるが
+    % 他のフォントでも可能。\let\widering\relaxは普通に読み込むと
+    % パッケージの命令が衝突するので命令を無効化している
+    \let\widering\relax
+    \usepackage{yhmath}
+    % 数式のフォントをfourierncにする
+    \let\widering\relax         % yhmathを読み込む時これがないと衝突する
+    \usepackage{fouriernc}
+    % 数式で太字にするには\mathbf{...}を使用できるが、出力がローマン体の太字でイタリックでなく、
+    % またギリシア文字の小文字と記号は太字にはならない。
+    % そこでbm(BoldMath)パッケージを使う。
+    % bmパッケージは4つの数式記号用フォントを定義している。これを無効にする。
+    % またbmは数式フォントパッケージの後にimportする
+    \newcommand{\bmmax}{0}
+    \newcommand{\hmmax}{0}
+    \usepackage{bm}${0}
+snippet     split
+abbr        複数の別行立て数式で一つの数式番号を真ん中に出力する。
+options     word, indent
+        \begin{split}${0}\end{split}
+snippet     aligned
+abbr        複数の別行立て数式で柔軟に出力可能
+options     word, indent
+        \begin{aligned}${0}\end{aligned}
+snippet     uptcb
+alias       uptcolorbox
+abbr        枠囲みを作成するパッケージtcolorパッケージ
+options     word, indent
+    \usepackage{tcolorbox}
+    \tcbuselibrary{raster,skins,breakable}${0}
+snippet     tcb
+alias       tcolorbox
+abbr        枠囲みを作成する
+options     word, indent
+    \begin{tcolorbox}[]
+        ${0}
+    \end{tcolorbox}
+snippet     raster
+alias       tcbraster
+abbr        tcbraster tcolorboxを並べる
+    \begin{tcbraster}[raster columns=,raster equal height]
+        ${0:TARGET}
+    \end{tcbraster}
+snippet     ast
+abbr        *
+options     word, indent
+    \textasteriskcentered${0}
+snippet     tbs
+alias       textbs
+abbr        textbackslash
+options     word, indent
+    \textbackslash{}${0}
+snippet     bs
+abbr        数式backslash
+options     word, indent
+    \backslash{}${0}
+snippet     ms
+abbr        mathstrut
+options     word, indent
+    \mathstrut${0}
+snippet     mr
+abbr        mathrel
+options     word, indent
+    \mathrel{${1}}${0}
+snippet     uptext
+abbr        行間・verbatimなどテキストに関するパッケージ
+options     word, indent
+    % テキスト用パッケージ
+    % 単語間とセンテンスの区切りのスペースを同じにする。
+    \frenchspacing
+    % 行間を設定するパッケージ
+    \usepackage{setspace}
+    % 本文の行間を設定する
+    \renewcommand{\baselinestretch}{${1:bairitu}}
+    % jsverbパッケージ
+    % verbatim環境では左寄せになるためこのパッケージを使う。
+    \usepackage{bxjsverb}
+    % verbatim環境内での左のマージンの設定
+    \setlength{\verbatimleftmargin}{1\zw}
+    \usepackage{bxokumacro}
+    % 独自のマクロ
+    \usepackage{mymacros}
+    % 箇条書きの拡張パッケージ
+    % shortlabels   \alabic*などのラベルを使用できるようにする
+    % inline        横並び箇条書きを有効にする
+    \usepackage[shortlabels,inline]{enumitem}
+    % ハイパーテキスト
+    % LuaLaTeXを使用する場合はunicodeオプションをつける
+    \usepackage[unicode=true]{hyperref}
+    % しおりを日本語表示する LuaTeXは内部でUTF-8を使用するので外す
+    %\usepackage{pxjahyper}${0}
+    % TeXでは欧文のセンテンスト用のスペースと単語間のスペースでは違うもの。
+    % スペースの大きさが違う。使い分けが難しい場合はただ単に以下の設定を行う。
+    % この設定で同じスペースになる。
+    \frenchspacing
+snippet     upctrl
+abbr        ifやforなどの制御文を拡張するパッケージ
+options     word, indent
+    % 制御文パッケージ
+    \usepackage{ifthen}
+    % ifthenなど制御文で整数式が使えるようにしたもの
+    \usepackage{calc}
+    % \boolean{uptex}のようにTeXエンジン用boolean変数を使用する
+    \usepackage{ifxetex,ifluatex,ifuptex}${0}
+snippet     ifelse
+abbr        LaTeX if else 文
+options     word, indent
+    \ifthenelse{${0}}{}{}
+snippet     while
+abbr        LaTeX while文
+options     word, indent
+    \whiledo{${0}}{}
+snippet     counter
+abbr        LaTeX counter
+options     word, indent
+    \newcounter{${1}}\setcounter{$1}{${2}}${0}
+snippet     length
+abbr        LaTeX length
+options     word, indent
+    \newlength{${1}}\setlength{$1}{${0}}
+snippet     boolean
+abbr        LaTeX ifthen package boolean
+options     word, indent
+    \newboolean{${1}}\setboolean{$1}{${0}}
+snippet     bool
+abbr        LaTeX ifthen package boolean value
+options     word, indent
+    \boolean{${0}}
+snippet     val
+abbr        counter \value{ ... }
+options     word, indent
+    \value{${1}}${0}
+snippet     lnsp
+alias       linesp
+abbr        本文の行間のセット
+options     word, indent
+    %本文の行間の設定
+    \renewcommand{\baselinestretch}{${1}}${0}
+snippet     spacing
+abbr        行間の環境
+options     word, indent
+    \begin{spacing}{${1}}
+        ${0:TARGET}
+    \end{spacing}
+snippet     genfrac
+abbr        一般の分数
+options     word, indent
+    \genfrac{${0}}{}{}{}{}{}
+snippet     multline
+abbr        複数行に渡る一つの数式
+options     word, indent
+    \begin{multline}${0}\end{multline}
+snippet     text
+abbr        \text{ ... }
+options     word, indent
+    \text{${0:TARGET}}
+snippet     sl
+abbr        \setlength{}{}
+options     word, indent
+    \setlength{${0}}{}
+snippet     bmarks
+alias       bookmarks
+abbr        bookmarks
+options     word, indent
+    bookmarks=true,bookmarksnumbered=true,%
+    pdftitle={${0}},% タイトル 
+    pdfsubject={},% サブタイトル
+    pdfauthor={},% 著者
+    pdfkeywords={}% キーワード
+snippet     psym
+alias       psymbol
+abbr        Symbol Font
+options     word, indent
+    \Pisymbol{psy}{"${0}}
+snippet     uplayout
+abbr        \usepackage{layout} \layout
+options     word, indent
+    \usepackage{layout}
+    ${0}\layout
+snippet     biblatex
+abbr        biblatex
+options     word, indent
+    \usepackage[backend=biber]{biblatex}
+    \addbibresource{${0}}
+    \DeclareFieldFormat*{volume}{\mkbibbold{#1}} % 巻数を太字にする
+    \DeclareFieldFormat*{title}{\mkbibquote{#1\adddot}}  % タイトルにダブルクオーテーションをつける
+    \DeclareFieldFormat*{edition}{第#1版} % editionを日本語風にする
+    \DeclareFieldFormat*{year}{#1年} % 年
+    \DeclareFieldFormat*{month}{#1月} % 月
+    % \DeclareFieldFormat[article]{book}{\mkbibemph{#1}}  % article要素のbookを斜体にする
+    \renewcommand{\labelnamepunct}{\addcolon\addspace} % 著者と書籍名の間にコロンとスペースを付ける eg., J. Smith: "A great paper."
+    \renewbibmacro{in:}{} % in: Some journal の "in:" を取る
+snippet     mrm
+abbr        \mathrm{ ... }
+options     word, indent
+    \mathrm{${0:TARGET}}
+snippet     array
+abbr        \begin{array} .. \end{array}
+options     word, indent
+    \begin{array}{${0}}
+
+    \end{array}
+snippet     uplayout
+abbr        layout snippet
+options     word, indent
+    \usepackage{fancyhdr}
+    \pagestyle{fancy}
+    % 左側ヘッダの定義 中央ヘッダの定義 右側ヘッダの定義
+    %\lhead[偶数ページ]{奇数ページ}
+    %\chead[偶数ページ]{奇数ページ}
+    %\rhead[偶数ページ]{奇数ページ}
+    % 左側フッターの定義 中央フッターの定義 右側フッターの定義
+    %\lfoot[偶数ページ]{奇数ページ}
+    %\cfoot[偶数ページ]{奇数ページ}
+    %\rfoot[偶数ページ]{奇数ページ}
+    % ヘッダの線の太さ
+    % \renewcommand{\headrulewidth}{0.3pt} 
+    % フッターの線の太さ
+    % \renewcommand{\footrulewidth}{0.3pt}
+    % 概要・図・表の名前を変える
+    % \newcommand{\refname}{参考文献}
+    %\newcommand{\bibname}{参考文献}
+    %\renewcommand{\prepartname}{第}
+    %\renewcommand{\postpartname}{部}
+    %\renewcommand{\prechaptername}{第}
+    %\renewcommand{\postchaptername}{章}
+    %\renewcommand{\contentsname}{目次}
+    %\renewcommand{\listfigurename}{図目次}
+    %\renewcommand{\listtablename}{表目次}
+    %\renewcommand{\indexname}{索引}
+    %\renewcommand{\figurename}{図}
+    %\renewcommand{\tablename}{表}
+    %\renewcommand{\appendixname}{付録}
+    %\renewcommand{\abstractname}{概要}
+    \usepackage{geometry}
+    \geometry{top=1cm,left=2cm,right=2cm,bottom=1.5cm}
+    \setlength{\textwidth}{42\zw}
+    % \setlength{\textheight}{48\baselineskip}
+    \setlength{\headheight}{0pt}
+    \setlength{\headsep}{0pt}
+    \setlength{\footskip}{2\zw}
+    \usepackage{layout}
+    \layout${0}
+

@@ -1,0 +1,48 @@
+snippet     book
+alias       bookbib
+abbr        文献データーベース(bibファイル)の一つの文献 @book{参照名, ....},
+options     word,indent
+    @book{${1:bookrefname},
+        title="${0}",,
+        author="",,
+        yomi="",
+        publisher="",,
+        note="",,
+        edition="",,
+        year="",,
+        month="",,
+        isbn="",,
+        asin="",,
+        url="",,
+        totalpages="",,
+        memo="",,
+    },
+snippet     yomi
+abbr        著者の読み yomi = "著者の読み",
+options     word,indent
+    yomi = "${1}",${0}
+snippet     se
+alias       series
+abbr        本のシリーズ名 series = "本のシリーズ名",
+options     word,indent
+    series = "${1}",${0}
+snippet     note
+abbr        訳者, 監訳した物の名前(なんでも書き込める欄) note = "...",
+options     word,indent
+    note = "${1}",${0}
+snippet     comm
+alias       comment
+abbr        bibtexコメント @comment{ ... }
+options     word,indent
+    @comment{${0}}
+snippet     str
+alias       string
+abbr        bibtex 略称・置き換え @string{name = ""}
+options     word,indent
+    @string{${1:#:name} = "${0}"}
+snippet     memo
+abbr        bibtex meme欄 memo="....",
+options     word,indent
+    memo = "${0}",
+
+

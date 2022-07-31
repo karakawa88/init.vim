@@ -1,0 +1,48 @@
+snippet     ifn
+alias       ifnot
+abbr        IF NOT EXISTS ...
+options     word, indent
+    IF NOT EXISTS ${0}
+snippet     ctmysql
+alias       createtablemysql
+abbr        CREATE TABLE table_name (...) ...;
+options     word, indent
+    CREATE TABLE ${1}(
+        ${0}
+    )
+    DEFAULT CHARACTER SET UTF8
+    ENGINE InnoDB;
+snippet     cvmysql
+alias       createviewmysql
+abbr        CREATE OR REPLACE VIEW view_name() AS SELECT ...;
+options     word, indent
+    CREATE OR REPLACE VIEW ${1}
+        (${0})
+    AS
+snippet     nn
+alias       nnull
+abbr        NOT NULL
+options     word, indent
+    NOT NULL${0}
+snippet     case
+abbr        CASE式 CASE WHEN ... THEN ... END
+options     word, indent
+    CASE    WHEN ${0} THEN
+            WHEN THEN
+            ELSE
+    END
+snippet     toint
+alias       castint
+abbr        キャスト integer CAST(... AS SIGNED INTEGER)
+options     word, indent
+    CAST(${0} AS SIGNED INTEGER)
+snippet     seq
+alias       createseq
+abbr        CREATE SEQUENCE ....;
+options     word, indent
+    CREATE SEQUENCE ${1:sequence_name}
+        INCREMENT BY 1${0}
+        MAXVALUE 99999999
+        START WITH 1
+        NO CYCLE;
+

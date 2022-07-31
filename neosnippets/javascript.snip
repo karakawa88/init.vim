@@ -1,0 +1,573 @@
+snippet     ebi
+abbr        document.getElementById("...")
+options     word, indent
+    document.getElementById("${1}")${0}
+snippet     switch
+abbr        switch文 switch (...){...}
+options     word, indent
+    switch (${1}) {
+        case ${0}:
+            break;
+        default:
+    }
+snippet     case
+abbr        switch文のcase case ...: .... break;
+options     word, indent
+    case ${1}: 
+        ${0}
+        break;
+snippet     clog
+alias       cl
+abbr        console出力 console.log(...)
+options     word, indent
+    console.log(${0:TARGET});
+snippet     us
+alias       strict
+abbr        Strictモードを有効にする 'use strict';
+options     word, indent
+    'use strict';${0}
+snippet     consts
+alias       constsym
+abbr        定数をSymbolで定義する const ... = Symbol('...');
+options     word, indent
+    const ${1} = Symbol('$1');${0}
+snippet     letlam
+abbr        アロー関数(匿名関数)を定義生成して変数に格納 let hensuu = (${0}) => { ... };
+options     word, indent
+    let ${1} = (${0}) => {};
+snippet     foreach
+abbr        forEach() obj.forEach((value, index, array) => { ... })
+options     word, indent
+    forEach((value, index, array) => {${0}})
+snippet     fnmap
+abbr        map() obj.map((value, index, array) => { ... })
+options     word, indent
+    map((value, index, array) => { return ${0};})
+snippet     fnsome
+abbr        some() obj.some((value, index, array) => { ... })
+options     word, indent
+    some((value, index, array) => { return ${0};})
+snippet     fnfilter
+abbr        filter() obj.filter((value, index, array) => { ... })
+options     word, indent
+    filter((value, index, array) => { return ${0};})
+snippet     fnsort
+abbr        sort() 破壊的メソッド obj.sort((x, y) => { ... })
+options     word, indent
+    sort((x, y) => {${0}})
+snippet     slicesort
+alias       ssort
+abbr        slice().sort() 非破壊的メソッド obj.slice.sort((x, y) => { ... })
+options     word ,indent
+    slice().sort((x, y) => {${0}})
+snippet     create
+abbr        Object.create(null)
+options     word ,indent
+    Object.create(null)${0}
+snippet     objcreate
+abbr        オブジェクトを生成する createメソッド Object.create(Object.prototype, .... )
+options     word, indent
+    Object.create(Object.prototype,{
+            ${0}
+    })
+snippet     objcreatepro
+alias       objpro
+abbr        Object.createで指定するプロパティー proname: { value: ..., writable: true, configurable: true, enumerable: true } 
+options     word, indent
+    ${1}: { value: ${2}, writable: true, configurable: true, enumerable: true },${0}
+snippet     fn
+abbr        関数定義 function fname() {}
+options     word, indent
+    function (${0}){}
+snippet     afn
+abbr        関数定義 async function fname() {}
+options     word, indent
+    async function (${0}){}
+snippet     forof
+abbr        for (let 変数 of 列挙型) {}
+options     word,indent
+    for (let ${1:#:val} of ${2}) {${0}}
+snippet     assign
+alias       objassign
+abbr        オブジェクトをマージする Object.assign(....)
+options     word, indent
+    Object.assign({}, ${0})
+snippet     freeze
+abbr        不変オブジェクトに変更 Object.freeze(obj);
+options     word, indent
+    Object.freeze(${1});${0}
+snippet     fncall
+abbr        即時関数 (() => {})();
+options     word, indent
+    (() => {
+        ${0:TARGET}
+    })();
+snippet     arg
+abbr        argumentsオブジェクト arguments
+options     word, indent
+    arguments${0}
+snippet     try
+abbr        try catch文 try{ ... }catch( ... ) {}
+options     word, indent
+    try {
+        ${0}
+    } catch(${1}) {}
+snippet     tryfinally
+alias       tryf
+abbr        try catch文 try{ ... }catch( ... ){}finally{}
+options     word, indent
+    try {
+        ${0}
+    } catch(${1}) {
+    }finally{}
+snippet     ifun
+alias       ifundefined
+abbr        変数がundefinedかチェック if ( === undefined) {}
+options     word, indent
+    if (${1} ${2:=}== undefined) {${0}}
+snippet     un
+abbr        undefined
+options     word, indent
+    undefined${0}
+snippet     for
+abbr        for文 for (let ..; ... ; ...) {}
+options     word, indent
+    for (let ${0};;) {}
+snippet     sp
+abbr        空白 &nbsp;
+options     word, indent
+    &nbsp; ${0}
+snippet     amp
+abbr        & &amp;
+options     word, indent
+    &amp;${0}
+snippet     &<
+abbr        "<" 小なり &lt;
+options     word, indent
+    &lt;${0}
+snippet     &>
+abbr        ">" 大なり &gt;
+options     word, indent
+    &gt;${0}
+snippet     &"
+abbr        '"' ダブルクォテーション &quot;
+options     word, indent
+    &quot;${0}
+snippet     &\
+abbr        \記号 &yen;
+options     word, indent
+    &yen;${0}
+snippet     cp
+alias       copy
+abbr        copyright &copy;
+options     word, indent
+    &copy;${0}
+snippet     &'
+abbr        '' シングルクオンテーション &#39;
+options     word, indent
+    &#39;${0}
+snippet     iftype
+alias       iftypeof
+abbr        基本型チェック if ((typeof ...) === ...) {}
+options     word, indent
+    if ((typeof ${1}) ${2:=}== '${3:number}') {${0}}
+snippet     defineprop
+abbr        ゲッター・セッターメソッドの定義 Object.defineProperty(this, 'プロパティーの名前', {});
+options     word, indent
+    Object.defineProperty(this, '${1}', {
+            get: function () { return _${1}; },
+            set: function (value) { _${1} = value; }
+        });
+snippet     objdefprops
+abbr        複数のゲッター・セッターメソッドの定義 Object.defineProperty(this, 'プロパティーの名前', {}); 
+options     word, indent
+    Object.defineProperties(this, {
+            ${0}
+        });
+snippet     defpro
+abbr        プロパティそしてそれのゲッター・セッターの定義 プロパティー名: { get: function () {}, set: function() {} }
+options     word, indent
+    ${1}: { 
+        get: function () { return ${0}; },
+        set: function ($1) {}
+    },
+snippet     namespace
+abbr        名前空間の定義
+options     word, indent
+    let ${1} = $1 || {};${0}
+snippet     forilen
+alias       fori
+abbr        for文 for (var i = 0,len = obj.length;i < len;i++) {}
+options     word, indent
+    for (var i = 0,len = ${1}.length;i < len;i++) {${0}}
+snippet     class
+abbr        ES2015 class構文 class { constructor(){} .... }
+options     word, indent
+    /**
+     *
+     */
+    class ${1} {
+        /**
+         * @construct
+         */
+        constructor(${0}){}
+    }
+snippet     clextends
+alias       clex
+abbr        既存のクラスを継承 class className extends superClass { constructor(){} }
+options     word, indent
+    /**
+     *
+     */
+    class ${1} extends ${2} {
+        /**
+         * @construct
+         *
+         */
+        constructor(${0}) {
+            super();
+        }
+    }
+snippet     clgetset
+alias       getset
+abbr        ES2015 class構文のget, set get プロパティー名() {} set プロパティー名() {}
+options     word, indent
+    get ${1}() { return this._$1; }
+    set $1(value) { this._$1 = value; }${0}
+snippet     fngen
+alias       generator
+abbr        ES2015 ジェネレーター function* fnname() { yield ; }
+options     word, indent
+    function* ${1}() {
+        yield ${2};
+    }
+snippet     oldconstructor
+alias       oldcon
+abbr        旧構文 コンストラクター let className = function () { ... };
+options     word, indent
+    let ${1:#:className} = function (${2}) {
+        if (!(this instanceof $1)) {
+            return new $1($2);
+        }${0}
+    };
+snippet     pro
+abbr        prototype
+options     word, indent
+    prototype${0}
+snippet     prototypeobj
+alias       proobj
+abbr        prototype オブジェクトリテラル構文 className.prototype = { ... };
+   ${1}.prototype = {${0}};
+snippet     forin
+abbr        for...in命令 for (let key in obj) {}
+options     word, indent
+    for (let ${1:key} in ${2}) {${0}}
+snippet     proxy
+abbr        Proxyオブジェクト new Proxy(target, handler)
+options     word, indent
+    new Proxy(${1:#:target},{});${0}
+snippet     proxygetset
+abbr        Proxyオブジェクト get,setトラップメソッド定義 get(target, prop) {}, set(target, prop) {}
+options     word, indent
+    get(target, prop) {${0}},
+    set(target, prop) {}
+snippet     addeventlistener
+alias       addel
+abbr        イベントリスナーの定義 addEventListener('イベント名', 関数..., イベント実行順序がキャプチャーフェーズかバブリングフェーズか);
+options     word, indent
+    addEventListener('${1:click}', (event) => {${0:TARGET}}, false);
+snippet     jsvoid
+alias       jsv
+abbr        JavaScript疑似プロトコル void演算子 JavaScript:void(0)
+options     word, indent
+    JavaScript:void(0)${0}
+snippet     filereader
+alias       freader
+abbr        FileReader ファイルを読み込む let reader = new FileReader(); reader.addEventListener('load',...); reader.readAsText(...);
+options     word, indent
+    let ${1:reader} = new FileReader();
+    $1.addEventListener('load',() => {
+        ${0:TARGET}
+    });
+    $1.addEventListener('error',() => {
+        console.log(reader.error.message);
+    });
+    $1.readAsText(${2:#:file}, 'UTF-8');
+snippet     interval
+alias       setinterval
+abbr        タイマー setInterval(() => {}, msec);
+options     word, indent
+    setInterval(() => {${0:TARGET}}, ${1});
+snippet     timeout
+alias       settimeout
+abbr        タイマー setTimeout(() => {}, msec);
+options     word, indent
+    setTimeout(() => {${0:TARGET}}, ${1});
+snippet     cinfo
+abbr        コンソール info console.info()
+options     word, indent
+    console.info(${0})
+snippet     cwarn
+abbr        コンソール warn console.warn()
+options     word, indent
+    console.warn(${0})
+snippet     cerr
+abbr        コンソール error console.error()
+options     word, indent
+    console.error(${0})
+snippet     cdir
+abbr        コンソール dir console.dir()
+options     word, indent
+   console.dir(${0})
+snippet     storageall
+alias       storageforilen
+abbr        ストレージのデーターをすべて取り出す for (let i = 0;i < strage.length;i++) { ... }
+options     word, indent
+    for (let i = 0,len = ${1:storage}.length;i < len;i++) {
+        let key = $1.key(i);
+        let val = $1[key];
+        ${0}
+    }
+snippet     setobjstorage
+alias       setstorage
+abbr        ストレージにオブジェクトを格納する storage.setItem('key', JSON);
+options     word, indent
+    ${1:storage}[${2}] = JSON.stringify(${3:obj})${0}
+snippet     getobjstorage
+alias       getstorage
+abbr        ストレージからオブジェクトを復元する JSON.parse(storage[key])
+options     word, indent
+    JSON.parse(${1:storage}[${2:key}])${0}
+snippet     onload
+alias       ready
+abbr        DOMContentLoadedイベントリスナー コンテンツがロードされたところで実行(画像の読み込みを待たない)
+options     word, indent
+    window.addEventListener('DOMContentLoaded', (event) => {
+        ${0}
+    }, false);
+snippet     reactlifecycle
+alias       rcycle
+abbr        React コンポーネントライフサイクルメソッド 
+options     word, indent
+    //コンポーネントがマウントされる前
+    componentWillMount() {}
+    //コンポーネントがマウントされた後
+    componentDidMount() {}
+    //コンポーネントがアンマウントされる直前
+    componentWillUnMount() {}
+    //コンポーネント更新前(state)
+    componentWillUpdate(nextprops, nextstate) {}
+    //コンポーネント更新後(state)
+    componentDidUpdate(prevprops, prevstate) {}
+snippet     parseFloat
+alias       pfloat
+abbr        文字列から数値へ変換 小数点 Number.parseFloat()
+options     word, indent
+    Number.parseInt(${1:TARGET})${0}
+snippet     cn
+alias       classname
+abbr        React JSXのclass属性名 className="..."
+options     word, indent
+    className="${0}"
+snippet     reactcl
+alias       reactclass
+abbr        Reactクラス class クラス名 extends React.Component { ... }
+options     word, indent
+    /**
+     * 
+     */
+    class ${1} extends React.Component {
+        /**
+         * コンストラクタ
+         */
+        constructor(props) {
+            super(props);
+            this.state = {${0}};
+        }
+        /**
+         * 再描画。
+         */
+        render() {
+            return ();
+        }
+    }
+snippet     array_copy
+alias       acopy
+abbr        Array copy
+options     word, indent
+    ${1}.slice(0, $1.length)${0}
+snippet     lambda
+alias       lam
+abbr        arrow function () => {}
+options     word, indent
+    (${0}) => {}
+snippet     imfunc
+alias       imfn
+abbr        Immediate function 即時関数
+options     word, indent
+    (function(){
+        ${0:TARGET}
+    }).call(this);
+snippet     args
+abbr        arguments obj
+options     word, indent
+    arguments${0}
+snippet     nan
+abbr        Number.isNaN( .... )
+options     word, indent
+    Number.isNaN(${0})
+snippet     pi
+alias       parseInt
+abbr        Number.parseInt()
+options     word, indent
+    Number.parseInt(${0:TARGET})
+snippet     pf
+alias       parseFloat
+abbr        Number.parseFloat()
+options     word, indent
+    Number.parseFloat(${0:TARGET})
+snippet     from
+abbr        Array.from( ... )
+options     word, indent
+    Array.from(${0})
+snippet     qselect
+abbr        document.querySelector('...')
+options     word, indent
+    document.querySelector('${0}')
+snippet     qall
+abbr        document.querySelectorAll('...')
+options     word, indent
+    document.querySelectorAll('${0}')
+snippet     newpro
+abbr        new Promise( ... )
+options     word, indent
+    new Promise((resolve, reject) => {${0}})
+snippet     prores
+abbr        Promise.resolve(${0})
+options     word, indent
+    Promise.resolve(${0})
+snippet     prorej
+abbr        Promise.reject(new Error('${0}'))
+options     word, indent
+    Promise.reject(new Error('${0}'))
+snippet     err
+abbr        new Error(' ... ')
+options     word, indent
+    new Error('${0}')
+snippet     byid
+abbr        document.getElementById( .... )
+options     word, indent
+    document.getElementById(${0})
+snippet     then
+abbr        then(() => {})
+options     word, indent
+    then((${0}) => {})
+snippet     catch
+abbr        catch((err) => {})
+options     word, indent
+    catch((err) => {${0}})
+snippet     toString
+abbr        toString() { ... }
+options     word, indent
+    /**
+     * このオブジェクトの文字列表現を返す。
+     *
+     * @return {String} このオブシェクトの文字列表現
+     */ 
+    toString() {${0}}
+snippet     hasp
+alias       hasprop
+abbr        hasOwnProperty( ... )
+options     word, indent
+    hasOwnProperty(${0})
+snippet     @p
+abbr        @param { ... }
+options     word, indent
+    @param {${0}}
+snippet     @ps
+alias       @pstr
+abbr        @param {String} ...
+options     word, indent
+    @param {String} ${0}
+snippet     @pn
+alias       @pnum
+abbr        @param {Number} ...
+options     word, indent
+    @param {Number} ${0}
+snippet     @po
+alias       @pobj
+abbr        @param {Object} ...
+options     word, indent
+    @param {Object} ${0}
+snippet     @pa
+alias       @parr
+abbr        @param {Array[ ... ]}
+options     word, indent
+    @param {Array[${0}]}
+snippet     @r
+abbr        @return { ... }
+options     word, indent
+    @return {${0}}
+snippet     @rs
+alias       @rstr
+abbr        @return {String} ...
+options     word, indent
+    @return {String} ${0}
+snippet     @rn
+alias       @rnum
+abbr        @return {Number} ...
+options     word, indent
+    @return {Number} ${0}
+snippet     @ro
+alias       @robj
+abbr        @return {Object} ...
+options     word, indent
+    @return {Object} ${0}
+snippet     @ra
+alias       @rarr
+abbr        @return {Array[ ... ]}
+options     word, indent
+    @return {Array[${0}]}
+
+snippet     @t
+abbr        @type { ... }
+options     word, indent
+    @type {${0}}
+snippet     @tn
+alias       @tnum
+abbr        @type {Number}
+options     word, indent
+    @type {Number} ${0}
+snippet     @ts
+alias       @tstr
+abbr        @type {String}
+options     word, indent
+    @type {String} ${0}
+snippet     @to
+alias       @tobj
+abbr        @type {Object}
+options     word, indent
+    @type {Object} ${0}
+snippet     @ta
+alias       @tarr
+abbr        @type {Array[]}
+options     word, indent
+    @type {Array[${0}]}
+snippet     get_scale
+abbr        window.devicePixelRatio 
+options     word, indent
+    window.devicePixelRatio${0}
+snippet     flat
+abbr        array.flat(Infinity)
+options     word, indent
+    flat(Infinity)${0}
+snippet     gt
+abbr        globalThis
+options     word ,indent
+    globalThis${0}
+snippet     event_default
+abbr        event.preventDefault()
+options     word, indent
+    event.preventDefault()${0}
+
+

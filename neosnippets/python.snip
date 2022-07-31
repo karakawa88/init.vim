@@ -1,0 +1,339 @@
+snippet     fn
+alias       func
+abbr        Python関数定義 def funcname(): ...
+options     word, indent
+    def ${1}(${0}):
+snippet     try
+abbr        Python例外
+options     word, indent
+    try:
+        ${0:TARGET}
+    except ${1:Exception} as ex:
+snippet     null
+abbr        None
+options     word, indent
+    None${0}
+snippet     cl
+alias       class
+abbr        クラス定義
+options     word, indent
+    ##
+    # @breif 
+    #
+    # @version
+    # @file             
+    # @date
+    # @author           荒川 健太郎
+    class ${1}(${2}):
+        def __init__(self${0}):
+snippet     mfn
+alias       memberfunc
+abbr        Pythonメンバー関数定義 def funcname(self, ...): ...
+options     word, indent
+    def ${1}(self${0}):
+snippet     spcon
+alias       supercon
+abbr        親クラスのコンストラクタ呼び出し super().__init__(...)
+options     word, indent
+    super().__init__(${0})
+snippet     getset
+abbr        getter, setter @property ゲッター @name.setter セッター
+options     word, indent
+    @property
+    def ${1}(self):
+        """${2}を返す。
+        Returns:
+           ${0} : ${2}
+        """
+        return self.__$1
+    @$1.setter
+    def $1(self, $1) -> None:
+    """${2}を設定する。
+    Args:
+        $1 ():
+    """
+        self.__$1 = $1
+snippet     clm
+alias       clmethod
+abbr        クラスメソッド @classmethod メソッド
+options     word, indent
+    @classmethod
+    def ${1}(cls${0}):
+snippet     _=
+alias       _eq
+abbr        = 演算子特殊メソッド def __eq__(self, other): 
+options     word, indent
+    def __eq__(self, other):
+        ${0}
+snippet     _!=
+alias       _ne
+abbr        != 演算子特殊メソッド def __ne__(self, other): 
+options     word, indent
+    def __ne__(self, other):
+        ${0}
+snippet     _<
+alias       _lt
+abbr        < 演算子特殊メソッド def __lt__(self, other): 
+options     word, indent
+    def __lt__(self, other):
+        ${0}
+snippet     _>
+alias       _gt
+abbr        > 演算子特殊メソッド def __gt__(self, other): 
+options     word, indent
+    def __gt__(self, other):
+        ${0}
+snippet     _<=
+alias       _le
+abbr        <= 演算子特殊メソッド def __le__(self, other): 
+options     word, indent
+    def __le__(self, other):
+        ${0}
+snippet     _>=
+alias       _ge
+abbr        >= 演算子特殊メソッド def __ge__(self, other): 
+options     word, indent
+    def __ge__(self, other):
+        ${0}
+snippet     _-
+alias       _sub
+abbr        - 演算子特殊メソッド def __sub__(self, other): 
+options     word, indent
+    def __sub__(self, other):
+        ${0}
+snippet     _str
+alias       toString
+abbr        オブジェクトの状態を表示するメンバーメソッド def __str__(self):
+options     word, indent
+    ##
+    # @breif このオブジェクトの文字列表現を返す。
+    #
+    # @return このオブジェクトの文字列表現
+    def __str__(self) -> str:
+        ${0}
+    
+    ##
+    # @brief このオブジェクトの再現可能なPython式の文字列。
+    #
+    # @return 再現可能なPython式の文字列
+    def __repr__(self) -> str:
+snippet     print
+abbr        print(...)
+options     word, indent
+    print(${0:TARGET})
+snippet     main
+abbr        main関数 if __name__ == '__main__': ...
+options     word, indent
+    def main():
+        ${0}
+    
+    if __name__ == '__main__':
+        main()
+snippet     mecab
+abbr        mecab snippet
+options     word, indent
+    import MeCab
+    
+    mecab = MeCab.Tagger("-Ochasen")
+    # 最初は空の文字列でパースする必要がある
+    mecab.parse('')
+    text = ''
+    # nodeを使うことで一つの単語ずつ処理できる
+    node = mecab.parseToNode(text)
+
+    while node:
+        # node.surface  元の文字列
+        # node.feature  解析結果の文字列
+        print(node.surface + '\t' + node.feature)
+        node = node.next
+    ${0}
+snippet     con
+abbr        コンストラクタ定義
+options     word, indent
+    ##
+    # @brief コンストラクタ
+    #
+    def __init__(self):
+        ${0}
+snippet     namedtuple
+alias       nt
+abbr        名前付きタプル
+options     word, indent
+    from collections import namedtuple
+    # 第一引数がクラス名 第二引数がフィールド名のリスト
+    $1 = namedtuple('${1}', (${0}))
+snippet     fopen
+abbr        ファイルオープン open() ...close()
+options     word, indent
+    ${1:fin} = open(${0}, '${3:r,w,a,rb,wb,ab,w+}')
+    $1.close()
+snippet     abstractclass
+alias       abstcl
+abbr     abstract class
+options     word, indent
+    from abc import ABCMeta, abstractmethod
+    
+    ##
+    # @breif 
+    #
+    # @version
+    # @file             
+    # @date
+    # @author           荒川 健太郎
+    class ${1}(metaclass=ABCMeta):
+        pass${0}
+snippet     abstractmethod
+alias       abstm
+abbr        abstract method
+options     word, indent
+    ##
+    # @brief 
+    #
+    @abstractmethod
+    def ${1}(self):
+        pass${0}
+snippet     flask
+abbr        Flask instance
+options     word, indent
+    from flask import Flask
+    app = Flask(__name__)${0}
+snippet     route
+abbr        Flask routing
+options     word, indent
+    @app.route(${0})
+snippet     methget
+alias       mget
+abbr        flask method get
+options     word, indent
+    methods=["GET"]${0}
+snippet     methpost
+alias       mpost
+abbr        flask method post
+options     word, indent
+    methods=["POST"]${0}
+snippet     blueprint
+abbr        flask BluePrint
+options     word, indent
+    from flask import Blueprint
+    
+    ${1} = Blueprint('${2}', __name__, static_url_path='${0}', static_folder='')
+    app.register_blueprint($1)
+snippet     bprint
+abbr        BluePrint Object flask
+options     word, indent
+    ${1} = Blueprint('${2}', __name__, static_url_path='${3}', static_folder='${4}')${0}
+    app.register_blueprint($1)
+snippet     typing
+abbr        Type Hints import
+options     word, indent
+    from typing import Optional, Union, Any
+    from typing import NoReturn
+    from typing import Dict
+    from typing import TypeVar, Generic, NewType, Type, ClassVar
+    from typing import IO, TextIO, BinaryIO
+    from collections.abc import Callable
+    from collections.abc import Sequence, Iterable${0}
+snippet     #t
+abbr        # type: ignore
+options     word, indent
+    # type: ignore${0}
+snippet     __new
+abbr        def __new__(cls, *args): ....
+options     word, indent
+    ##
+    # @brief コンストラクタ
+    # 
+    # @param *args      可変引数のタプル
+    # @return $1オブジェクト
+    def __new__(cls, *args: Tuple[Any, ...]) -> ${1}:
+        ${0}
+        return super.__new__(cls)
+snippet     nr
+abbr        -> NoReturn
+options     word, indent
+    -> NoReturn${0}
+snippet     *i
+abbr        __all__ = []
+options     word, indent
+    # *importでimportするクラス・関数
+    __all__ = []
+snippet     _setattr
+abbr        def __setattr__(self):
+options     word, indent
+    ##
+    # @brief 属性の設定。
+    #
+    # @param name   属性名
+    # @param val    値
+    def __setattr__(self, name, val) -> None:
+        ${0}
+        super().__setattr__(name, val)
+snippet     _iter
+abbr        iterator object
+options     word, indent
+    ##
+    # @brief iteratorオブジェクトを返す。
+    #
+    # @return iteratorオブジェクト
+    def __iter__(self) -> __class__:
+        return self
+    ##
+    # @brief 次の要素を返す。
+    #
+    # @return  次の要素
+    def __next__(self) -> ${0}:
+        try:
+            
+        except IndexError as ex:
+            raise StopIteration()
+snippet     context_manager
+alias       cm
+abbr        ContextManeger
+options     word, indent
+    ##
+    # @brief コンテキストマネージャーの前処理。
+    #
+    # @return asキーワードに渡すオブジェクト
+    def __enter__(self) -> None:
+        ${0}
+    ##
+    # @brief コンテキストマネージャーの後処理。
+    #
+    # @param exc_type   例外のクラス
+    # @param exc_value  例外のオブジェクト
+    # @param traceback  例外のtraceback情報
+    # @return True      例外を再送出しない
+    def __exit__(self, exc_type, exc_value, traceback) -> None:
+snippet     ipath
+abbr        from pathlib import Path
+options     word, indent
+    from pathlib import Path${0}
+snippet     abstract
+abbr        Abstract Class
+options     word, indent
+    from abc import ABCMeta, abstractmethod
+
+    class ${1}(metaclass=ABCMeta):
+        """抽象クラス
+        Args:
+        """
+        def __init__(self):
+            pass
+
+         @abstractmethod
+        def func(self):
+            """
+            """
+            pass
+snippet     fastapi
+abbr        fastapi module import
+options     word, indent
+    from fastapi import FastAPI
+    from fastapi import Query, Path
+    from pydantic import BaseModel
+    from fastapi import Body
+    from pydantic import Field
+    from fastapi import HTTPException
+    from starlette.responses import Response
+    from starlette.status import HTTP_201_CREATED${0}
+

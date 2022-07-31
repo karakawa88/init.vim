@@ -1,0 +1,141 @@
+snippet     sh
+alias       binsh
+abbr        #/bin/sh
+options     word, indent
+    #/bin/sh
+snippet     while
+abbr        while文 while ... do ... done
+options     word, indent
+    while ${0}
+    do
+    done
+snippet     while[
+abbr        while[]文 while [ ... ] do ... done
+options     word, indent
+    while [ ${0} ]
+    do
+    done
+snippet     if
+abbr        if文 if ...; then .... fi
+options     word, indent
+    if ${0}; then
+    fi
+snippet     if[
+alias       iftest
+abbr        if文 test if [ ... ]; then ... fi
+    if [ ${0} ]; then
+    fi
+snippet     inc
+abbr        変数をインクリメント 変数=`expr 変数 "+" 1`
+options     word, indent
+    ${1:#:var}=\`expr "$$1" "+" 1\`${0}
+snippet     for
+abbr        for文 for 変数名 in .... do .... done
+options     word, indent
+    for ${1} in ${2}
+    do
+        ${0}
+    done
+snippet     savearr
+alias       savearray
+abbr        配列の代入 array=("${array[@]}")
+options     word, indent
+    ${1}=("${${2}[@]}")${0}
+snippet     allarr
+alias       allarray
+abbr        配列の一括参照 "${array[@]}"
+options     word, indent
+    "${${1}[@]}"${0}
+snippet     ifelse
+abbr        if else文 if ...; then ... else ... fi
+options     word, indent
+    if ${0}; then
+    else
+    fi
+snippet     elif
+abbr        elif ... then
+options     word, indent
+    elif ${0}; then
+snippet     elif[
+alias       eliftest
+abbr        elif [ ... ]; then
+options     word, indent
+    elif [ ${0} ]; then
+snippet     switch
+abbr        シェルのswitch文 case ... ) ... ;; *) ... ;; esac
+options     word, indent
+    case ${1} in
+        ${0})
+            
+            ;;
+        *)
+            
+            ;;
+    esac
+snippet     case
+abbr        シェルswitch文のcase ) ... ;;
+options     word, indent
+    ${1})
+        ${0}
+        ;;
+snippet     fn
+abbr        関数定義 function 関数名() { ... }
+options     word, indent
+    function ${1}()
+    {
+        ${0:TARGET}
+    }
+snippet     select
+abbr        select文 select in .... do ... done
+options     word, indent
+    PS3='${1}'
+    select ${2:cmd} in ${0}
+    do
+        case $$2 in
+            )
+                ;;
+            *)
+                ;;
+        esac
+    done
+snippet     here
+abbr        ヒアドキュメント command << END ... END
+options     word, indent
+    << '${1:END}'
+    ${0:TARGET}
+    $1
+snippet     getopts
+abbr        オプション解析 getopts
+options     word, indent
+    while getopts ${1} opts
+    do
+        case "$opts" in
+            ${0})
+                ;;
+            \?)
+                
+                ;;
+        esac
+    done
+    shift \`expr "$OPTIND" "-" 1\`
+snippet     err
+alias       errecho
+abbr        エラー出力 echo "..." 1>&2
+options     word, indent
+    echo "${0}" 1>&2
+snippet     ro
+abbr        readonly 変数名="..."
+options     word, indent
+    readonly ${1}=${0}
+snippet     aref
+alias       arrayref
+abbr        配列参照 "${array[index]}"
+    "${${1:#:array}[${2:#:index}]}"${0}
+snippet     args
+abbr        引数処理
+    while [ "$#" -gt 0 ]
+    do
+        ${0:TARGET}
+        shift
+    done
+

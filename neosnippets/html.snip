@@ -1,0 +1,370 @@
+snippet     html5file
+alias       html5
+abbr        html5ファイルの雛形 <html lang="ja">...</html>
+options     word, indent
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="../css/normalize.css" />
+        <title>${0}</title>
+    </head>
+    <body>
+        ${1:TARGET}
+    </body>
+    </html>
+snippet     linkcss
+abbr        CSSファイルの指定 <link rel="stylesheet" href="*.css" />
+options     word, indent
+    <link rel="stylesheet" href="${1}.css" />${0}
+snippet     javascript
+alias       js
+abbr        <script src=" ... "></script>
+options     word, indent
+    <script src="${1}.js"></script>${0}
+snippet     sp
+abbr        空白 &nbsp;
+options     word, indent
+    &nbsp; ${0}
+snippet     amp
+alias       &&
+abbr        & &amp;
+options     word, indent
+    &amp;${0}
+snippet     &<
+abbr        "<" 小なり &lt;
+options     word, indent
+    &lt;${0}
+snippet     &>
+abbr        ">" 大なり &gt;
+options     word, indent
+    &gt;${0}
+snippet     &"
+abbr        '"' ダブルクォテーション &quot;
+options     word, indent
+    &quot;${0}
+snippet     &\
+abbr        \記号 &yen
+options     word, indent
+    &yen;${0}
+snippet     cp
+alias       copy
+abbr        copyright &copy;
+options     word, indent
+    &copy;${0}
+snippet     tb
+alias       targetblank
+abbr        リンクを別タブで開く target="_blank"
+options     word, indent
+    target="_blank"${0}
+snippet     id
+abbr        要素のid属性 id="属性名"
+options     word, indent
+    id="${0}"
+snippet     cl
+alias       class
+abbr        要素のclass属性 class="属性名"
+options     word, indent
+    class="${0}"
+snippet     wh
+alias       widthheight
+abbr        要素の幅と高さの属性 width="幅" height="高さ"
+    width="${1}" height="${2}" ${0}
+snippet     br
+abbr        改行要素brタグ <br />
+options     word, indent
+    <br />${0}
+snippet     cspan
+alias       colspan
+abbr        列の結合 属性 colspan="..."
+options     word, indent
+    colspan="${1}"${0}
+snippet     rspan
+alias       rowspan
+abbr        行の結合 属性 rowspan="..."
+options     word, indent
+    rowspan="${1}"${0}
+snippet     form
+abbr        フォーム要素 <form action="..." method="..."></form>
+options     word, indent
+    <form action="${1}" method="${2:post}">${0}</form>
+snippet     input
+alias       inputtag
+abbr        テキストフィールド <label for=""> ... </label><input type="..." name="" id="" />
+options     word, indent
+    <label for="$3">${0}</label>
+    <input type="${1:text}" name="${2}" id="${3}" />
+snippet     texta
+alias       textarea
+abbr        テキストエリア <label for=""> ... </label><textarea name="" id=""> ... </textarea>
+options     word, indent
+    <label for="$2">${0}</label>
+    <textarea name="${1}" id="${2}"></textarea>
+snippet     sc
+alias       acope
+abbr        行と列の関連性 scope="row|col"
+options     word, indent
+    scope="${1:row}"${0}
+snippet     radio
+alias       rd
+abbr        ラジオボタン <input type="radio" id="" name="" value="" /><label for=""></label>
+options     word, indent
+    <input type="radio" id="${1}" name="${0}" value="" /><label for="$1"></label>
+snippet     checkbox
+alias       checkin
+abbr        チェックボックス <input type="checkbox" id="" name="" value="" /><label for=""></label>
+options     word, indent
+    <input type="checkbox" id="${1}" name="${2}" value="${3}" /><label for="$1">${0}</label>
+snippet     submit
+abbr        送信ボタン <input type="submit" name="" value="" />
+options     word, indent
+    <input type="submit" value="${1}" />${0}
+snippet     inputemail
+abbr        e-mailテキストフィールド <label for=""></label><input type="email" id="" name="" />
+options     word, indent
+    <label for="$1"></label>
+    <input type="email" id="${1}" name="${2}" />
+snippet     inputtext
+abbr        テキストフィールド <label for=""></label><input type="text" id="" name="" />
+options     word, indent
+    <label for="$1"></label>
+    <input type="text" id="${1}" name="${2}" />
+snippet     inputtel
+abbr        telテキストフィールド <label for=""></label><input type="tel" id="" name="" />
+options     word, indent
+    <label for="$1"></label>
+    <input type="tel" id="${1}" name="${2}" />
+snippet     inputpasswd
+abbr        passwordテキストフィールド <label for=""></label><input type="tel" id="" name="" />
+options     word, indent
+    <label for="$1"></label>
+    <input type="password" id="${1}" name="${2}" />
+snippet     inputnumber
+abbr        数値テキストフィールド <label for=""></label><input type="number" id="" name="" />
+options     word, indent
+    <label for="$1"></label>
+    <input type="number" id="${1}" name="${2}" />
+snippet     hidden
+abbr        hiddenフィールド <input type="hidden" id="" name="" />
+options     word, indent
+    <input type="hidden" name="${0}" value="" />
+snippet     viewport
+abbr        ビューポートの設定 <meta name="viewport" ....>
+options     word, indent
+    <meta name="viewport" content="width-device-width, initial-scale=1" />${0}
+snippet     favicon
+alias       fav
+abbr        ファビコンの指定
+options     word, indent
+    <link rel="shortcut icon" href="${1:./favicon.ico}" type="image/vnd.microsoft.ico" />
+    <link rel="apple-touch-icon" href="${2:/apple-touch-icon.png}" />${0}
+snippet     srcset
+abbr        画像の高解像度と普通の画像の切り替え srcset=""
+options     word, indent
+    srcset="${1} 1x, ${2} 2x"${0}
+snippet     polyfill
+alias       poly
+abbr        polyfill NodeJsライブラリー ロード <script src....></script>
+options     word, indent
+    <script src="node_modules/babel-polyfill/dist/polyfill.js"></script>${0}
+snippet     normalize
+abbr        normalize.cssの指定 <link rel="stylesheet" href="normalize.css" />
+options     word, indent
+    <link rel="stylesheet" href="${0}normalize.css" />
+snippet     select
+abbr        selectタグ <label for="...">ラベル名</label><select ...></select>
+options     word, indent
+    <label for="$1">${0}</label>
+    <select name="${1}" id="$1"></select>
+snippet     opt
+alias       option
+    <option value="${1}">${2}</option>${0}
+snippet     fileinput
+abbr        fileタグ <label for="..."></label><input type="file" id="" name="" />
+options     word, indent
+    <label for="$1"></label>
+    <input type="file" id="${1}" name="$1" />${0}
+snippet     onsubmit
+abbr        onsubmit属性 onsubmit="return false;"
+options     word, indent
+    onsubmit="return false;"${0}
+snippet     btn
+abbr        ボタン <input type="button" value="..." />
+options     word, indent
+    <input type="button" value="${1}" />${0}
+snippet     onfalse
+abbr        イベントを無効にする onイベント名="return false;"
+options     word, indent
+    on${1:submit}="return false;"${0}
+snippet     jquerycdn
+alias       jqcdn
+abbr        JQuery CDN
+options     word, indent
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/${1}/jquery.js"></script>${0}
+snippet     cdnreact
+abbr        React CDN
+options     word, indent
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>${0}
+snippet     npmreact
+abbr        React NPM node_modules
+options     word, indent
+    <script src="../node_modules/react/dist/react.js"></script>
+    <script src="../node_modules/react-dom/dist/react-dom.js"></script>${0}
+snippet     req
+abbr        フォーム部品のrequired属性
+options     word, indent
+    required${0}
+snippet     val
+abbr        value属性 value="..."
+options     word, indent
+    value="${1}"${0}
+snippet     table
+alias       tabletag
+abbr        テーブル要素
+options     word, indent
+    <table>
+        <caption>${0}</caption>
+        <thead></thead>
+        <tbody></tbody>
+        <tfoot></tfoot>
+    </table>
+snippet     placeholder
+alias       ph
+options     word, indent
+    placeholder="${0}"
+snippet     noindex
+alias       nocrawler
+abbr        not crawler <meta name="robots" content="noindex,nofollow" />
+options     word, indent
+    <meta name="robots" content="noindex,nofollow" />${0}
+snippet     fontawesome
+alias       fonta
+abbr        fontawesome設定
+        <script>
+            FontAwesomeConfig = {
+                searchPseudoElements: true,
+                autoReplaceSvg: 'nest' 
+            };
+        </script>
+        <script src="https://kit.fontawesome.com/7454a2559d.js" crossorigin="anonymous"></script>
+snippet     webfonts
+alias       wfonts
+abbr        Web Fonts
+options     word, indent
+    <!-- WEB Fonts -->
+    <!-- Noto Serif JP-->
+    <!-- font-family: 'Noto Serif JP', serif; -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet"> 
+    <!-- Noto Sans JP-->
+    <!-- font-family: 'Noto Sans JP', sans-serif; -->
+    <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">${0}
+snippet     webfontext
+alias       wfext
+abbr        WEB Fonts 拡張
+    <!-- Kosugi Maru -->
+    <!-- font-family: 'Kosugi Maru', sans-serif; -->
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <!-- Sawarabi Gothic -->
+    <!-- font-family: 'Sawarabi Gothic', sans-serif; -->
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap" rel="stylesheet">
+    <!-- Sawarabi mincho -->
+    <!-- font-family: 'Sawarabi Mincho', sans-serif; -->
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&display=swap" rel="stylesheet">${0}
+snippet     cdata
+abbr        XML CDATA処理命令
+options     word, indent
+    <![CDATA[ ${0}]]>
+snippet     section
+alias       sec
+abbr        section element
+options     word, indent
+    <section>
+        <h${1}>${0}<h$1/>
+        <div>
+
+        </div>
+    </section>
+snippet     resetcss
+abbr        reset css and normalize css
+options     word, indent
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/normalize.css" />${0}
+snippet     figure
+abbr        <figure> ... </figure>
+options     word, indent
+    <figure>
+        <img src="${0}" alt="" />
+        <figcaption></figcaption>
+    </figure>
+snippet     form-data
+alias       multip
+abbr        enctype="multipart/form-data"
+options     word, indent
+    enctype="multipart/form-data"${0}
+snippet     url_for
+abbr        jinja2 {{url_for(...)}}
+options     word, indent
+    {{url_for('${1}', filename='${2}')}}${0}
+snippet     {raw
+abbr        {% raw %} .... {% endraw %}
+options     word, indent
+    {% raw %}
+    ${0:TARGET}
+    {% endraw %}
+snippet     {for
+abbr        {% for ... in ... %} ... {% endfor %}
+options     word, indent
+    {% for ${1} in ${2} %}
+    ${0:TARGET}
+    {% endfor %}
+snippet     {ext
+alias       {extends
+abbr        {% extends "..." %} ... {% endblock %}
+options     word, indent
+    {% extends "${1}" %}
+    ${0:TARGET}
+    {% endblock %}
+snippet     {block
+abbr        {% block ... %} ... {% endblock %}
+options     word, indent
+    {% block ${1} %}
+    ${0:TARGET}
+    {% endblock %}
+snippet     {sp
+alias       {super
+abbr        {{ super() }}
+options     word, indent
+    {{ super() }}${0}
+snippet     range
+abbr        <input type="range" ... />
+options     word, indent
+    <label for="$1"></label>
+    <input type="range" id="${1}" name="${1}" value="${0}" min="" max="" step="1" />
+snippet     void0
+alias       jsvoid0
+abbr        JavaScript:void(0)
+options     word, indent
+    JavaScript:void(0)${0}
+snippet     offsubmit
+abbr        onsubmit="return false;"
+options     word, indent
+    onsubmit="return false;"${0}
+snippet     canvaswh
+abbr        canvas width height
+options     word, indent
+    width="${1}" height="${2}" style="width:${3}px;height:${4}px;"${0}
+snippet     quote
+alias       bquote
+abbr        <blockquote cite=" ... "> ... </blockquote>
+options     word, indent
+    <blockquote cite="${0}"></blockquote>
+snippet     react
+abbr        React JS
+options     word, indent
+    <!-- React JS -->
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>${0}

@@ -1,0 +1,504 @@
+snippet     main
+abbr        main関数 int main(int argc, char *argv[]) { ... return 0; }
+options     word, indent
+    int main(int argc, char *argv[]) {
+        ${0}
+        return 0; 
+    }
+snippet     cin
+abbr        std::cin #include <iostream>
+options     word
+    std::cin${0}
+snippet     cout
+abbr        std::cout #include <iostream>
+options     word
+    std::cout${0}
+snippet     cerr
+abbr        std::cerr #include <iostream>
+options     word
+    std::cerr${0}
+snippet     endl
+abbr        std::endl #include <iostream>
+options     word
+    std::endl${0}
+snippet     ln
+abbr        std::cout << std::endl; #include <iostream>
+options     word
+    std::cout ${0} << std::endl;
+snippet     errln
+abbr        std::cerr << std::endl; #include <iostream>
+options     word
+    std::cerr << ${0}std::endl;
+snippet     fori
+abbr        for (int i = ...;i < ...;++i){}
+options     word
+    for (int i = ${1:0};i ${2};++i)${0:TARGET}
+snippet     scast
+abbr        static_cast<型>(...)
+options     word, indent
+    static_cast<${1}>(${0:TARGET})
+snippet     pcast
+abbr        reinterpret_cast<型>(...)
+options     word, indent
+    reinterpret_cast<${1}>(${0:TARGET})
+snippet     ccast
+abbr        const_cast<型>(...)
+options     word, indent
+    const_cast<${1}>(${0:TARGET})
+snippet     mv
+alias       move
+abbr        左辺値を右辺値にキャスト std::move(...) <utility>
+options     word
+    std::move(${1})${0}
+snippet     str
+alias       string
+abbr        std::string <string>
+options     word
+    std::string${0}
+snippet     rcast
+abbr        左辺値を右辺値にキャスト static_cast<..&&>(...)
+options     word
+    static_cast<${1}&&>(${2})${0}
+snippet     rs
+abbr        原文字列 R"(.....)"
+options     word
+    R"(${0})"
+snippet     reg
+abbr        正規表現オブジェクトの作成 ECMAScript正規表現 std::regex 変数名(R"(正規表現原文字列)")
+options     word
+    std::regex ${1}(R"(${2})")${0}
+snippet     exit
+abbr        プログラム終了関数 std::exit() #include<cstdlib>
+options     word
+    std::exit(${0})
+snippet     failure
+alias       fai
+abbr        プログラム異常終了のステータス EXIT_FAILURE #include<cstdlib>
+options     word
+    EXIT_FAILURE${0}
+snippet     success
+alias       suc
+abbr        プログラム正常終了のステータス EXIT_SUCCESS #include<cstdlib>
+options     word
+    EXIT_SUCCESS${0}
+snippet     dw
+alias       dowhile
+abbr        do while文 do { ... } while()
+options     word
+    do {
+
+    } while (${0});
+snippet     enum
+abbr        列挙型(enum) enum 名前 {...};
+options     word,indent
+    enum ${1} {
+        ${0}
+    };
+snippet     ios
+abbr        std::ios
+options     word,indent
+    std::ios
+snippet     hppmac
+alias       hppmacro
+abbr        ヘッダーファイル(.hpp)に付けるマクロ  #ifndef (HeaderFileName)_H #define (HeaderFileName)_H ... #endif
+options     word, indent
+    #ifndef ${1:#:HeaderFileName}_H 
+    #define $1_H
+    ${0}
+    #endif
+snippet     decclass
+alias       class
+abbr        クラス宣言 class クラス名 { ... };
+options     word, indent
+    class ${1:#:class_name} {
+    public:
+        /**
+         * @brief デフォルトコンストラクタ
+         *
+         */
+        $1();
+        /**
+         * @brief デストラクタ
+         *
+         */
+        ~$1() noexcept;
+        /**
+         * @brief コピーコンストラクタ。
+         *
+         * @param obj $1オブジェクトの参照
+         */
+        $1(const $1& obj);
+
+    private:
+        ${0}
+    };
+snippet     classcomm
+abbr        クラス宣言・定義のコメント
+options     word, indent
+    /**
+     * @class ${1:#:classname} $1.hpp
+     * @brief 
+     * 
+     * @version ${0}
+     * @author 荒川　健太郎
+     * @date 
+     * @file 
+     */
+snippet     @br
+alias       @b
+abbr        Doxygenドキュメントの要約説明 @brief
+options     word, indent
+    @brief ${0}
+    
+snippet     defcon
+abbr        デフォルトコンストラクタとデストラクタの定義。 クラス名::クラス名( ... ); クラス名::~クラス名(){ ... }
+options     word, indent
+    /**
+     * @brief デフォルトコンストラクタ
+     * 
+     */
+    ${1}::$1() {${0}}
+    /**
+     * @brief デストラクタ
+     * 
+     */
+    $1::~$1() noexcept {}
+snippet     decop
+abbr        演算子オーバーロード宣言(クラスメンバー関数) 返値 operator<演算子>(...);
+options     word, indent
+    ${1:#:return_type} operator ${2}($1 const & obj);
+snippet     op
+abbr        二項演算子オーバーロード定義 返値 operator <演算子>(...){}
+options     word, indent
+    ${1:#:return_type} operator ${3}($1 const & obj) {}
+snippet     decop=
+abbr        代入演算子オーバーロード宣言(メンバー関数) クラス& operator=(const クラス& obj);
+options     word, indent
+    /**
+     * @brief $1オブジェクトの代入演算子オーバーロード
+     * 
+     * @param obj 代入する$1オブジェクト
+     * @return 代入された$1オブジェクト
+     */
+    ${1:#:class_name}& operator=(const $1& obj);${0}
+snippet     op=
+abbr        代入演算子オーバーロード定義(メンバー関数) クラス& クラス::operator=(const クラス& obj);
+options     word, indent
+    /**
+     * @brief $1オブジェクトの代入演算子オーバーロード
+     * 
+     * @param obj 代入する$1オブジェクト
+     * @return 代入された$1オブジェクト
+     */
+    ${1:#:class_name}& $1::operator=(const $1& obj){
+        ${0}
+        return *this;
+    }
+snippet     decunop
+alias       dec++op
+abbr        前置単項演算子(unary)++または--オーバーロード宣言(メンバー関数) オブジェクトの参照 operator++();
+options     word, indent
+    ${1}& operator ${2:++}();${0}
+snippet     unop
+alias       ++op
+abbr        前置単項演算子(unary)++または--オーバーロード(メンバー関数) オブジェクトの参照 operator++();
+options     word, indent
+    $1& operator ${2:++}() {
+        ${0}
+        return *this;
+    }
+snippet     decopun
+alias       decop++
+abbr        後置単項演算子++または--オーバーロード宣言(メンバー関数) オブジェクト operator++(int unused);
+options     word, indent
+    /**
+     * @brief $1オブジェクトの後置単項演算子$2オーバーロード
+     * 
+     * @return  $1オブジェクト
+     */
+    ${1} operator ${2:++}(int);${0}
+snippet     opun
+alias       op++
+abbr        後置単項演算子++または--オーバーロード(メンバー関数) オブジェクト operator++(int unused);
+options     word, indent
+    $1& operator ${2:++}(int) {
+        $1 ret = *this;${0}
+        return ret;
+    }
+snippet     op==
+abbr        比較演算子オーバーロード == !=演算子
+options     word, indent
+    bool operator ${1}(${2} const & obj) {${0}}
+snippet     decop==
+abbr        比較演算子オーバーロード == !=演算子
+options     word, indent
+    bool operator ${1}(${2} const & obj);${0}
+snippet     decop[
+abbr        添字演算子オーバーロード(メンバー関数)宣言 オブジェクトの要素 operator[](std::size_t index) const throw(std::out_of_range);
+options     word, indent
+    ${1}& operator[](std::size_t index) const throw(std::out_of_range);${0}
+snippet     op[
+abbr        添字演算子オーバーロード(メンバー関数) オブジェクトの要素 operator[](std::size_t index) const throw(std::out_of_range) { ... }
+options     word, indent
+    ${1}& operator[](std::size_t index) const throw(std::out_of_range) {${0}}
+snippet     decop(
+abbr        関数演算子オーバーロード(メンバー関数)宣言 operator()();
+options     word, indent
+    /**
+     * @brief ${1}オブジェクトの関数演算子() オーバーロード
+     * 
+     */
+    ${2:return_type} operator()(${3});${0}
+snippet     op(
+abbr        関数演算子オーバーロード定義 operator()();
+options     word, indent
+    /**
+     * @brief $1オブジェクトの関数演算子() オーバーロード
+     * 
+     */
+    ${2:return_type} ${1}::operator()(${3}) {${0}}
+snippet     decop<<
+abbr        挿入演算子オーバーロード<<(フレンド関数)宣言 friend std::ostream& operator<<(std::ostream& stream, const クラス名& obj);
+options     word, indent
+    /**
+     * @brief 引数の出力ストリームオブジェクトの挿入演算子 <<  オーバーロード
+     * 
+     * @param   stream  出力ストリーム
+     * @param   obj     $1オブジェクトの参照
+     * @return  引数で受け取った出力ストリームの参照
+     */
+    friend std::ostream& operator<<(std::ostream& stream, const ${1:#:classname}& obj);${0}
+snippet     op<<
+abbr        挿入演算子オーバーロード<<(フレンド関数) std::ostream& operator<<(std::ostream& stream, const クラス名& obj) {${0}}
+options     word, indent
+    /**
+     * @brief 引数の出力ストリームオブジェクトの挿入演算子 <<  オーバーロード
+     * 
+     * @param   stream  出力ストリーム
+     * @param   obj     $1オブジェクトの参照
+     * @return  引数で受け取った出力ストリームの参照
+     */
+    std::ostream& operator<<(std::ostream& stream, const ${1:#:classname}& obj) {
+        ${0}
+        return stream;
+    }
+snippet     decop>>
+abbr        抽出演算子オーバーロード>>(フレンド関数)宣言 friend std::istream& operator>>(std::istream& stream, クラス名& obj);
+options     word, indent
+    /**
+     * @brief 引数の入力ストリームオブジェクトの抽出演算子 >>  オーバーロード
+     * 
+     * @param   stream  入力ストリーム
+     * @param   obj     $1オブジェクトの参照
+     * @return  引数で受け取った入力ストリームの参照
+     */
+    friend std::istream& operator>>(std::istream& stream, ${1:#:classname}& obj);${0}
+snippet     op>>
+abbr        抽出演算子オーバーロード>>(フレンド関数) std::istream& operator>>(std::istream& stream, クラス名& obj) {${0}}
+options     word, indent
+    /**
+     * @brief 引数の入力ストリームオブジェクトの抽出演算子 >>  オーバーロード
+     * 
+     * @param   stream  入力ストリーム
+     * @param   obj     $1オブジェクトの参照
+     * @return  引数で受け取った入力ストリームの参照
+     */
+    std::istream& operator>>(std::istream& stream, ${1:#:classname}& obj) {
+        ${0}
+        return stream;
+    }
+snippet     newnoex
+abbr        メモリー割当時(new)に例外を投げない p = new(nothrow) type;
+options     word, indent
+    ${1:#:var} = new(std::nothrow) ${2:#:type};${0}
+snippet     deccpcon
+abbr        コピーコンストラクタ宣言 class_name class_name(const class_name& obj);
+options     word, indent
+    /**
+     * @brief コピーコンストラクタ。
+     *
+     * @param obj $1オブジェクトの参照
+     */
+    ${1:#:class_name}(const $1& obj);${0}
+snippet     cpcon
+abbr        コピーコンストラクタ定義 class_name class_name::class_name(const class_name& obj) { ... }
+options     word, indent
+    /**
+     * @brief コピーコンストラクタ。
+     *
+     * @param obj $1オブジェクトの参照
+     */
+    ${1:#:class_name}::$1(const $1& obj) {
+        ${0}
+    }
+snippet     try
+abbr        例外処理 try, catchブロック try{ ... }catch(){ ... }
+options     word, indent
+    try {
+        ${1:TARGET}
+    } catch(${0}) {
+        
+    }
+snippet     cat
+alias       catch
+abbr        例外処理 catchブロック  catch() { ... }
+options     word, indent
+    catch(${0}) {
+        
+    }
+snippet     catall
+alias       catchall
+abbr        例外処理 すべての例外を補足するcatchブロック  catch(...) { ... }
+options     word, indent
+    catch(...) {
+        ${0}
+    }
+snippet     ne
+abbr        例外処理 例外を送出しない noexcept
+options     word, indent
+    noexcept${0}
+snippet     th
+abbr        例外処理 関数が送出する例外の限定 function() throw(... ,...)
+options     word, indent
+    throw(${0})
+snippet     for_each
+abbr        std::for_each()関数  #include <algorithm>
+options     word, indent
+    std::for_each(${0})
+snippet     lam
+alias       lambda
+abbr        ラムダ式  [](){}
+options     word, indent
+    [](){${0}}
+snippet     autolam
+alias       autolambda
+abbr        auto ラムダ式  auto fnvar_name = [](){};
+options     word, indent
+    auto ${1:fnvar_name} = [](){${0}};
+snippet     begin
+alias       beg
+abbr        std::begin()
+options     word, indent
+    std::begin(${0})
+snippet     end
+abbr        std::end()
+options     word, indent
+    std::end(${0})
+snippet     beginend
+alias       be
+abbr        std::begin(...), std::end(...)
+options     word, indent
+    std::begin(${1}), std::end($1)${0}
+snippet     vec
+alias       vector
+abbr        std::vector<type_name>
+options     word, indent
+    std::vector<${1}>${0}
+snippet     treemap
+abbr        std::map<Key, Value> #include <map>
+options     word, indent
+    std::map<${1:#:Key}, ${2:#:Value}> ${0}
+snippet     make_pair
+alias       mpair
+abbr        std::make_pair(Key, Value)
+options     word, indent
+    std::make_pair(${1:#:Key}, ${2:#:Value})${0}
+snippet     tostr
+alias       to_string
+abbr        std::to_string(...)
+options     word, indent
+    std::to_string(${1:TARGET})${0}
+snippet     null
+abbr        nullptr
+options     word,indent
+    nullptr${0}
+snippet     makesh
+alias       makeshared
+abbr        shared_ptr<...>を作成する std::make_shared<...>()
+options     word, indent
+   std::make_shared<${1}>(${0})
+snippet     foreach
+abbr        拡張for文 for(auto& val: ...) {}
+options     word,indent
+    for (auto& ${1:val}: ${2}) {${0}}
+snippet     mapemplace
+abbr        マップでキーを追加する時のオブジェクトを直接構築して追加。 map.emplace(...)
+options     word,indent
+    emplace(std::piecewise_construct, 
+            std::forward_as_tuple(${0}), 
+            std::forward_as_tuple())
+snippet     ba
+alias       boola
+abbr        std::boolalpha
+options     word, indent
+    std::boolalpha${0}
+snippet     st
+alias       size_t
+abbr        std::size_t
+options     word, indent
+    std::size_t${0}
+snippet     count
+abbr        std::count(...)
+options     word, indent
+    std::count(${0})
+snippet     count_if
+abbr        std::count_if(...)
+options     word, indent
+    std::count_if(${0})
+snippet     equal
+alias       eq
+abbr        std::equal(...)
+options     word, indent
+    std::equal(${0})
+snippet     dist
+alias       distance
+abbr        std::distance(....)
+options     word, indent
+    std::distance(${0})
+snippet     copy
+alias       cp
+abbr        std::copy(...)
+options     word, indent
+    std::copy(${0})
+snippet     transform
+alias       trans
+abbr        std::transform(...)
+options     word, indent
+    std::transform(${0})
+snippet     remove
+abbr        std::remove(...)
+options     word, indent
+    std::remove(${0})
+snippet     ui
+alias       uint
+abbr        unsigned int
+options     word, indent
+    unsigned int${0}
+snippet     sof
+abbr        sizeof(...)
+options     word, indent
+    sizeof(${0})
+snippet     temp
+abbr        template<typename ...>
+options     word, indent
+    template<typename ${0}>
+snippet     pd
+alias       pdiff
+abbr        std::ptrdiff_t
+options     word, indent
+    std::ptrdiff_t${0}
+snippet     nd
+abbr        [[nodiscard]]
+options     word, indent
+    [[nodiscard]]${0}
+snippet     uptr
+alias       unique_ptr
+abbr        std::make_unique<T>(...)
+options     word, indent
+    std::make_unique<${1}>(${0})
+snippet     sptr
+alias       shared_ptr
+abbr        std::make_shared<T>(...)
+options     word, indent
+    std::make_shared<${1}>(${0})
+

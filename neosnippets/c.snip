@@ -1,0 +1,43 @@
+snippet     main
+abbr        int main(int argc, char *argv[]){ ... }
+options     word, indent
+    int main(int argc, char *argv[]) {
+        ${0}
+        return 0;
+    }
+snippet     ln
+abbr        printf("...\n", );
+options     word, indent
+    printf("${0}\n", );
+snippet     switch
+abbr        switch() { ... }
+options     word, indent
+    switch(${1}) {
+        case ${0}:
+            
+            break;
+        default:
+            
+            break;
+    }
+snippet     case
+abbr        case x: ... break;
+options     word, indent
+    case ${1}:
+        ${0}
+        break;
+snippet     hif
+abbr        #ifndef ... #endif
+options     word, indent
+    #ifndef ${1}
+    #define $1
+
+    #endif
+snippet     ui
+abbr        unsigned int
+options     word, indent
+    unsigned int${0}
+snippet     err
+abbr        fprintf(stderr, "\n"${0});
+options     word, indent
+    fprintf(stderr, "\n"${0});
