@@ -368,7 +368,7 @@ nnoremap <silent><C-e> :NERDTreeToggle<CR>
 "起動時にブックマークを表示
 let NERDTreeShowBookmarks = 1
 "Vim起動時にNERDTreeを開く
-autocmd VimEnter * NERDTree
+" autocmd VimEnter * NERDTree
 "NERDTreeのウィンドウしか開かれていないときは自動的に閉じる
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && \b:NERDTree.isTabTree()) |q| endif
 " vim-devicons ファイルタイプごとにアイコンを表示するプラグイン
