@@ -1,5 +1,9 @@
 source ~/.config/nvim/plugin/plug.vim
 call plug#begin()
+" vim-plugのhelpを見れるようにする
+Plug 'junegunn/vim-plug'
+" neovimのhelpを日本語化する
+Plug 'vim-jp/vimdoc-ja'
 " vim-unimpaired vimに便利なキーマップを追加する
 " バッファを移動する
 " [b 前のバッファに戻る
@@ -12,6 +16,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-vinegar'
 " vim-devicons ファイルタイプごとにアイコンを表示するプラグイン
 Plug 'ryanoasis/vim-devicons'
+" ack-grep
+Plug 'mileszs/ack.vim'
 " easy-motion
 Plug 'easymotion/vim-easymotion'
 Plug 'kana/vim-tabpagecd'
@@ -95,7 +101,6 @@ Plug 'vim-scripts/a.vim'
 Plug 'lervag/vimtex'
 Plug 'w0rp/ale'
 " on_cmd = ['ALELint', 'ALEToggle', 'ALEEnable', 'ALEToggleBuffer', 'ALEEnableBuffer']
-Plug 'vim-jp/vimdoc-ja'
 Plug 'https://github.com/preservim/nerdtree'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'lervag/vimtex'

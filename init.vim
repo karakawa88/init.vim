@@ -15,14 +15,6 @@ let g:python_host_prog = expand('/usr/bin/python2.7')
 " mapleaderはspaceのような特殊キーを受け付けないため \<space>とする
 let mapleader = "\<space>"
 
-"dein Scripts-----------------------------
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-
-" Required:
-" set runtimepath+=/Users/kdbadev/.config/nvim/plugin/vim-plug.vim
-source ~/.config/nvim/plugins.vim
 
 " Required:
 " ファイルタイプに基づいたインデントを有効にする
@@ -150,7 +142,7 @@ nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 "grepをvimのvimgrepを使用するようにする
 "set grepprg=internal
 " 通常のgrep
-set grepprg=grep\ -E\ -n\ -i\ -R\ -I\ --exclude=~/.config/nvim/nvim_grep_exclude.txt\ $*
+set grepprg=grep\ -E\ -n\ -I\ --exclude=~/.config/nvim/nvim_grep_exclude.txt\ $*\ 2>/dev/null
 " QuickFixに表示する一行の要素のフォーマット
 set grepformat=%f:%l:%m
 " vimgrep検索での除外パターン
@@ -347,6 +339,17 @@ if has("autocmd")
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \   exe "normal g`\"" |
         \ endif
+endif
+
+"----------------------------------------------------
+" vim-plug
+"----------------------------------------------------
+" set runtimepath+=/Users/kdbadev/.config/nvim/plugin/vim-plug.vim
+source ~/.config/nvim/plugins.vim
+"vimplugがまだインストールされていなければインストールする
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/plugin/plug.vim --create-dirs \https://raw.github.com/junegunn/vimplug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 "----------------------------------------------------
