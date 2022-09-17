@@ -13,6 +13,7 @@ let g:python_host_prog = expand('/usr/bin/python2.7')
 " <leader>キーの変更
 " \ からスペースキーに切り替える
 " mapleaderはspaceのような特殊キーを受け付けないため \<space>とする
+" また''はただの文字列でそうしたくない場合(展開など)は""を使用する。
 let mapleader = "\<space>"
 
 
@@ -117,21 +118,23 @@ set wrapscan
 " インクリメンタルサーチを使わない
 set noincsearch
 " 前回の検索にマッチする単語の数を表示する
-nnoremap <silent> <Leader>c :%s///gn<CR>
+nnoremap <silent> <leader>c :%s///gn<cr>
 " インクリメンタルサーチを有効にする
-nnoremap <silent> <Leader>i :set incsearch<CR>
+nnoremap <silent> <leader>i :set incsearch<cr>
 " インクリメンタルサーチを無効にする
-nnoremap <silent> <Leader>n :set noincsearch<CR>
+nnoremap <silent> <leader>n :set noincsearch<cr>
 " 検索結果文字列のハイライトを有効にする
-" :nohでハイライトを消せる
+" :nohでハイライトを消せ
 " set nohlsearch
 set hlsearch
 " 検索結果文字列のハイライトを無効にするキーマップ
 " nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
-nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
+nnoremap <silent> <leader>h  :noh<cr>
+" nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 " ビジュアルで選択された文字列で検索を可能にする。
 " ビジュアルで選択されていれば*と#で検索できる。
 " source ~/.vim/plugin/visualstar.vim
+
 "----------------------------------------------------
 " grep
 "----------------------------------------------------
@@ -176,6 +179,8 @@ set list
 set showcmd
 " ステータスラインを常に表示
 set laststatus=2
+"最後に実行したコマンドをステータスラインに表示する
+set showcmd
 " 対応する括弧のハイライト
 let loaded_matchparen = 1
 " 括弧入力時の対応する括弧を表示
@@ -344,13 +349,23 @@ endif
 "----------------------------------------------------
 " vim-plug
 "----------------------------------------------------
-" set runtimepath+=/Users/kdbadev/.config/nvim/plugin/vim-plug.vim
-source ~/.config/nvim/plugins.vim
 "vimplugがまだインストールされていなければインストールする
-if empty(glob('~/.vim/autoload/plug.vim'))
+if empty(glob('~/.config/nvim/plugin/plug.vim'))
     silent !curl -fLo ~/.vim/plugin/plug.vim --create-dirs \https://raw.github.com/junegunn/vimplug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+" set runtimepath+=/Users/kdbadev/.config/nvim/plugin/vim-plug.vim
+source ~/.config/nvim/plugins.vim
+"------------------------------------------------------
+" カラースキーム
+"------------------------------------------------------
+" カラースキームをAtomのonedarkに変更する
+"NeoBundle 'joshdick/onedark.vim'
+" One Darkを有効にするために必要
+"let g:onedark_termcolors=16
+" カラースキーマを宣言する
+" colorscheme murphy
+colorscheme PaperColor
 
 "----------------------------------------------------
 " Terminal
@@ -410,6 +425,17 @@ set guifont=Ricty\ Regular\ Nerd\ Font\ Plus\ Font\ Awesome\ Plus\ Octicons\ Plu
 " カーソル移動を高速にするプラグイン
 map  <Leader><Leader>/ <Plug>(easymotion-sn)
 nmap  <Leader><Leader>/ <Plug>(easymotion-sn)
+
+"----------------------------------------------------
+" airline
+"----------------------------------------------------
+" airlineのタブを有効にする
+let g:airline#extensions#tabline#enabled = 1
+" C-p C-nでタブを切り替える
+"nmap <C-p> <Plug>AirlineSelectPrevTab
+"nmap <C-n> <Plug>AirlineSelectNextTab
+" タブに番号をつける
+let g:airline#extensions#tabline#buffer_idx_mode = 1
 
 "----------------------------------------------------
 " プログラム関連
@@ -853,12 +879,6 @@ vmap <Leader>c <Plug>(caw:I:toggle)
 " NeoBundle 表示
 "----------------------------------------------------
 " onedark.vim
-" カラースキームをAtomのonedarkに変更する
-"NeoBundle 'joshdick/onedark.vim'
-" One Darkを有効にするために必要
-"let g:onedark_termcolors=16
-" カラースキーマを宣言する
-" colorscheme murphy
 
 " タブ・ステータスバーの表示
 " NeoBundle 'itchyny/lightline.vim'

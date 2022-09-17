@@ -20,6 +20,14 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'mileszs/ack.vim'
 " easy-motion
 Plug 'easymotion/vim-easymotion'
+" カラースキーム
+" カラースキームをスクロールする
+Plug 'flazz/vimcolorschemes'
+" ステータスラインの見た目
+" airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 Plug 'kana/vim-tabpagecd'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neoyank.vim'
