@@ -465,7 +465,7 @@ inoremap { {}<esc>i
 "autocmd BufWritePost * call system(" ctags -R")
 "nnoremap <C-h> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
 "nnoremap <C-k> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
-set tags=./tags;~,ctags;~/
+set tags=tags;
 " tagsジャンプの時に複数ある時は一覧表示                                        
 nnoremap <C-]> g<C-]> 
 " tagbar
@@ -522,116 +522,7 @@ set shortmess+=I
 " helpの言語の優先順位
 set helplang=ja,en
 
-
-"----------------------------------------------------
-" Denite
-"----------------------------------------------------
-"見た目
-" call denite#custom#option('default', 'prompt', '>')
-" " grep
-" call denite#custom#var('grep', 'command', ['grep'])
-" call denite#custom#var('grep', 'default_opts',['-i', '--vimgrep', '--nocolor', '--nogroup'])
-" call denite#custom#var('grep', 'recursive_opts', [])
-" call denite#custom#var('grep', 'final_opts', [])
-" call denite#custom#var('grep', 'separator', [])
-" "denite時に使用するキーマップ
-" "ESCキーでdeniteを終了
-" call denite#custom#map('insert', '<esc>', '<denite:enter_mode:normal>', 'noremap')
-" call denite#custom#map('insert', '<C-g>', '<denite:quit>', 'noremap')
-" call denite#custom#map('normal', '<C-g>', '<denite:quit>', 'noremap')
-" "C-N,C-Pで上下移動
-" call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
-" call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
-" "C-J,C-Kでsplitで開く
-" call denite#custom#map('insert', '<C-j>', '<denite:do_action:split>', 'noremap')
-" call denite#custom#map('insert', '<C-k>', '<denite:do_action:vsplit>', 'noremap')
-" 高速に絞り込み検索を行うmatcher_cpsmを使用する
-" call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
-"call denite#custom#var('file/rec', 'command',
-"\ ['rg', '--files', '--glob', '!.git'])
-" Define mappings
-" autocmd FileType denite call s:denite_my_settings()
-" function! s:denite_my_settings() abort
-"   nnoremap <silent><buffer><expr> <CR>
-"  \ denite#do_map('do_action')
-"   nnoremap <silent><buffer><expr> d
-"  \ denite#do_map('do_action', 'delete')
-"   nnoremap <silent><buffer><expr> p
-"  \ denite#do_map('do_action', 'preview')
-"   nnoremap <silent><buffer><expr> q
-"  \ denite#do_map('quit')
-"   nnoremap <silent><buffer><expr> i
-"  \ denite#do_map('open_filter_buffer')
-"   nnoremap <silent><buffer><expr> <Space>
-"  \ denite#do_map('toggle_select').'j'
-" 
-"   " Deniteを閉じる
-"   inoremap <silent><buffer><expr> <C-g> denite#do_map('quit')
-"   nnoremap <silent><buffer><expr> <esc> denite#do_map('quit')
-"   " call denite#custom#map('insert', '<esc>', '<denite:enter_mode:normal>', 'noremap')
-" " call denite#custom#map('insert', '<C-g>', '<denite:quit>', 'noremap')
-" " call denite#custom#map('normal', '<C-g>', '<denite:quit>', 'noremap')
-" endfunction
-" 
-" " Deniteコマンドのキーマップ
-" nmap <silent> <M-b> :<C-u>Denite buffer<CR>
-" nmap <silent> <M-f> :<C-u>Denite file_rec<CR>
-" nmap <silent> <M-d> :<C-u>DeniteBufferDir -buffer-name=files file<CR>
-" nmap <silent> <M-l> :<C-u>Denite line<CR>
-" nmap <silent> <M-g> :<C-u>Denite grep<CR>
-" nmap <silent> <C-c><C-w> :<C-u>DeniteCursorWord grep<CR>
-" nmap <silent> <M-m> :<C-u>Denite file_mru<CR>
-" nmap <silent> <M-y> :<C-u>Denite neoyank<CR>
-" nmap <silent> <M-r> :<C-u>Denite -resume<CR>
-" "nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
-" "nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
-" 
-" " let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-" "let g:ycm_global_ycm_extra_conf = '${HOME}/.ycm_extra_conf.py'
-" let g:ycm_auto_trigger = 1
-" let g:ycm_min_num_of_chars_for_completion = 3
-" let g:ycm_autoclose_preview_window_after_insertion = 1
-" set splitbelow
-
-"vim-lsp
-" if executable('pyls')
-"     " pip install python-language-server
-"     au User lsp_setup call lsp#register_server({
-"        \ 'name': 'pyls',
-"        \ 'cmd': {server_info->['pyls']},
-"        \ 'allowlist': ['python'],
-"        \ })
-" endif
-" 
-" function! s:on_lsp_buffer_enabled() abort
-"     setlocal omnifunc=lsp#complete
-"     setlocal signcolumn=yes
-"     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-"     nmap <buffer> gd <plug>(lsp-definition)
-"     nmap <buffer> gs <plug>(lsp-document-symbol-search)
-"     nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
-"     nmap <buffer> gr <plug>(lsp-references)
-"     nmap <buffer> gi <plug>(lsp-implementation)
-"     nmap <buffer> gt <plug>(lsp-type-definition)
-"     nmap <buffer> <leader>rn <plug>(lsp-rename)
-"     nmap <buffer> [g <plug>(lsp-previous-diagnostic)
-"     nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-"     nmap <buffer> K <plug>(lsp-hover)
-"     nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
-"     nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
-" 
-"     let g:lsp_format_sync_timeout = 1000
-"     autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
-" 
-"     " refer to doc to add more commands
-" endfunction
-" 
-" augroup lsp_install
-"     au!
-"     " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-"     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-" augroup END
-
+" 補完
 " ddc
 " ddcのnvimのLSP保管に必要なmasonの初期化 luaで初期化する
 lua require('plugins')
@@ -669,22 +560,9 @@ inoremap <silent><expr> <C-space>
 "call popup_preview#enable()
 "call signature_help#enable()
 " Use ddc.
-
 call ddc#enable()
 call popup_preview#enable()
 call signature_help#enable()
-
-"----------------------------------------------------
-" vimfiler
-"----------------------------------------------------
-" Uniteと連携して動作するため先にUniteを設定する必要がある
-"NeoBundle 'Shougo/vimfiler'
-" vimfilerを:e .でも起動できるようにする
-"let g:vimfiler_as_default_explorer = 1
-" vimfilerのファイルの関連付け
-"call vimfiler#set_execute_file('vim', 'vim')
-" C-X C-T で IDE みたいなファイルツリーを開く。width の値を適当に変えると大きさが変わる。
-"noremap <C-X><C-T> :VimFiler -split -simple -winwidth=45 -no-quit<ENTER>
 
 "----------------------------------------------------
 " NeoSnippet
@@ -1173,6 +1051,9 @@ let g:vimtex_imaps_enabled = 0
 " NeoBundle 'davidhalter/jedi-vim'
 " ""jedi-vim Setting
 " "
+" "Pythonのファイルを保存するたびにタグファイルを再生成する
+autocmd BufWritePost *.py silent! !ctags -R &
+
 autocmd FileType python setlocal omnifunc=jedi#completions
 let g:jedi#force_py_version = 3
 " 補完機能を有効化
