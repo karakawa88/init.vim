@@ -13,16 +13,9 @@ let g:python_host_prog = expand('/usr/bin/python2.7')
 " <leader>キーの変更
 " \ からスペースキーに切り替える
 " mapleaderはspaceのような特殊キーを受け付けないため \<space>とする
+" また''はただの文字列でそうしたくない場合(展開など)は""を使用する。
 let mapleader = "\<space>"
 
-"dein Scripts-----------------------------
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-
-" Required:
-" set runtimepath+=/Users/kdbadev/.config/nvim/plugin/vim-plug.vim
-source ~/.config/nvim/plugins.vim
 
 " Required:
 " ファイルタイプに基づいたインデントを有効にする
@@ -125,21 +118,23 @@ set wrapscan
 " インクリメンタルサーチを使わない
 set noincsearch
 " 前回の検索にマッチする単語の数を表示する
-nnoremap <silent> <Leader>c :%s///gn<CR>
+nnoremap <silent> <leader>c :%s///gn<cr>
 " インクリメンタルサーチを有効にする
-nnoremap <silent> <Leader>i :set incsearch<CR>
+nnoremap <silent> <leader>i :set incsearch<cr>
 " インクリメンタルサーチを無効にする
-nnoremap <silent> <Leader>n :set noincsearch<CR>
+nnoremap <silent> <leader>n :set noincsearch<cr>
 " 検索結果文字列のハイライトを有効にする
-" :nohでハイライトを消せる
+" :nohでハイライトを消せ
 " set nohlsearch
 set hlsearch
 " 検索結果文字列のハイライトを無効にするキーマップ
 " nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
-nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
+nnoremap <silent> <leader>h  :noh<cr>
+" nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 " ビジュアルで選択された文字列で検索を可能にする。
 " ビジュアルで選択されていれば*と#で検索できる。
 " source ~/.vim/plugin/visualstar.vim
+
 "----------------------------------------------------
 " grep
 "----------------------------------------------------
@@ -150,7 +145,7 @@ nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 "grepをvimのvimgrepを使用するようにする
 "set grepprg=internal
 " 通常のgrep
-set grepprg=grep\ -E\ -n\ -i\ -R\ -I\ --exclude=~/.config/nvim/nvim_grep_exclude.txt\ $*
+set grepprg=grep\ -E\ -n\ -I\ --exclude=~/.config/nvim/nvim_grep_exclude.txt\ $*\ 2>/dev/null
 " QuickFixに表示する一行の要素のフォーマット
 set grepformat=%f:%l:%m
 " vimgrep検索での除外パターン
@@ -184,6 +179,8 @@ set list
 set showcmd
 " ステータスラインを常に表示
 set laststatus=2
+"最後に実行したコマンドをステータスラインに表示する
+set showcmd
 " 対応する括弧のハイライト
 let loaded_matchparen = 1
 " 括弧入力時の対応する括弧を表示
@@ -350,6 +347,30 @@ if has("autocmd")
 endif
 
 "----------------------------------------------------
+" vim-plug
+"----------------------------------------------------
+"vimplugがまだインストールされていなければインストールする
+if empty(glob('~/.config/nvim/plugin/plug.vim'))
+    silent !curl -fLo ~/.vim/plugin/plug.vim --create-dirs \https://raw.github.com/junegunn/vimplug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+" set runtimepath+=/Users/kdbadev/.config/nvim/plugin/vim-plug.vim
+source ~/.config/nvim/plugins.vim
+"コンパイルに時間がかかる場合もあるためタイムアウトを伸ばす
+let g:plug_timeout=300
+
+"------------------------------------------------------
+" カラースキーム
+"------------------------------------------------------
+" カラースキームをAtomのonedarkに変更する
+"NeoBundle 'joshdick/onedark.vim'
+" One Darkを有効にするために必要
+"let g:onedark_termcolors=16
+" カラースキーマを宣言する
+" colorscheme murphy
+colorscheme PaperColor
+
+"----------------------------------------------------
 " Terminal
 "----------------------------------------------------
 " Terminalでのshellを設定する
@@ -368,7 +389,7 @@ nnoremap <silent><C-e> :NERDTreeToggle<CR>
 "起動時にブックマークを表示
 let NERDTreeShowBookmarks = 1
 "Vim起動時にNERDTreeを開く
-autocmd VimEnter * NERDTree
+" autocmd VimEnter * NERDTree
 "NERDTreeのウィンドウしか開かれていないときは自動的に閉じる
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && \b:NERDTree.isTabTree()) |q| endif
 " vim-devicons ファイルタイプごとにアイコンを表示するプラグイン
@@ -407,6 +428,21 @@ set guifont=Ricty\ Regular\ Nerd\ Font\ Plus\ Font\ Awesome\ Plus\ Octicons\ Plu
 " カーソル移動を高速にするプラグイン
 map  <Leader><Leader>/ <Plug>(easymotion-sn)
 nmap  <Leader><Leader>/ <Plug>(easymotion-sn)
+
+"----------------------------------------------------
+" タブとステータスバー
+"----------------------------------------------------
+" <space>t   タブを新しく作成
+nmap <leader>t  :tabnew<cr>
+
+" Airline
+" airlineのタブを有効にする
+let g:airline#extensions#tabline#enabled = 1
+" C-p C-nでタブを切り替える
+"nmap <C-p> <Plug>AirlineSelectPrevTab
+"nmap <C-n> <Plug>AirlineSelectNextTab
+" タブに番号をつける
+let g:airline#extensions#tabline#buffer_idx_mode = 1
 
 "----------------------------------------------------
 " プログラム関連
@@ -514,138 +550,136 @@ set helplang=ja,en
 "call denite#custom#var('file/rec', 'command',
 "\ ['rg', '--files', '--glob', '!.git'])
 " Define mappings
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> d
-  \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-  \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-  \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space>
-  \ denite#do_map('toggle_select').'j'
+" autocmd FileType denite call s:denite_my_settings()
+" function! s:denite_my_settings() abort
+"   nnoremap <silent><buffer><expr> <CR>
+"  \ denite#do_map('do_action')
+"   nnoremap <silent><buffer><expr> d
+"  \ denite#do_map('do_action', 'delete')
+"   nnoremap <silent><buffer><expr> p
+"  \ denite#do_map('do_action', 'preview')
+"   nnoremap <silent><buffer><expr> q
+"  \ denite#do_map('quit')
+"   nnoremap <silent><buffer><expr> i
+"  \ denite#do_map('open_filter_buffer')
+"   nnoremap <silent><buffer><expr> <Space>
+"  \ denite#do_map('toggle_select').'j'
+" 
+"   " Deniteを閉じる
+"   inoremap <silent><buffer><expr> <C-g> denite#do_map('quit')
+"   nnoremap <silent><buffer><expr> <esc> denite#do_map('quit')
+"   " call denite#custom#map('insert', '<esc>', '<denite:enter_mode:normal>', 'noremap')
+" " call denite#custom#map('insert', '<C-g>', '<denite:quit>', 'noremap')
+" " call denite#custom#map('normal', '<C-g>', '<denite:quit>', 'noremap')
+" endfunction
+" 
+" " Deniteコマンドのキーマップ
+" nmap <silent> <M-b> :<C-u>Denite buffer<CR>
+" nmap <silent> <M-f> :<C-u>Denite file_rec<CR>
+" nmap <silent> <M-d> :<C-u>DeniteBufferDir -buffer-name=files file<CR>
+" nmap <silent> <M-l> :<C-u>Denite line<CR>
+" nmap <silent> <M-g> :<C-u>Denite grep<CR>
+" nmap <silent> <C-c><C-w> :<C-u>DeniteCursorWord grep<CR>
+" nmap <silent> <M-m> :<C-u>Denite file_mru<CR>
+" nmap <silent> <M-y> :<C-u>Denite neoyank<CR>
+" nmap <silent> <M-r> :<C-u>Denite -resume<CR>
+" "nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
+" "nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
+" 
+" " let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+" "let g:ycm_global_ycm_extra_conf = '${HOME}/.ycm_extra_conf.py'
+" let g:ycm_auto_trigger = 1
+" let g:ycm_min_num_of_chars_for_completion = 3
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+" set splitbelow
 
-  " Deniteを閉じる
-  inoremap <silent><buffer><expr> <C-g> denite#do_map('quit')
-  nnoremap <silent><buffer><expr> <esc> denite#do_map('quit')
-  " call denite#custom#map('insert', '<esc>', '<denite:enter_mode:normal>', 'noremap')
-" call denite#custom#map('insert', '<C-g>', '<denite:quit>', 'noremap')
-" call denite#custom#map('normal', '<C-g>', '<denite:quit>', 'noremap')
-endfunction
+"vim-lsp
+" if executable('pyls')
+"     " pip install python-language-server
+"     au User lsp_setup call lsp#register_server({
+"        \ 'name': 'pyls',
+"        \ 'cmd': {server_info->['pyls']},
+"        \ 'allowlist': ['python'],
+"        \ })
+" endif
+" 
+" function! s:on_lsp_buffer_enabled() abort
+"     setlocal omnifunc=lsp#complete
+"     setlocal signcolumn=yes
+"     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+"     nmap <buffer> gd <plug>(lsp-definition)
+"     nmap <buffer> gs <plug>(lsp-document-symbol-search)
+"     nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+"     nmap <buffer> gr <plug>(lsp-references)
+"     nmap <buffer> gi <plug>(lsp-implementation)
+"     nmap <buffer> gt <plug>(lsp-type-definition)
+"     nmap <buffer> <leader>rn <plug>(lsp-rename)
+"     nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+"     nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+"     nmap <buffer> K <plug>(lsp-hover)
+"     nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+"     nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+" 
+"     let g:lsp_format_sync_timeout = 1000
+"     autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+" 
+"     " refer to doc to add more commands
+" endfunction
+" 
+" augroup lsp_install
+"     au!
+"     " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+"     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+" augroup END
 
-" Deniteコマンドのキーマップ
-nmap <silent> <M-b> :<C-u>Denite buffer<CR>
-nmap <silent> <M-f> :<C-u>Denite file_rec<CR>
-nmap <silent> <M-d> :<C-u>DeniteBufferDir -buffer-name=files file<CR>
-nmap <silent> <M-l> :<C-u>Denite line<CR>
-nmap <silent> <M-g> :<C-u>Denite grep<CR>
-nmap <silent> <C-c><C-w> :<C-u>DeniteCursorWord grep<CR>
-nmap <silent> <M-m> :<C-u>Denite file_mru<CR>
-nmap <silent> <M-y> :<C-u>Denite neoyank<CR>
-nmap <silent> <M-r> :<C-u>Denite -resume<CR>
-"nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
-"nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
+" ddc
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+lua require('plugins')
 
 
-"----------------------------------------------------
-" deoplete
-"----------------------------------------------------
-" let g:deoplete#enable_at_startup = 0
-" let g:deoplete#auto_complete_delay = 0
-" let g:deoplete#auto_complete_start_length = 1
-" let g:deoplete#enable_camel_case = 0
-" let g:deoplete#enable_ignore_case = 0
-" let g:deoplete#enable_refresh_always = 0
-" let g:deoplete#enable_smart_case = 0
-" let g:deoplete#file#enable_buffer_path = 1
-" let g:deoplete#max_list = 10000
-" inoremap <expr><tab> pumvisible() ? "\<C-n>" :
-"        \ neosnippet#expandable_or_jumpable() ?
-"        \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
-
-"----------------------------------------------------
-" asyncomplete
-"----------------------------------------------------
-" let g:asyncomplete_auto_popup = 0
-" set completeopt+=preview
-
-"----------------------------------------------------
-" neocomplete
-"----------------------------------------------------
-" Disable AutoComplPop.
-"let g:acp_enableAtStartup = 0
-" Use neocomplete.
-" let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-"let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-"let g:neocomplete#sources#syntax#min_keyword_length = 3
-"let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-"let g:neocomplete#sources#dictionary#dictionaries = {
-"    \ 'default' : '',
-"    \ 'vimshell' : $HOME.'/.vimshell_hist',
-"    \ 'scheme' : $HOME.'/.gosh_completions'
-"        \ }
-
-" Define keyword.
-"if !exists('g:neocomplete#keyword_patterns')
-"    let g:neocomplete#keyword_patterns = {}
-"endif
-"let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-"inoremap <expr><C-g>     neocomplete#undo_completion()
-"inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-"function! s:my_cr_function()
-"  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-"endfunction
+call ddc#custom#patch_global('completionMenu', 'pum.vim')
+call ddc#custom#patch_global('sources', [
+ \ 'around',
+ \ 'nvim-lsp',
+ \ 'file'
+ \ ])
+call ddc#custom#patch_global('sourceOptions', {
+ \ '_': {
+ \matchers   'matchers': ['matcher_head'],
+ \   'sorters': ['sorter_rank'],
+ \   'converters': ['converter_remove_overlap'],
+ \ },
+ \ 'around': {'mark': 'Around'},
+ \ 'nvim-lsp': {
+ \   'mark': 'LSP', 
+ \   'matchers': ['matcher_head'],
+ \   'forceCompletionPattern': '\.|:|->|"\w+/*'
+ \ },
+ \ 'file': {
+ \   'mark': 'file',
+ \   'isVolatile': v:true, 
+ \   'forceCompletionPattern': '\S/\S*'
+ \ }})
+call ddc#custom#patch_global('sourceParams', {
+      \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
+      \ })
+inoremap <Tab> <Cmd>call pum#map#insert_relative(+1)<CR>
+inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
+" Mappings
 " <TAB>: completion.
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-"if !exists('g:neocomplete#sources#omni#input_patterns')
-"  let g:neocomplete#sources#omni#input_patterns = {}
-"endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-" let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+inoremap <silent><expr> <C-space>
+\ ddc#map#pum_visible() ? '<C-n>' :
+\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+\ '<TAB>' : ddc#map#manual_complete()
+" <S-TAB>: completion back.
+" inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
+"call popup_preview#enable()
+"call signature_help#enable()
+" Use ddc.
+call ddc#enable()
+call ddc_nvim_lsp_doc#enable()
 
 "----------------------------------------------------
 " vimfiler
@@ -850,12 +884,6 @@ vmap <Leader>c <Plug>(caw:I:toggle)
 " NeoBundle 表示
 "----------------------------------------------------
 " onedark.vim
-" カラースキームをAtomのonedarkに変更する
-"NeoBundle 'joshdick/onedark.vim'
-" One Darkを有効にするために必要
-"let g:onedark_termcolors=16
-" カラースキーマを宣言する
-" colorscheme murphy
 
 " タブ・ステータスバーの表示
 " NeoBundle 'itchyny/lightline.vim'
@@ -931,41 +959,6 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {'mode':'passive'}
 nnoremap <F10> :SyntasticCheck<CR> :SyntasticToggleMode<CR> :w<CR>
-
-" decomplete
-call deoplete#enable()
-" No display of the number of competion list
-set shortmess+=c
-
-" <TAB>: completion.
-inoremap <silent><expr> <C-Space>
-          \ pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ deoplete#manual_complete()
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-" <S-TAB>: completion back.
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
-" <C-e>: popup cancel
-inoremap <expr><C-e>       deoplete#cancel_popup()
-
-call deoplete#custom#source('_', 'matchers', ['matcher_head'])
-call deoplete#custom#source('_', 'converters', [
-            \ 'converter_remove_paren',
-            \ 'converter_remove_overlap',
-            \ 'matcher_length',
-            \ 'converter_truncate_abbr',
-            \ 'converter_truncate_menu',
-            \ 'converter_auto_delimiter',
-            \ ])
-call deoplete#custom#option('keyword_patterns', {
-            \ '_': '[a-zA-Z_]\k*\(?',
-            \ 'tex': '[^\w|\s][a-zA-Z_]\w*',
-            \ })
-call deoplete#custom#option('camel_case', v:true)
 
 "----------------------------------------------------
 " シェルスクリプト関連
