@@ -29,13 +29,17 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 "補完
-""Plug 'ycmcore/YouCompleteMe', { 'do': './install.py' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
+
 " ddc
 Plug 'Shougo/ddc.vim'
 Plug 'vim-denops/denops.vim'
+" ポップアップのプレビューを表示するプラグイン
+Plug 'matsui54/denops-popup-preview.vim'
+" signature helpを表示する
+Plug 'matsui54/denops-signature_help'
 " ポップアップウィンドウを表示するプラグイン
 Plug 'Shougo/pum.vim'
 " カーソル周辺の既出単語を補完するsource
@@ -49,7 +53,6 @@ Plug 'Shougo/ddc-sorter_rank'
 " 補完候補の重複を防ぐためのfilter
 Plug 'Shougo/ddc-converter_remove_overlap'
 Plug 'Shougo/ddc-nvim-lsp'
-Plug 'matsui54/ddc-nvim-lsp-doc'
 
 Plug 'kana/vim-tabpagecd'
 Plug 'Shougo/neomru.vim'

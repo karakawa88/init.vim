@@ -633,35 +633,26 @@ set helplang=ja,en
 " augroup END
 
 " ddc
-Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
+" ddcのnvimのLSP保管に必要なmasonの初期化 luaで初期化する
 lua require('plugins')
-
-
 call ddc#custom#patch_global('completionMenu', 'pum.vim')
 call ddc#custom#patch_global('sources', [
- \ 'around',
  \ 'nvim-lsp',
+ \ 'around',
  \ 'file'
  \ ])
 call ddc#custom#patch_global('sourceOptions', {
- \ '_': {
- \matchers   'matchers': ['matcher_head'],
- \   'sorters': ['sorter_rank'],
- \   'converters': ['converter_remove_overlap'],
- \ },
- \ 'around': {'mark': 'Around'},
- \ 'nvim-lsp': {
- \   'mark': 'LSP', 
- \   'matchers': ['matcher_head'],
- \   'forceCompletionPattern': '\.|:|->|"\w+/*'
- \ },
- \ 'file': {
- \   'mark': 'file',
- \   'isVolatile': v:true, 
- \   'forceCompletionPattern': '\S/\S*'
- \ }})
+      \ '_': {
+      \ 'matchers': ['matcher_head'],
+      \ 'sorters': ['sorter_rank'],
+      \ 'converters': ['converter_remove_overlap'],
+      \ },
+      \ 'around': {'mark': 'A'},
+      \ 'nvim-lsp': {
+      \ 'mark': 'L',
+      \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+      \ },
+      \ })
 call ddc#custom#patch_global('sourceParams', {
       \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
       \ })
@@ -678,8 +669,10 @@ inoremap <silent><expr> <C-space>
 "call popup_preview#enable()
 "call signature_help#enable()
 " Use ddc.
+
 call ddc#enable()
-call ddc_nvim_lsp_doc#enable()
+call popup_preview#enable()
+call signature_help#enable()
 
 "----------------------------------------------------
 " vimfiler
