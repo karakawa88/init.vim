@@ -30,9 +30,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 "補完
 ""Plug 'ycmcore/YouCompleteMe', { 'do': './install.py' }
-" vim LSP
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/vim-lsp'
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 " ddc
 Plug 'Shougo/ddc.vim'
 Plug 'vim-denops/denops.vim'
@@ -49,6 +49,7 @@ Plug 'Shougo/ddc-sorter_rank'
 " 補完候補の重複を防ぐためのfilter
 Plug 'Shougo/ddc-converter_remove_overlap'
 Plug 'Shougo/ddc-nvim-lsp'
+Plug 'matsui54/ddc-nvim-lsp-doc'
 
 Plug 'kana/vim-tabpagecd'
 Plug 'Shougo/neomru.vim'
@@ -123,7 +124,7 @@ Plug 'vim-scripts/dbext.vim'
 Plug 'majutsushi/tagbar'
 Plug 'lighttiger2505/gtags.vim'
 Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
+"Plug 'prabirshrestha/vim-lsp'
 "Plug 'prabirshrestha/asyncomplete.vim'
 "Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'vim-scripts/a.vim'
