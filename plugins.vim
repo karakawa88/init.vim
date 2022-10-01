@@ -29,10 +29,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 "補完
+" neovimのビルトインのLSPを使用する
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
-
 " ddc
 Plug 'Shougo/ddc.vim'
 Plug 'vim-denops/denops.vim'
@@ -53,6 +53,27 @@ Plug 'Shougo/ddc-sorter_rank'
 " 補完候補の重複を防ぐためのfilter
 Plug 'Shougo/ddc-converter_remove_overlap'
 Plug 'Shougo/ddc-nvim-lsp'
+
+" ddu.vim nvim anything
+Plug 'Shougo/ddu.vim'
+Plug 'vim-denops/denops.vim'
+" ui
+Plug 'Shougo/ddu-ui-ff'
+Plug 'Shougo/ddu-ui-filer'
+Plug 'Shougo/ddu-column-filename'
+" source
+Plug 'Shougo/ddu-source-file'
+Plug 'Shougo/ddu-source-register'
+Plug 'kuuote/ddu-source-mr'
+Plug 'shun/ddu-source-buffer'
+Plug 'lambdalisue/mr.vim'
+Plug 'Shougo/ddu-filter-matcher_substring'
+Plug 'Shougo/ddu-commands.vim'
+Plug 'Shougo/ddu-kind-file'
+
+" テキスト翻訳
+" Googl翻訳を使用して翻訳
+Plug 'skanehira/translate.vim'
 
 Plug 'kana/vim-tabpagecd'
 Plug 'Shougo/neomru.vim'

@@ -547,8 +547,8 @@ call ddc#custom#patch_global('sourceOptions', {
 call ddc#custom#patch_global('sourceParams', {
       \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
       \ })
-inoremap <Tab> <Cmd>call pum#map#insert_relative(+1)<CR>
-inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
+"inoremap <Tab> <Cmd>call pum#map#insert_relative(+1)<CR>
+"inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
 " Mappings
 " <TAB>: completion.
 inoremap <silent><expr> <C-space>
@@ -563,6 +563,69 @@ inoremap <silent><expr> <C-space>
 call ddc#enable()
 call popup_preview#enable()
 call signature_help#enable()
+
+call ddu#custom#patch_global({
+    \   'ui': 'filer',
+    \   'sources': [{'name':'file','params':{}},{'name':'mr'},{'name':'register'},{'name':'buffer'}],
+    \   'sourceOptions': {
+    \     '_': {
+    \       'columns': ['filename'],
+    \     },
+    \   },
+    \   'kindOptions': {
+    \     'file': {
+    \       'defaultAction': 'open',
+    \     },
+    \   },
+    \ })
+"    \       'matchers': ['matcher_substring'],
+
+"ddu-key-setting
+autocmd FileType ddu-filer call s:ddu_my_settings()
+function! s:ddu_my_settings() abort
+  nnoremap <buffer><silent> <CR>
+        \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
+  nnoremap <buffer><silent> <Space>
+        \ <Cmd>call ddu#ui#filer#do_action('toggleSelectItem')<CR>
+  nnoremap <buffer><silent> i
+        \ <Cmd>call ddu#ui#filer#do_action('openFilterWindow')<CR>
+  nnoremap <buffer><silent> q
+        \ <Cmd>call ddu#ui#filer#do_action('quit')<CR>
+endfunction
+
+autocmd FileType ddu-ff-filter call s:ddu_filter_my_settings()
+function! s:ddu_filter_my_settings() abort
+  nnoremap <buffer> <CR>
+  \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
+  nnoremap <buffer><silent> q
+  \ <Cmd>call ddu#ui#filer#do_action('quit')<CR>
+  inoremap <buffer> <CR>
+  \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
+  inoremap <buffer> <C-j>
+  \ <Cmd>call ddu#ui#filer#execute("call cursor(line('.')+1,0)")<CR>
+  inoremap <buffer> <C-k>
+  \ <Cmd>call ddu#ui#filer#execute("call cursor(line('.')-1,0)")<CR>
+endfunction
+
+"ddu keymapping.
+nnoremap <SID>[ug] <Nop>
+nmap ,u <SID>[ug]
+
+nnoremap <silent> <SID>[ug]m :<C-u>Ddu mr<CR>
+nnoremap <silent> <SID>[ug]b :<C-u>Ddu buffer<CR>
+nnoremap <silent> <SID>[ug]r :<C-u>Ddu register<CR>
+nnoremap <silent> <SID>[ug]n :<C-u>Ddu file -source-param-new -volatile<CR>
+nnoremap <silent> <SID>[ug]f :<C-u>Ddu file<CR>
+
+"----------------------------------------------------
+" テキスト処理
+"----------------------------------------------------
+let g:translate_source = "en"
+let g:translate_target = "ja"
+let g:translate_popup_window = 0 " if you want use popup window, set value 1
+let g:translate_winsize = 10 " set buffer window height size if you doesn't use popup window
+nmap gr <Plug>(Translate)
+vmap t <Plug>(VTranslate)
 
 "----------------------------------------------------
 " NeoSnippet
@@ -1103,4 +1166,6 @@ filetype plugin indent on
 vnoremap <Space><CR> :!sh<CR>
 " 行選択していない状態から実行
 nnoremap <Space><CR> V:!sh<CR>
+
+
 
