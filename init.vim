@@ -350,7 +350,7 @@ endif
 " vim-plug
 "----------------------------------------------------
 "vimplugがまだインストールされていなければインストールする
-if empty(glob('~/.config/nvim/plugin/plug.vim'))
+if empty(glob('~/.config/nvim/plugins/plug.vim'))
     silent !curl -fLo ~/.vim/plugin/plug.vim --create-dirs \https://raw.github.com/junegunn/vimplug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif

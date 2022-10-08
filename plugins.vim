@@ -1,4 +1,4 @@
-source ~/.config/nvim/plugin/plug.vim
+source ~/.config/nvim/plugins/plug.vim
 call plug#begin()
 " vim-plugのhelpを見れるようにする
 Plug 'junegunn/vim-plug'
