@@ -8,4 +8,5 @@ plugged/*
 log/*
 *.old
 tags
+plugins/pack
 
