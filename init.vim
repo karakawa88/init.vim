@@ -16,6 +16,8 @@ let g:python_host_prog = expand('/usr/bin/python2.7')
 " また''はただの文字列でそうしたくない場合(展開など)は""を使用する。
 let mapleader = "\<space>"
 
+" packpath
+set packpath+="~/.config/nvim/plugins"
 
 " Required:
 " ファイルタイプに基づいたインデントを有効にする
@@ -350,7 +352,7 @@ endif
 " vim-plug
 "----------------------------------------------------
 "vimplugがまだインストールされていなければインストールする
-if empty(glob('~/.config/nvim/plugin/plug.vim'))
+if empty(glob('~/.config/nvim/plugins/plug.vim'))
     silent !curl -fLo ~/.vim/plugin/plug.vim --create-dirs \https://raw.github.com/junegunn/vimplug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -526,7 +528,15 @@ set helplang=ja,en
 " ddc
 " ddcのnvimのLSP保管に必要なmasonの初期化 luaで初期化する
 lua require('plugins')
+" pum.vim
 call ddc#custom#patch_global('completionMenu', 'pum.vim')
+inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
+inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
+inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
+inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
+inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
+inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
+
 call ddc#custom#patch_global('sources', [
  \ 'nvim-lsp',
  \ 'around',
@@ -564,12 +574,16 @@ call ddc#enable()
 call popup_preview#enable()
 call signature_help#enable()
 
+
+" ddu.vim
+" ddu.vim設定
 call ddu#custom#patch_global({
-    \   'ui': 'filer',
-    \   'sources': [{'name':'file','params':{}},{'name':'mr'},{'name':'register'},{'name':'buffer'}],
+    \   'ui': 'ff',
+    \   'sources': [{'name':'file','params':{}},{'name':'mr'},{'name':'register'},{'name':'buffer'},
+    \               {'name': 'file_rec', 'params': {}}],
     \   'sourceOptions': {
     \     '_': {
-    \       'columns': ['filename'],
+    \       'matchers': ['matcher_substring'],
     \     },
     \   },
     \   'kindOptions': {
@@ -578,44 +592,71 @@ call ddu#custom#patch_global({
     \     },
     \   },
     \ })
-"    \       'matchers': ['matcher_substring'],
-
-"ddu-key-setting
-autocmd FileType ddu-filer call s:ddu_my_settings()
+" ddu.vim key map
+autocmd FileType ddu-ff call s:ddu_my_settings()
 function! s:ddu_my_settings() abort
   nnoremap <buffer><silent> <CR>
-        \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
+        \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
   nnoremap <buffer><silent> <Space>
-        \ <Cmd>call ddu#ui#filer#do_action('toggleSelectItem')<CR>
+        \ <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
   nnoremap <buffer><silent> i
-        \ <Cmd>call ddu#ui#filer#do_action('openFilterWindow')<CR>
+        \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
   nnoremap <buffer><silent> q
-        \ <Cmd>call ddu#ui#filer#do_action('quit')<CR>
+        \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
 endfunction
-
 autocmd FileType ddu-ff-filter call s:ddu_filter_my_settings()
 function! s:ddu_filter_my_settings() abort
   nnoremap <buffer> <CR>
-  \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
+  \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
   nnoremap <buffer><silent> q
-  \ <Cmd>call ddu#ui#filer#do_action('quit')<CR>
+  \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
   inoremap <buffer> <CR>
-  \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
+  \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
   inoremap <buffer> <C-j>
-  \ <Cmd>call ddu#ui#filer#execute("call cursor(line('.')+1,0)")<CR>
+  \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')+1,0)")<CR>
   inoremap <buffer> <C-k>
-  \ <Cmd>call ddu#ui#filer#execute("call cursor(line('.')-1,0)")<CR>
+  \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')-1,0)")<CR>
 endfunction
+" call ddu#custom#patch_global({
+"    \   'ui': 'filer',
+"    \   'sources': [{'name': 'file', 'params': {}}],
+"    \   'sourceOptions': {
+"    \     '_': {
+"    \       'columns': ['filename'],
+"    \     },
+"    \   },
+"    \   'kindOptions': {
+"    \     'file': {
+"    \       'defaultAction': 'open',
+"    \     },
+"    \   }
+"    \ })
+" 
+" autocmd FileType ddu-filer call s:ddu_my_settings()
+" function! s:ddu_my_settings() abort
+"   nnoremap <buffer><silent> <CR>
+"        \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
+"   nnoremap <buffer><silent> <Space>
+"        \ <Cmd>call ddu#ui#filer#do_action('toggleSelectItem')<CR>
+"   nnoremap <buffer> o
+"        \ <Cmd>call ddu#ui#filer#do_action('expandItem',
+"        \ {'mode': 'toggle'})<CR>
+"   nnoremap <buffer><silent> q
+"        \ <Cmd>call ddu#ui#filer#do_action('quit')<CR>
+" endfunction
 
-"ddu keymapping.
 nnoremap <SID>[ug] <Nop>
-nmap ,u <SID>[ug]
+nmap , <SID>[ug]
+nnoremap <SID>[fi] <Nop>
+nmap ; <SID>[fi]
 
 nnoremap <silent> <SID>[ug]m :<C-u>Ddu mr<CR>
 nnoremap <silent> <SID>[ug]b :<C-u>Ddu buffer<CR>
 nnoremap <silent> <SID>[ug]r :<C-u>Ddu register<CR>
-nnoremap <silent> <SID>[ug]n :<C-u>Ddu file -source-param-new -volatile<CR>
-nnoremap <silent> <SID>[ug]f :<C-u>Ddu file<CR>
+nnoremap <silent> <SID>[fi]n :<C-u>Ddu file -source-param-new -volatile<CR>
+nnoremap <silent> <SID>[fi]r :<C-u>Ddu file_rec<CR>
+nnoremap <silent> <SID>[fi]f :<C-u>Ddu file<CR>
+
 
 "----------------------------------------------------
 " テキスト処理

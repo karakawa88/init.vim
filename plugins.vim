@@ -1,4 +1,4 @@
-source ~/.config/nvim/plugin/plug.vim
+source ~/.config/nvim/plugins/plug.vim
 call plug#begin()
 " vim-plugのhelpを見れるようにする
 Plug 'junegunn/vim-plug'
@@ -57,23 +57,27 @@ Plug 'Shougo/ddc-nvim-lsp'
 " ddu.vim nvim anything
 Plug 'Shougo/ddu.vim'
 Plug 'vim-denops/denops.vim'
-" ui
+Plug 'Shougo/ddu.vim'
+Plug 'vim-denops/denops.vim'
 Plug 'Shougo/ddu-ui-ff'
-Plug 'Shougo/ddu-ui-filer'
-Plug 'Shougo/ddu-column-filename'
-" source
 Plug 'Shougo/ddu-source-file'
 Plug 'Shougo/ddu-source-register'
 Plug 'kuuote/ddu-source-mr'
-Plug 'shun/ddu-source-buffer'
 Plug 'lambdalisue/mr.vim'
+Plug 'shun/ddu-source-buffer'
 Plug 'Shougo/ddu-filter-matcher_substring'
 Plug 'Shougo/ddu-commands.vim'
 Plug 'Shougo/ddu-kind-file'
+Plug 'Shougo/ddu-source-file_rec'
+Plug 'Shougo/ddu-ui-filer'
+Plug 'Shougo/ddu-column-filename'
 
 " テキスト翻訳
 " Googl翻訳を使用して翻訳
 Plug 'skanehira/translate.vim'
+" Vim
+" vimのヘルプファイルの作成
+Plug 'LeafCage/vimhelpgenerator'
 
 Plug 'kana/vim-tabpagecd'
 Plug 'Shougo/neomru.vim'

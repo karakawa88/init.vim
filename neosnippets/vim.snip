@@ -4,3 +4,10 @@ options     word, indent
     function! ${1}(${2}) abort
         ${3:TARGET}
     endfunction
+snippet     echoh
+abbr        メッセージをエラーや警告に分類して出力
+options     word, indent
+    echohl ErrorMsg
+    echomsg ${0}
+    echohl None
+
