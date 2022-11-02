@@ -69,8 +69,8 @@ Plug 'Shougo/ddu-filter-matcher_substring'
 Plug 'Shougo/ddu-commands.vim'
 Plug 'Shougo/ddu-kind-file'
 Plug 'Shougo/ddu-source-file_rec'
-Plug 'Shougo/ddu-ui-filer'
-Plug 'Shougo/ddu-column-filename'
+" Plug 'Shougo/ddu-ui-filer'
+" Plug 'Shougo/ddu-column-filename'
 
 " テキスト翻訳
 " Googl翻訳を使用して翻訳
