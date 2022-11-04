@@ -620,33 +620,6 @@ function! s:ddu_filter_my_settings() abort
   inoremap <buffer> <C-k>
   \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')-1,0)")<CR>
 endfunction
-" call ddu#custom#patch_global({
-"    \   'ui': 'filer',
-"    \   'sources': [{'name': 'file', 'params': {}}],
-"    \   'sourceOptions': {
-"    \     '_': {
-"    \       'columns': ['filename'],
-"    \     },
-"    \   },
-"    \   'kindOptions': {
-"    \     'file': {
-"    \       'defaultAction': 'open',
-"    \     },
-"    \   }
-"    \ })
-" 
-" autocmd FileType ddu-filer call s:ddu_my_settings()
-" function! s:ddu_my_settings() abort
-"   nnoremap <buffer><silent> <CR>
-"        \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
-"   nnoremap <buffer><silent> <Space>
-"        \ <Cmd>call ddu#ui#filer#do_action('toggleSelectItem')<CR>
-"   nnoremap <buffer> o
-"        \ <Cmd>call ddu#ui#filer#do_action('expandItem',
-"        \ {'mode': 'toggle'})<CR>
-"   nnoremap <buffer><silent> q
-"        \ <Cmd>call ddu#ui#filer#do_action('quit')<CR>
-" endfunction
 
 nnoremap <SID>[ug] <Nop>
 nmap , <SID>[ug]
