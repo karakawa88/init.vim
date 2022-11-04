@@ -9,6 +9,7 @@ let s:dein_dir = expand('$CONFIG/nvim/dein')
 let g:python3_host_prog = expand('/usr/local/python/bin/python3')
 let g:python_host_prog = expand('/usr/bin/python2.7')
 "let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+" test
 
 " <leader>キーの変更
 " \ からスペースキーに切り替える
@@ -467,6 +468,8 @@ inoremap { {}<esc>i
 "autocmd BufWritePost * call system(" ctags -R")
 "nnoremap <C-h> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
 "nnoremap <C-k> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
+" これを設定するともしカレントディレクトリにtagsがない場合は親のディレクトリを遡って
+" tagsファイルを探しに行く。;が親を遡るの意味。
 set tags=tags;
 " tagsジャンプの時に複数ある時は一覧表示                                        
 nnoremap <C-]> g<C-]> 

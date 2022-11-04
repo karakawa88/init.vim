@@ -78,9 +78,12 @@ Plug 'skanehira/translate.vim'
 " Vim
 " vimのヘルプファイルの作成
 Plug 'LeafCage/vimhelpgenerator'
+" GUndo
+" Plug 'sjl/gundo.vim'
+" Git
+Plug 'tpope/vim-fugitive'
 
 Plug 'kana/vim-tabpagecd'
-Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neoyank.vim'
 " Plug 'Shougo/denite.nvim'
 " Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -166,7 +169,6 @@ Plug 'lervag/vimtex'
 "YouCompleteMeはコンパイルに時間がかかるためタイムアウトを伸ばす
 " let g:plug_timeout=300
 " Plug 'ycmcore/YouCompleteMe'
-Plug 'sjl/gundo.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
@@ -174,5 +176,4 @@ Plug 'mxw/vim-jsx'
 "Plug 'zchee/deoplete-clang'
 "Plug 'Shougo/neoinclude.vim'
 call plug#end()
-
 
