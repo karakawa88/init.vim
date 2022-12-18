@@ -633,6 +633,18 @@ nnoremap <silent> <SID>[fi]n :<C-u>Ddu file -source-param-new -volatile<CR>
 nnoremap <silent> <SID>[fi]r :<C-u>Ddu file_rec<CR>
 nnoremap <silent> <SID>[fi]f :<C-u>Ddu file<CR>
 
+" fzf
+nnoremap <C-p> :FZFFileList<CR>
+command! FZFFileList call fzf#run({
+            \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
+            \ 'sink': 'e'})
+command! Fmru FZFMru
+command! FZFMru call fzf#run({
+            \  'source':  v:oldfiles,
+            \  'sink':    'tabe',
+            \  'options': '-m -x +s',
+            \  'down':    '40%'})
+
 
 "----------------------------------------------------
 " テキスト処理
