@@ -82,6 +82,9 @@ Plug 'LeafCage/vimhelpgenerator'
 " Plug 'sjl/gundo.vim'
 " Git
 Plug 'tpope/vim-fugitive'
+" fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 Plug 'kana/vim-tabpagecd'
 Plug 'Shougo/neoyank.vim'
