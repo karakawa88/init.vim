@@ -533,6 +533,7 @@ set helplang=ja,en
 lua require('plugins')
 " pum.vim
 call ddc#custom#patch_global('completionMenu', 'pum.vim')
+call ddc#custom#patch_global('ui', 'native')
 inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
 inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
 inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
@@ -565,7 +566,7 @@ call ddc#custom#patch_global('sourceParams', {
 " Mappings
 " <TAB>: completion.
 inoremap <silent><expr> <C-space>
-\ ddc#map#pum_visible() ? '<C-n>' :
+\ pumvisible() ? '<C-n>' :
 \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
 \ '<TAB>' : ddc#map#manual_complete()
 " <S-TAB>: completion back.
@@ -1034,6 +1035,7 @@ let g:deoplete#sources#clang#clang_complete_database="./build/"
 "----------------------------------------------------
 " WEB関連
 "----------------------------------------------------
+" HTML5
 " emmet.vim
 let g:user_emmet_install_global = 0
 " emmet.vimのキーバインドはデフォルトで<C-y>だがそれを変更できる。
@@ -1048,6 +1050,11 @@ let g:user_emmet_settings = {
 \      'extends' : 'js',
 \  },
 \}
+" alvan/vim-closetag
+" 閉じタグを自動で閉じる
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+
 " open-browser.vim
 " URL文字列にコマンドを指定するとブラウザーにそのURLのホームページを表示し、
 " ただの文字列ならブラウザーでその文字列を検索する

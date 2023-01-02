@@ -7,5 +7,42 @@ alias       #d
 abbr        #[derive(Debug)]
 options     word, indent
     #[derive(Debug)]${0}
+snippet     use_hashmap
+abbr        use std::collections::HashMap;
+options     word, indent
+    use std::collections::HashMap;${0}
+snippet     init_hashmap
+abbr        .zip(...).collect()
+options     word, indent
+    let init_keys = vec![${0}];
+    let init_values = vec![];
+    let ${1}: HashMap<_, _> = init_keys.iter().zip(init_values).collect();
+snippet     use_file
+abbr        use std::fs::File;
+options     word, indent
+    use std::io;
+    use std::fs::File;
+    use std::io::Read;
+    use std::io::ErrorKind;${0}
+snippet     use_regex
+abbr        use regex::Regex;
+options     word, indent
+    use regex::Regex;${0}
+snippet     regex_new
+abbr        Regex::new().unwrap()
+options     word, indent
+    let ${1} = Regex::new(r"${2}").unwrap();${0}
+snippet     use_display
+abbr        use std::fmt::Display;
+options     word, indent
+    use std::fmt::Display;${0}
+snippet     use_cmp
+abbr        use std::cmp::PartialOrd;
+options     word, indent
+    use std::cmp::PartialOrd;${0}
+
+
+
+
 
 

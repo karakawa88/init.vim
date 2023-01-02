@@ -45,11 +45,6 @@ alias       targetblank
 abbr        リンクタグのリンクの表示先 target="_blank"
 options     word, indent
     target="_blank"${0}
-snippet     bgimg
-alias       background
-abbr        要素の背景の一括指定 background: url(...) 位置 繰り返し スクロール 背景色;
-options     word, indent
-    background: url() left ${1:0} top ${2:0} fixed ${3:#:backgroud-color};${0}
 snippet     table
 alias       tablecss
 abbr        テーブルに設定する最低限のCSS  table { border-collapse: collapse; } th, td { ... }
@@ -134,4 +129,10 @@ options     word, indent
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;${0}
+snippet     google_font
+alias       gf
+abbr        Google Font Noto Serif Noto Sans
+options     word, indent
+    font-family: 'Noto Serif JP', serif;
+    font-family: "Noto Sans JP";${0}
 

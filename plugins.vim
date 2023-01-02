@@ -36,6 +36,7 @@ Plug 'williamboman/mason-lspconfig.nvim'
 " ddc
 Plug 'Shougo/ddc.vim'
 Plug 'vim-denops/denops.vim'
+Plug 'Shougo/ddc-ui-native'
 " ポップアップのプレビューを表示するプラグイン
 Plug 'matsui54/denops-popup-preview.vim'
 " signature helpを表示する
@@ -136,11 +137,14 @@ Plug 'osyo-manga/vim-textobj-multiblock'
 Plug 'glts/vim-textobj-indblock'
 Plug 'RyanMcG/vim-textobj-dash'
 Plug 'bps/vim-textobj-python'
+" HTML5 CSS
 Plug 'othree/html5.vim'
+Plug 'alvan/vim-closetag'
 " Plug 'hokaccha/vim-html5validator'
 Plug  'mattn/emmet-vim'
 Plug  'tyru/open-browser.vim'
 Plug 'hail2u/vim-css3-syntax'
+" JS
 Plug  'jelera/vim-javascript-syntax'
 Plug  'othree/yajs.vim'
 " Plug 'neomake/neomake'
