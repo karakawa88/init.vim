@@ -8,6 +8,9 @@ require("packer").startup(function(use)
   use "neovim/nvim-lspconfig"
   use "williambomanm/mason.nvim"
   use "williambomanm/mason-lspconfig.nvim"
+  -- Telescope
+  use "nvim-lua/plenary.nvim"
+   use "nvim-telescope/telescope.nvim"
 
   if packer_bootstrap then
     require("packer").sync()
@@ -50,3 +53,20 @@ require("mason-lspconfig").setup_handlers {
     }
   end,
 }
+
+
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      n = {
+        ["<esc>"] = require('telescope.actions').close,
+      },
+      i = {
+        ["<esc>"] = require('telescope.actions').close,
+        ["<C-a>"] = require('telescope.actions').send_to_qflist + require('telescope.actions').open_qflist,
+        ["<C-q>"] = require('telescope.actions').send_selected_to_qflist + require('telescope.actions').open_qflist
+      }
+    }
+  }
+}
+

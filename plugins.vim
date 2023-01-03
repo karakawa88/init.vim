@@ -55,23 +55,8 @@ Plug 'Shougo/ddc-sorter_rank'
 Plug 'Shougo/ddc-converter_remove_overlap'
 Plug 'Shougo/ddc-nvim-lsp'
 
-" ddu.vim nvim anything
-Plug 'Shougo/ddu.vim'
-Plug 'vim-denops/denops.vim'
-Plug 'Shougo/ddu.vim'
-Plug 'vim-denops/denops.vim'
-Plug 'Shougo/ddu-ui-ff'
-Plug 'Shougo/ddu-source-file'
-Plug 'Shougo/ddu-source-register'
-Plug 'kuuote/ddu-source-mr'
-Plug 'lambdalisue/mr.vim'
-Plug 'shun/ddu-source-buffer'
-Plug 'Shougo/ddu-filter-matcher_substring'
-Plug 'Shougo/ddu-commands.vim'
-Plug 'Shougo/ddu-kind-file'
-Plug 'Shougo/ddu-source-file_rec'
-" Plug 'Shougo/ddu-ui-filer'
-" Plug 'Shougo/ddu-column-filename'
+"Telescope
+Plug 'kyazdani42/nvim-web-devicons'
 
 " テキスト翻訳
 " Googl翻訳を使用して翻訳

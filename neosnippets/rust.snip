@@ -22,6 +22,7 @@ abbr        use std::fs::File;
 options     word, indent
     use std::io;
     use std::fs::File;
+    use std::io::prelude::*;
     use std::io::Read;
     use std::io::ErrorKind;${0}
 snippet     use_regex
@@ -40,9 +41,24 @@ snippet     use_cmp
 abbr        use std::cmp::PartialOrd;
 options     word, indent
     use std::cmp::PartialOrd;${0}
-
-
-
+snippet     test_fn
+abbr        #[test] fn ..() {}
+options     word, indent
+    #[test]
+    fn ${0}() {}
+snippet     #spanic
+alias       #sp
+abbr        #[should_panic(expected = "...")]
+options     word, indent
+    #[should_panic(expected = "${0}")]
+snippet     test_mod
+abbr        #[cfg(test)] mod test { use super::*; .... }
+options     word, indent
+    #[cfg(test)]
+    mod test {
+        use super::*;
+        ${0}
+    }
 
 
 
