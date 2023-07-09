@@ -311,10 +311,13 @@ noremap <right> <nop>
 " 永続Undoを有効にする
 " 永続アンドゥはセッションをまたいでUndoを記憶できる
 set undofile
+" これだけだと編集するファイルたびにundoファイルが作られてしまうために
+" ファイルシステムが汚れる。undoファイルを一つのディレクトリにまとめる。
 if !isdirectory(expand("$HOME/.cache/undodir"))
     call mkdir(expand("$HOME/.cache/undodir"),"p")
 endif
 set undodir=$HOME/.cache/undodir
+
 "---------------------------------------------------
 " Helpの日本語
 "---------------------------------------------------
