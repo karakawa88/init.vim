@@ -54,6 +54,57 @@ require("mason-lspconfig").setup_handlers {
   end,
 }
 
+local status, telescope = pcall(require, "telescope")
+if (not status) then return end
+
+local builtin = require('telescope.builtin')
+
+telescope.load_extension("frecency") --frecency search
+telescope.setup({
+  defaults = {
+    sorting_strategy = "ascending", -- 検索結果を上から下に並べる
+    winblend = 4, --若干ウィンドウを透明に
+    layout_strategy = 'vertical',
+    layout_config = { height = 0.9 },
+    file_ignore_patterns = { --検索対象に含めないファイルを指定
+      "^.git/",
+      "^node_modules/",
+    },
+  },
+  extensions = {
+    frecency = {
+      db_root = "~/.cache/nvim/dbroot",
+      show_scores = false,
+      show_unindexed = true,
+      ignore_patterns = {"*.git/*", "*/tmp/*"},
+      disable_devicons = false,
+      workspaces = {
+        ["conf"]    = "/Users/jkdbadev/.config",
+        ["etc"]    = "/etc",
+        ["work"] = "/Users/jkdbadev/work",
+      }
+    }
+  },
+})
+
+-- file search
+vim.keymap.set('n', '<leader>f',
+  function()
+    builtin.find_files({
+      no_ignore = false,
+      hidden = true
+    })
+  end)
+-- -- Grep
+vim.keymap.set('n', '<leader>r',
+  function()
+    builtin.live_grep({
+      no_ignore = false,
+      hidden = true
+    })
+  end)
+
+--Telescope-coc
 
 require('telescope').setup{
   defaults = {

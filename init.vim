@@ -85,6 +85,7 @@ set nrformats=
 " 折り畳み
 "----------------------------------------------------
 set foldmethod=indent
+" 折り畳みを可視化する
 set foldcolumn=2
 " 読み込まれた段階では折りたたみはしない
 autocmd BufRead * normal zR
@@ -587,8 +588,8 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-nnoremap <leader>cc <cmd>lua require('telescope.builtin').commands()<cr>
-nnoremap <leader>ch <cmd>lua require('telescope.builtin').command_history()<cr>
+nnoremap <leader>tc <cmd>lua require('telescope.builtin').commands()<cr>
+nnoremap <leader>tch <cmd>lua require('telescope.builtin').command_history()<cr>
 
 " fzf
 nnoremap <C-p> :FZFFileList<CR>

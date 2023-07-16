@@ -56,7 +56,34 @@ Plug 'Shougo/ddc-converter_remove_overlap'
 Plug 'Shougo/ddc-nvim-lsp'
 
 "Telescope
+" telescope.nvimが依存
+Plug 'nvim-lua/plenary.nvim'
+Plug 'airblade/vim-rooter'
+" Search for Project root
+" Find files using Telescope command-line sugar.
+" nnoremap <C-p> <cmd>Telescope find_files<cr>
+" nnoremap <C-g> <cmd>Telescope live_grep<cr>
+" " プロジェクトルートではなく現在開いているファイルを起点にファイル検索
+" nnoremap <M-p> <cmd>lua require('telescope.builtin').find_files( { cwd = vim.fn.expand('%:p:h') })<cr>
+" nnoremap <M-g> <cmd>lua require('telescope.builtin').live_grep( { cwd = vim.fn.expand('%:p:h') })<cr>
+" nnoremap <leader>fb <cmd>Telescope buffers<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" 
+" " Using Lua functions
+" nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+" nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+" nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+" nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+Plug 'nvim-telescope/telescope.nvim'
+
+" telescope-frequencyが依存
+Plug 'tami5/sqlite.lua'
+
+" telescope-frequencyが依存
 Plug 'kyazdani42/nvim-web-devicons'
+
+Plug 'nvim-telescope/telescope-frecency.nvim'
+nnoremap <C-f> <cmd>Telescope frecency<cr>
 
 " テキスト翻訳
 " Googl翻訳を使用して翻訳
