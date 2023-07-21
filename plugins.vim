@@ -85,6 +85,14 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-telescope/telescope-frecency.nvim'
 nnoremap <C-f> <cmd>Telescope frecency<cr>
 
+" Fern ファイラー
+Plug 'lambdalisue/fern.vim'
+" Fernでアイコンを表示する
+Plug 'lambdalisue/nerdfont.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+"  アイコンに違う色で表示する
+Plug 'lambdalisue/glyph-palette.vim'
+
 " テキスト翻訳
 " Googl翻訳を使用して翻訳
 Plug 'skanehira/translate.vim'

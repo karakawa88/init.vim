@@ -591,6 +591,18 @@ nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>tc <cmd>lua require('telescope.builtin').commands()<cr>
 nnoremap <leader>tch <cmd>lua require('telescope.builtin').command_history()<cr>
 
+"----------------------------------------------------
+"  Fern ファイラー
+"----------------------------------------------------
+" アイコン表示の有効化
+let g:fern#renderer = 'nerdfont'
+" アイコンを違う色で表示する設定
+augroup my-glyph-palette
+  autocmd! *
+  autocmd FileType fern call glyph_palette#apply()
+  autocmd FileType nerdtree,startify call glyph_palette#apply()
+augroup END
+
 " fzf
 nnoremap <C-p> :FZFFileList<CR>
 command! FZFFileList call fzf#run({
@@ -602,7 +614,6 @@ command! FZFMru call fzf#run({
             \  'sink':    'tabe',
             \  'options': '-m -x +s',
             \  'down':    '40%'})
-
 
 "----------------------------------------------------
 " テキスト処理
