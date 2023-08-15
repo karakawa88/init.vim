@@ -590,6 +590,7 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>tc <cmd>lua require('telescope.builtin').commands()<cr>
 nnoremap <leader>tch <cmd>lua require('telescope.builtin').command_history()<cr>
+nnoremap <leader>fr frecency<cr>
 
 "----------------------------------------------------
 "  Fern ファイラー

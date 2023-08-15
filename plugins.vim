@@ -55,6 +55,7 @@ Plug 'Shougo/ddc-sorter_rank'
 Plug 'Shougo/ddc-converter_remove_overlap'
 Plug 'Shougo/ddc-nvim-lsp'
 
+" ファイルやFinder
 "Telescope
 " telescope.nvimが依存
 Plug 'nvim-lua/plenary.nvim'
@@ -78,12 +79,9 @@ Plug 'nvim-telescope/telescope.nvim'
 
 " telescope-frequencyが依存
 Plug 'tami5/sqlite.lua'
-
 " telescope-frequencyが依存
 Plug 'kyazdani42/nvim-web-devicons'
-
 Plug 'nvim-telescope/telescope-frecency.nvim'
-nnoremap <C-f> <cmd>Telescope frecency<cr>
 
 " Fern ファイラー
 Plug 'lambdalisue/fern.vim'
@@ -92,6 +90,11 @@ Plug 'lambdalisue/nerdfont.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 "  アイコンに違う色で表示する
 Plug 'lambdalisue/glyph-palette.vim'
+
+" fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 
 " テキスト翻訳
 " Googl翻訳を使用して翻訳
