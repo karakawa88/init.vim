@@ -30,9 +30,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 "補完
 " neovimのビルトインのLSPを使用する
-Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'williamboman/mason.nvim'
+" Plug 'williamboman/mason-lspconfig.nvim'
 "coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 

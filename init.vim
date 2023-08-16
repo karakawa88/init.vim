@@ -554,65 +554,16 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" " ddc
-" " ddcのnvimのLSP保管に必要なmasonの初期化 luaで初期化する
-" lua require('plugins')
-" " pum.vim
-" call ddc#custom#patch_global('completionMenu', 'pum.vim')
-" call ddc#custom#patch_global('ui', 'native')
-" inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
-" inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
-" inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
-" inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
-" inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
-" inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
-" 
-" call ddc#custom#patch_global('sources', [
-" \ 'nvim-lsp',
-" \ 'around',
-" \ 'file'
-" \ ])
-" call ddc#custom#patch_global('sourceOptions', {
-"      \ '_': {
-"      \ 'matchers': ['matcher_head'],
-"      \ 'sorters': ['sorter_rank'],
-"      \ 'converters': ['converter_remove_overlap'],
-"      \ },
-"      \ 'around': {'mark': 'A'},
-"      \ 'nvim-lsp': {
-"      \ 'mark': 'L',
-"      \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
-"      \ },
-"      \ })
-" call ddc#custom#patch_global('sourceParams', {
-"      \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
-"      \ })
-" "inoremap <Tab> <Cmd>call pum#map#insert_relative(+1)<CR>
-" "inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
-" " Mappings
-" " <TAB>: completion.
-" inoremap <silent><expr> <C-space>
-"\ pumvisible() ? '<C-n>' :
-"\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-"\ '<TAB>' : ddc#map#manual_complete()
-" " <S-TAB>: completion back.
-" " inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
-" "call popup_preview#enable()
-" "call signature_help#enable()
-" " Use ddc.
-" call ddc#enable()
-" call popup_preview#enable()
-" call signature_help#enable()
 
 " Telescope
 " Using Lua functions
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>tf <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>tg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>tb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>th <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>tc <cmd>lua require('telescope.builtin').commands()<cr>
 nnoremap <leader>tch <cmd>lua require('telescope.builtin').command_history()<cr>
-nnoremap <leader>fr frecency<cr>
+nnoremap <leader>tr frecency<cr>
 
 "----------------------------------------------------
 "  Fern ファイラー
@@ -625,6 +576,8 @@ augroup my-glyph-palette
   autocmd FileType fern call glyph_palette#apply()
   autocmd FileType nerdtree,startify call glyph_palette#apply()
 augroup END
+" Ctrl+nでファイルツリーを表示/非表示する
+nnoremap <C-f> :Fern . -reveal=% -drawer -toggle
 
 " fzf
 nnoremap <C-p> :FZFFileList<CR>
