@@ -1,0 +1,8 @@
+{
+  "languageserver": {
+    "rust-analyzer": {
+      "command": "/opt/homebrew/bin/rust-analyzer",
+      "filetypes": ["rs"]
+    }
+  }
+}

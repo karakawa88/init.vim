@@ -532,55 +532,77 @@ set shortmess+=I
 set helplang=ja,en
 
 " 補完
-" ddc
-" ddcのnvimのLSP保管に必要なmasonの初期化 luaで初期化する
-lua require('plugins')
-" pum.vim
-call ddc#custom#patch_global('completionMenu', 'pum.vim')
-call ddc#custom#patch_global('ui', 'native')
-inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
-inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
-inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
-inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
-inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
-inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
+" Coc
+" 処理をステータスラインに表示
+" Add (Neo)Vim's native statusline support
+" NOTE: Please see `:h coc-status` for integrations with external pjlugins that
+" provide custom statusline: lightline.vim, vim-airline
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-call ddc#custom#patch_global('sources', [
- \ 'nvim-lsp',
- \ 'around',
- \ 'file'
- \ ])
-call ddc#custom#patch_global('sourceOptions', {
-      \ '_': {
-      \ 'matchers': ['matcher_head'],
-      \ 'sorters': ['sorter_rank'],
-      \ 'converters': ['converter_remove_overlap'],
-      \ },
-      \ 'around': {'mark': 'A'},
-      \ 'nvim-lsp': {
-      \ 'mark': 'L',
-      \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
-      \ },
-      \ })
-call ddc#custom#patch_global('sourceParams', {
-      \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
-      \ })
-"inoremap <Tab> <Cmd>call pum#map#insert_relative(+1)<CR>
-"inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
-" Mappings
-" <TAB>: completion.
-inoremap <silent><expr> <C-space>
-\ pumvisible() ? '<C-n>' :
-\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-\ '<TAB>' : ddc#map#manual_complete()
-" <S-TAB>: completion back.
-" inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
-"call popup_preview#enable()
-"call signature_help#enable()
-" Use ddc.
-call ddc#enable()
-call popup_preview#enable()
-call signature_help#enable()
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" " ddc
+" " ddcのnvimのLSP保管に必要なmasonの初期化 luaで初期化する
+" lua require('plugins')
+" " pum.vim
+" call ddc#custom#patch_global('completionMenu', 'pum.vim')
+" call ddc#custom#patch_global('ui', 'native')
+" inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
+" inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
+" inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
+" inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
+" inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
+" inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
+" 
+" call ddc#custom#patch_global('sources', [
+" \ 'nvim-lsp',
+" \ 'around',
+" \ 'file'
+" \ ])
+" call ddc#custom#patch_global('sourceOptions', {
+"      \ '_': {
+"      \ 'matchers': ['matcher_head'],
+"      \ 'sorters': ['sorter_rank'],
+"      \ 'converters': ['converter_remove_overlap'],
+"      \ },
+"      \ 'around': {'mark': 'A'},
+"      \ 'nvim-lsp': {
+"      \ 'mark': 'L',
+"      \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+"      \ },
+"      \ })
+" call ddc#custom#patch_global('sourceParams', {
+"      \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
+"      \ })
+" "inoremap <Tab> <Cmd>call pum#map#insert_relative(+1)<CR>
+" "inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
+" " Mappings
+" " <TAB>: completion.
+" inoremap <silent><expr> <C-space>
+"\ pumvisible() ? '<C-n>' :
+"\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+"\ '<TAB>' : ddc#map#manual_complete()
+" " <S-TAB>: completion back.
+" " inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
+" "call popup_preview#enable()
+" "call signature_help#enable()
+" " Use ddc.
+" call ddc#enable()
+" call popup_preview#enable()
+" call signature_help#enable()
 
 " Telescope
 " Using Lua functions
