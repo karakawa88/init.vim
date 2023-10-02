@@ -17,7 +17,7 @@ Plug 'tpope/vim-vinegar'
 " vim-devicons ファイルタイプごとにアイコンを表示するプラグイン
 Plug 'ryanoasis/vim-devicons'
 " ack-grep
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 " easy-motion
 Plug 'easymotion/vim-easymotion'
 " カラースキーム
@@ -108,7 +108,12 @@ Plug 'skanehira/translate.vim'
 " vimのヘルプファイルの作成
 Plug 'LeafCage/vimhelpgenerator'
 " GUndo
-" Plug 'sjl/gundo.vim'
+"Plug 'sjl/gundo.vim'
+"Undo Redo
+" undotree
+" gundoがpython2.4+を必要としておりそれが面倒なのでundotree.vimに変更した。
+Plug 'mbbill/undotree'
+
 " Git
 Plug 'tpope/vim-fugitive'
 " fzf
@@ -126,7 +131,7 @@ Plug 'tpope/vim-surround'
 Plug 'LeafCage/yankround.vim'
 Plug 'tyru/caw.vim'
 Plug 'flazz/vim-colorschemes'
-Plug 'vim-scripts/DoxygenToolkit.vim'
+" Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'scrooloose/syntastic'
 "Plug 'justmao945/vim-clang'
 Plug 'Shougo/neoinclude.vim'
@@ -188,8 +193,8 @@ Plug 'scrooloose/syntastic'
 "Plug 'zchee/deoplete-jedi'
 Plug 'vim-scripts/dbext.vim'
 Plug 'majutsushi/tagbar'
-Plug 'lighttiger2505/gtags.vim'
-Plug 'prabirshrestha/async.vim'
+" Plug 'lighttiger2505/gtags.vim'
+" Plug 'prabirshrestha/async.vim'
 "Plug 'prabirshrestha/vim-lsp'
 "Plug 'prabirshrestha/asyncomplete.vim'
 "Plug 'prabirshrestha/asyncomplete-lsp.vim'

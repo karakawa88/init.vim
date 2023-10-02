@@ -9,4 +9,6 @@ log/*
 *.old
 tags
 plugins/pack
+.netrwhist
+.ycm_extra_conf.py
 
