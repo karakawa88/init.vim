@@ -83,7 +83,7 @@ set nrformats=
 
 "----------------------------------------------------
 " 折り畳み
-"----------------------------------------------------
+"---------------------------------------------------
 set foldmethod=indent
 " 折り畳みを可視化する
 set foldcolumn=2
@@ -154,6 +154,8 @@ set grepprg=grep\ -E\ -n\ -I\ --exclude=~/.config/nvim/nvim_grep_exclude.txt\ $*
 set grepformat=%f:%l:%m
 " vimgrep検索での除外パターン
 set wildignore+=.git/**,a.out,*.o,GPATH,GRTAGS,GTAGS,ctags,tags,*.gch,__pycache__/**
+" grep検索終了後QuickFixを自動的に開く設定
+autocmd QuickFixCmdPost *grep* cwindow
 
 "----------------------------------------------------
 " 置換
@@ -531,6 +533,10 @@ set shortmess+=I
 " helpの言語の優先順位
 set helplang=ja,en
 
+" UndoとRedo
+" undotree
+nnoremap <F5> :UndotreeToggle<CR>
+
 " 補完
 " Coc
 " 処理をステータスラインに表示
@@ -554,55 +560,6 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" " ddc
-" " ddcのnvimのLSP保管に必要なmasonの初期化 luaで初期化する
-" lua require('plugins')
-" " pum.vim
-" call ddc#custom#patch_global('completionMenu', 'pum.vim')
-" call ddc#custom#patch_global('ui', 'native')
-" inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
-" inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
-" inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
-" inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
-" inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
-" inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
-" 
-" call ddc#custom#patch_global('sources', [
-" \ 'nvim-lsp',
-" \ 'around',
-" \ 'file'
-" \ ])
-" call ddc#custom#patch_global('sourceOptions', {
-"      \ '_': {
-"      \ 'matchers': ['matcher_head'],
-"      \ 'sorters': ['sorter_rank'],
-"      \ 'converters': ['converter_remove_overlap'],
-"      \ },
-"      \ 'around': {'mark': 'A'},
-"      \ 'nvim-lsp': {
-"      \ 'mark': 'L',
-"      \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
-"      \ },
-"      \ })
-" call ddc#custom#patch_global('sourceParams', {
-"      \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
-"      \ })
-" "inoremap <Tab> <Cmd>call pum#map#insert_relative(+1)<CR>
-" "inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
-" " Mappings
-" " <TAB>: completion.
-" inoremap <silent><expr> <C-space>
-"\ pumvisible() ? '<C-n>' :
-"\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-"\ '<TAB>' : ddc#map#manual_complete()
-" " <S-TAB>: completion back.
-" " inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
-" "call popup_preview#enable()
-" "call signature_help#enable()
-" " Use ddc.
-" call ddc#enable()
-" call popup_preview#enable()
-" call signature_help#enable()
 
 " Telescope
 " Using Lua functions
@@ -772,7 +729,7 @@ let g:neosnippet#snippets_directory='~/.config/nvim/neosnippets/'
 " set splitright
 
 "----------------------------------------------------
-" NeoBundle ファイル関連
+" ファイル関連
 "----------------------------------------------------
 "----------------------------------------------------
 " 引数リスト
@@ -805,7 +762,7 @@ nnoremap <silent> ]w :cclose<CR>
 
 
 "----------------------------------------------------
-" NeoBundle 編集
+" 編集
 "----------------------------------------------------
 " suround.vim
 " 例えばS"コマンドで選択中の文字列に""で囲んでくれる。
@@ -831,39 +788,7 @@ nmap <C-n> <Plug>(yankround-next)
 nmap <Leader>c <Plug>(caw:I:toggle)
 vmap <Leader>c <Plug>(caw:I:toggle)
 
-"----------------------------------------------------
-" NeoBundle 検索・置換
-"----------------------------------------------------
 
-"----------------------------------------------------
-" NeoBundle 表示
-"----------------------------------------------------
-" onedark.vim
-
-" タブ・ステータスバーの表示
-" NeoBundle 'itchyny/lightline.vim'
-" let g:lightline = {
-" \ 'colorscheme': 'wombat',
-" \ 'component': {
-" \   'readonly': '%{&readonly?"x":""}',
-" \ },
-" \ 'separator': { 'left': '', 'right': '' },
-" \ 'subseparator': { 'left': '|', 'right': '|' }
-" \ }
-"
-" "NeoBundle 'vim-airline/vim-airline'
-" " " Powerline系フォントを利用する
-" " let g:airline_powerline_fonts=1
-" " " タブバーのカスタマイズを有効にする
-" " let g:airline#extensions#tabline#enabled=1
-" " " タブバーの右領域を非表示にする
-" " let g:airline#extensions#tabline#show_splits=0
-" " let g:airline#extensions#tabline#show_tab_type=0
-" " let g:airline#extensions#tabline#show_close_button=0
-" " " airlineをカラースキームonedark風に変更する
-" " let g:airline_theme='onedark'
-" " "NeoBundle 'joshdick/airline-onedark.vim'
-"
 "----------------------------------------------------
 " プログラム関連
 "----------------------------------------------------
@@ -994,10 +919,10 @@ autocmd BufNewFile,BufRead *.src  set filetype=sh
 " completion by C-p, selection by C-n, C-p, choosing by C-y, Enter
 
 " deocomplete-clang
-let g:deoplete#sources#clang#libclang_path = system("llvm-config --prefix")[:-2] . '/lib/libclang-12.so.1'
-let g:deoplete#sources#clang#clang_header = system("llvm-config --prefix")[:-2] . '/include/clang'
-let g:deoplete#sources#clang#sort_algo = 'priority'
-let g:deoplete#sources#clang#clang_complete_database="./build/"
+" let g:deoplete#sources#clang#libclang_path = system("llvm-config --prefix")[:-2] . '/lib/libclang-12.so.1'
+" let g:deoplete#sources#clang#clang_header = system("llvm-config --prefix")[:-2] . '/include/clang'
+" let g:deoplete#sources#clang#sort_algo = 'priority'
+" let g:deoplete#sources#clang#clang_complete_database="./build/"
 
 " watchdogs
 " この関数で g:quickrun_config にシンタックスチェックを行うための設定を追加する

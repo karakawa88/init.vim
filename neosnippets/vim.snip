@@ -10,4 +10,28 @@ options     word, indent
     echohl ErrorMsg
     echomsg ${0}
     echohl None
+snippet     if
+abbr        if文
+options     word, indent
+    if ${0}
+
+    endif
+snippet     for
+abbr        for文
+options     word, indent
+    for ${2} in ${1}
+        ${0}
+    endfor
+snippet     forkeys
+abbr        for 辞書キーでアクセス
+options     word, indent
+    for ${2:key} in keys(${1})
+        ${0}
+    endfor
+snippet     foritems
+abbr        for 辞書キーと値
+options     word, indent
+    for [${2:key}, ${3:val}] in items(${1})
+        ${0}
+    endfor
 
