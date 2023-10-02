@@ -563,13 +563,13 @@ endfunction
 
 " Telescope
 " Using Lua functions
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>tf <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>tg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>tb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>th <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>tc <cmd>lua require('telescope.builtin').commands()<cr>
 nnoremap <leader>tch <cmd>lua require('telescope.builtin').command_history()<cr>
-nnoremap <leader>fr frecency<cr>
+nnoremap <leader>tr frecency<cr>
 
 "----------------------------------------------------
 "  Fern ファイラー
@@ -582,6 +582,8 @@ augroup my-glyph-palette
   autocmd FileType fern call glyph_palette#apply()
   autocmd FileType nerdtree,startify call glyph_palette#apply()
 augroup END
+" Ctrl+nでファイルツリーを表示/非表示する
+nnoremap <C-f> :Fern . -reveal=% -drawer -toggle
 
 " fzf
 nnoremap <C-p> :FZFFileList<CR>
