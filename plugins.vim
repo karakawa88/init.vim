@@ -35,6 +35,8 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'williamboman/mason-lspconfig.nvim'
 "coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" coc-fzf
+Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 
 " ddc
 " Plug 'Shougo/ddc.vim'
