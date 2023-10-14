@@ -796,27 +796,37 @@ vmap <Leader>c <Plug>(caw:I:toggle)
 "----------------------------------------------------
 " シンタックスチェック
 " ALE
+" エラー行に表示するマーク
+let g:ale_sign_error = '⨉'
+let g:ale_sign_warning = '⚠'
+" エラー行にカーソルをあわせた際に表示されるメッセージフォーマット
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" エラー表示の列を常時表示
+let g:ale_sign_column_always = 1
+
+" ファイルを開いたときにlint実行
+let g:ale_lint_on_enter = 1
+" ファイルを保存したときにlint実行
+let g:ale_lint_on_save = 1
+" 編集中のlintはしない
+let g:ale_lint_on_text_changed = 'never'
+
 " eslint_dを利用するための設定
-if executable('eslint_d')
-    let g:ale_javascript_eslint_use_global = 1
-    let g:ale_javascript_eslint_executable = 'eslint'
-endif
+" if executable('eslint_d')
+"     let g:ale_javascript_eslint_use_global = 1
+"     let g:ale_javascript_eslint_executable = 'eslint'
+" endif
 let g:ale_linters_explicit = 1
 " ESLint \   'javascript': ['eslint']
 let g:ale_linters = {
 \       'javascript': ['eslint'],
-\       'tex': ['chktex']
+\       'tex': ['chktex'],
+\       'rust': ['cargo clippy'],
+\       'python': ['flake8'],
 \ }
 let g:ale_tex_chktex_options = '-n 8'
-" let g:ale_sign_error = '✘'
-" let g:ale_sign_warning = '⚠'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 0
-" ファイルオープン時にチェックしたくない場合
-let g:ale_lint_on_enter = 0
-
 
 " ドキュメント
 " Doxygenコメント自動生成
@@ -1023,7 +1033,6 @@ let g:jscomplete_use = ['dom', 'moz', 'es6th']
 "---------------------------------------------------
 " JSONファイルでダブルクオーテーションを有効にする
 let g:vim_json_syntax_conceal = 0
-
 
 ""LaTex関連
 " NeoBundle "vim-latex/vim-latex"
