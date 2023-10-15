@@ -23,6 +23,11 @@ Plug 'easymotion/vim-easymotion'
 " カラースキーム
 " カラースキームをスクロールする
 Plug 'flazz/vimcolorschemes'
+" PaperColorスキーム
+Plug 'NLKNguyen/papercolor-theme'
+" カラースキームを順番に試せるプラグイン
+Plug 'vim-scripts/ScrollColors'
+
 " ステータスラインの見た目
 " airline
 Plug 'vim-airline/vim-airline'

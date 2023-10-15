@@ -377,6 +377,7 @@ let g:plug_timeout=300
 "let g:onedark_termcolors=16
 " カラースキーマを宣言する
 " colorscheme murphy
+set background=dark
 colorscheme PaperColor
 
 "----------------------------------------------------
