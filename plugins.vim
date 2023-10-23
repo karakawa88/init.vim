@@ -28,7 +28,10 @@ Plug 'NLKNguyen/papercolor-theme'
 " カラースキームを順番に試せるプラグイン
 Plug 'vim-scripts/ScrollColors'
 
-" ステータスラインの見た目
+" ステータスライン
+" lightline
+" Plug 'itchyny/lightline.vim'
+
 " airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'

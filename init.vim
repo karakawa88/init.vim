@@ -440,19 +440,79 @@ map  <Leader><Leader>/ <Plug>(easymotion-sn)
 nmap  <Leader><Leader>/ <Plug>(easymotion-sn)
 
 "----------------------------------------------------
-" タブとステータスバー
+" タブとステータスライン
 "----------------------------------------------------
 " <space>t   タブを新しく作成
 nmap <leader>t  :tabnew<cr>
+" ステータスラインの基本設定
+"常にステータスラインを表示する（これを設定しないと隠れてしまうときがある）
+set laststatus=2
+"最後に実行したコマンドをステータスラインに表示する
+set showcmd
+
+" lightline
+" let g:lightline = {
+"      \ 'colorscheme': 'wombat',
+"      \ }
 
 " Airline
 " airlineのタブを有効にする
 let g:airline#extensions#tabline#enabled = 1
-" C-p C-nでタブを切り替える
-"nmap <C-p> <Plug>AirlineSelectPrevTab
-"nmap <C-n> <Plug>AirlineSelectNextTab
+" C-t n,pでタブを切り替える
+nmap <C-t>p <Plug>AirlineSelectPrevTab
+nmap <C-t>n <Plug>AirlineSelectNextTab
 " タブに番号をつける
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+" PowerLineフォントを使用する
+let g:airline_powerline_fonts = 1
+"左側に使用されるセパレータ
+" let g:airline_left_sep = '⮀'
+" let g:airline_left_alt_sep = '⮁'
+" "右側に使用されるセパレータ
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
+" let g:airline_symbols.crypt = '🔒'		"暗号化されたファイル
+" let g:airline_symbols.linenr = '¶'			"行
+" let g:airline_symbols.maxlinenr = '㏑'		"最大行
+" " let g:airline_symbols.branch = '⭠'		"gitブランチ
+" let g:airline_symbols.paste = 'ρ'			"ペーストモード
+" let g:airline_symbols.spell = 'Ꞩ'			"スペルチェック
+" let g:airline_symbols.notexists = '∄'		"gitで管理されていない場合
+" let g:airline_symbols.whitespace = 'Ξ'	"空白の警告(余分な空白など)
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+let g:airline_theme = 'papercolor'
+" 挿入モードからEscでノーマルモードに戻す時、少し時間がかかる場合
+set ttimeoutlen=50
 
 "----------------------------------------------------
 " プログラム関連
