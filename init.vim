@@ -436,8 +436,10 @@ set guifont=Ricty\ Regular\ Nerd\ Font\ Plus\ Font\ Awesome\ Plus\ Octicons\ Plu
 " EasyMotion
 "----------------------------------------------------
 " カーソル移動を高速にするプラグイン
+let g:EasyMotion_do_mapping = 1
 map  <Leader><Leader>/ <Plug>(easymotion-sn)
 nmap  <Leader><Leader>/ <Plug>(easymotion-sn)
+
 
 "----------------------------------------------------
 " タブとステータスライン
@@ -505,7 +507,7 @@ let g:airline_symbols.whitespace = 'Ξ'
 " powerline symbols
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
+let gairline_right_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
