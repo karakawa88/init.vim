@@ -436,6 +436,7 @@ set guifont=Ricty\ Regular\ Nerd\ Font\ Plus\ Font\ Awesome\ Plus\ Octicons\ Plu
 " EasyMotion
 "----------------------------------------------------
 " カーソル移動を高速にするプラグイン
+" EasyMotionのデフォルトのキーバイドを使用する
 let g:EasyMotion_do_mapping = 1
 map  <Leader><Leader>/ <Plug>(easymotion-sn)
 nmap  <Leader><Leader>/ <Plug>(easymotion-sn)

@@ -34,4 +34,14 @@ options     word, indent
     for [${2:key}, ${3:val}] in items(${1})
         ${0}
     endfor
+snippet     try
+abbr        try ... catch ... finally ..
+options     word, indent
+    try
+
+    catch /${0}/
+
+    finally
+        
+    endtry
 
