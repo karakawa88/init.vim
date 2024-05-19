@@ -149,11 +149,21 @@ nnoremap <silent> <leader>h  :noh<cr>
 "grepをvimのvimgrepを使用するようにする
 "set grepprg=internal
 " 通常のgrep
-set grepprg=grep\ -E\ -n\ -I\ --exclude=~/.config/nvim/nvim_grep_exclude.txt\ $*\ 2>/dev/null
+" let exclude_file=expand('~/.config/nvim/nvim_grep_exclude.txt')
+" set 'rg --hidden --ignore-file='.exclude1_file.'$* 2>/dev/null'
+" set grepprg=rg\ --hidden\ --glob\ .git\ $*\ 2>/dev/null
+set grepprg=grep\ -RrnH\ $*\ 2>/dev/null
+" set grepprg=rg\ --hidden\ --glob\ .git\ $*\ 2>/dev/null
 " QuickFixに表示する一行の要素のフォーマット
 set grepformat=%f:%l:%m
 " vimgrep検索での除外パターン
 set wildignore+=.git/**,a.out,*.o,GPATH,GRTAGS,GTAGS,ctags,tags,*.gch,__pycache__/**
+" ripgrep nvim-rg
+" :Rg [options] {pattern} [{directory}] で起動
+" QickFixは*grep*のバッファを使用する。
+" let g:rg_command='rg --vimgrep -R --hidden --ignore-file=~/.config/nvim/nvim_grep_exclude.txt'
+let g:rg_command='rg --vimgrep'
+" grep検索終了後QuickFixを自動的に開く設定
 " grep検索終了後QuickFixを自動的に開く設定
 autocmd QuickFixCmdPost *grep* cwindow
 

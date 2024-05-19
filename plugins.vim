@@ -18,6 +18,8 @@ Plug 'tpope/vim-vinegar'
 Plug 'ryanoasis/vim-devicons'
 " ack-grep
 " Plug 'mileszs/ack.vim'
+" ripgrep 
+Plug 'duane9/nvim-rg'
 " easy-motion
 Plug 'easymotion/vim-easymotion'
 " カラースキーム
