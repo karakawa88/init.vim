@@ -1,13 +1,12 @@
-"---------------------------------------------------
+"--------------------------------------------------
 " 基本的な設定
 "----------------------------------------------------
 " env
 ".configディレクトリー
 let $CONFIG = empty($XDG_CONFIG_HOME) ? expand('$HOME/.config') : $XDG_CONFIG_HOME
-let s:dein_dir = expand('$CONFIG/nvim/dein')
 " python3の実行ファイルのパス
-let g:python3_host_prog = expand('/usr/local/python/bin/python3')
-let g:python_host_prog = expand('/usr/bin/python2.7')
+let g:python3_host_prog = expand('/usr/local/bin/python3')
+let g:python_host_prog = expand('/usr/local/bin/python2')
 "let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 " test
 
@@ -664,7 +663,7 @@ nnoremap <C-p> :FZFFileList<CR>
 command! FZFFileList call fzf#run({
             \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
             \ 'sink': 'e'})
-command! Fmru FZFMru
+command! Mru FZFMru
 command! FZFMru call fzf#run({
             \  'source':  v:oldfiles,
             \  'sink':    'tabe',
