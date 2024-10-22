@@ -22,6 +22,9 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'duane9/nvim-rg'
 " easy-motion
 Plug 'easymotion/vim-easymotion'
+Plug 'haya14busa/vim-easyoperator-line'
+Plug 'haya14busa/vim-migemo'
+
 " カラースキーム
 " カラースキームをスクロールする
 Plug 'flazz/vimcolorschemes'

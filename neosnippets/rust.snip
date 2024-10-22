@@ -34,6 +34,7 @@ abbr        Regex::new().unwrap()
 options     word, indent
     let ${1} = Regex::new(r"${2}").unwrap();${0}
 snippet     use_display
+alias       use_d
 abbr        use std::fmt::Display;
 options     word, indent
     use std::fmt::Display;${0}
@@ -41,6 +42,11 @@ snippet     use_cmp
 abbr        use std::cmp::PartialOrd;
 options     word, indent
     use std::cmp::PartialOrd;${0}
+snippet     pf
+alias       pfn
+abbr        pub fn (){}
+options     word, indent
+    pub fn ${1}(){}
 snippet     test_fn
 alias       #t
 abbr        #[test] fn ..() {}
@@ -51,7 +57,9 @@ snippet     #panic
 alias       #p
 abbr        #[should_panic(expected = "...")]
 options     word, indent
-    #[should_panic(expected = "${0}")]
+    #[test]
+    #[should_panic(expected = "${1}")]
+    fn ${0}() {}
 snippet     #ignore
 alias       #i
 abbr        #[ignore]
@@ -74,6 +82,11 @@ snippet     use_rand
 abbr        use rand::Rng;
 options     word, indent
     use rand::Rng;${0}
+snippet     rand_range
+alias       rnd_int
+abbr        rand::thread_rng().gen_range()
+options     word, indent
+    rand::thread_rng().gen_range(${1:1..100})${0}
 snippet     drop
 abbr        std::mem::drop(...);
 options     word, indent

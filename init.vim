@@ -10,7 +10,7 @@ let g:python_host_prog = expand('/usr/local/bin/python2')
 "let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 " test
 
-" <leader>キーの変更
+" <eader>キーの変更
 " \ からスペースキーに切り替える
 " mapleaderはspaceのような特殊キーを受け付けないため \<space>とする
 " また''はただの文字列でそうしたくない場合(展開など)は""を使用する。
@@ -65,7 +65,10 @@ set runtimepath+=/opt/local/share/nvim/runtime/
 " ttimeoutlen
 " [esc]などのキーが次のキー入力を待つ時間
 " ここに-1を設定してあるとtimeoutlenの値が使われる timeoutlenが1000なら1秒待つ。デフォルトの設定。
-set timeout timeoutlen=1000 ttimeoutlen=50
+" set timeout timeoutlen=1000 ttimeoutlen=50
+set timeout 
+set timeoutlen=500
+set ttimeoutlen=50
 
 "----------------------------------------------------
 " 編集
@@ -121,11 +124,11 @@ set wrapscan
 " インクリメンタルサーチを使わない
 set noincsearch
 " 前回の検索にマッチする単語の数を表示する
-nnoremap <silent> <leader>c :%s///gn<cr>
+" nnoremap <silent> <leader>c :%s///gn<cr>
 " インクリメンタルサーチを有効にする
-nnoremap <silent> <leader>i :set incsearch<cr>
+nnoremap <silent> <leader>i :set incsearch!<cr>
 " インクリメンタルサーチを無効にする
-nnoremap <silent> <leader>n :set noincsearch<cr>
+" nnoremap <silent> <leader>n :set noincsearch<cr>
 " 検索結果文字列のハイライトを有効にする
 " :nohでハイライトを消せ
 " set nohlsearch
@@ -441,15 +444,35 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['txt'] = ''
 " ↓インストールしたfont
 set guifont=Ricty\ Regular\ Nerd\ Font\ Plus\ Font\ Awesome\ Plus\ Octicons\ Plus\ Pomicons\ Plus\ Font\ Logos\ (Font\ Linux):h14
 
-"----------------------------------------------------
+"--------------------------------------------------
 " EasyMotion
 "----------------------------------------------------
 " カーソル移動を高速にするプラグイン
 " EasyMotionのデフォルトのキーバイドを使用する
-let g:EasyMotion_do_mapping = 1
-map  <Leader><Leader>/ <Plug>(easymotion-sn)
-nmap  <Leader><Leader>/ <Plug>(easymotion-sn)
+let g:EasyMotion_do_mapping = 0
+map  <Leader>/ <Plug>(easymotion-sn)
+nmap  <Leader>/ <Plug>(easymotion-sn)
+" map <Leader><Leader>l  <Plug>(easyoperator-line-select)
+" nmap <Leader><Leader>l  <Plug>(easyoperator-line-select)
+"nmap d<Leader>l <Plug>(easyoperator-line-delete)
+"nmap p<Leader>l <Plug>(easyoperator-line-yank)
+" <Leader>f{char} to move to {char}
+map  <Leader>1 <Plug>(easymotion-bd-f)
+nmap <Leader>1 <Plug>(easymotion-overwin-f)
+" s{char}{char} to move to {char}{char}
+nmap <Leader>2 <Plg>(easymotion-overwin-f2)
+" Move to line
+map <Leader>l <Plug>(easymotion-bd-jk)
+nmap <Leader>l <Plug>(easymotion-overwin-line)
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 
+"大文字小文字を区別しない
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_use_smartsign_jp = 1 " JP layout
+" migemoを使用する
+let g:EasyMotion_use_migemo = 1
 
 "----------------------------------------------------
 " タブとステータスライン
@@ -627,7 +650,8 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 " <C-g>u breaks current undo, please make your own choice
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
+map  <Leader>o <Plug>(CocOutline)
+nmap <Leader>o <Plug>(CocOutline)
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -860,8 +884,8 @@ nmap <C-n> <Plug>(yankround-next)
 
 "コメント関連
 "caw-vim
-nmap <Leader>c <Plug>(caw:I:toggle)
-vmap <Leader>c <Plug>(caw:I:toggle)
+nmap <Leader>c <Plug>(caw:zeropos:toggle)
+vmap <Leader>c <Plug>(caw:zeropos:toggle)
 
 
 "----------------------------------------------------
@@ -1060,10 +1084,10 @@ let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
 " URL文字列にコマンドを指定するとブラウザーにそのURLのホームページを表示し、
 " ただの文字列ならブラウザーでその文字列を検索する
 " カーソル下のURLをブラウザで開く
-nmap <Leader>o <Plug>(openbrowser-open)
-vmap <Leader>o <Plug>(openbrowser-open)
+"nmap <Leader>o <Plug>(openbrowser-open)
+"vmap <Leader>o <Plug>(openbrowser-open)
 " ググる
-nnoremap <Leader>g :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
+" nnoremap <Leader>g :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
 " :OpenBrowserCurrent すれば現在のバッファで編集している HTML ファイルがブラウザで開かれます。
 command! OpenBrowserCurrent execute "OpenBrowser" expand("%:p")
 
@@ -1202,6 +1226,5 @@ filetype plugin indent on
 vnoremap <Space><CR> :!sh<CR>
 " 行選択していない状態から実行
 nnoremap <Space><CR> V:!sh<CR>
-
 
 
