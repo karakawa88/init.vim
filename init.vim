@@ -650,7 +650,7 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 " <C-g>u breaks current undo, please make your own choice
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-map  <Leader>o <Plug>(CocOutline)
+map  <Leader>o (CocOutline)
 nmap <Leader>o <Plug>(CocOutline)
 function! CheckBackspace() abort
   let col = col('.') - 1
@@ -693,6 +693,8 @@ command! FZFMru call fzf#run({
             \  'sink':    'tabe',
             \  'options': '-m -x +s',
             \  'down':    '40%'})
+map  <Leader>m :Mru<CR>
+nnoremap <silent> <Leader>m :Mru<CR>
 
 "----------------------------------------------------
 " テキスト処理

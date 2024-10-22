@@ -51,28 +51,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " coc-fzf
 Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 
-" ddc
-" Plug 'Shougo/ddc.vim'
-" Plug 'vim-denops/denops.vim'
-" Plug 'Shougo/ddc-ui-native'
-" " ポップアップのプレビューを表示するプラグイン
-" Plug 'matsui54/denops-popup-preview.vim'
-" " signature helpを表示する
-" Plug 'matsui54/denops-signature_help'
-" " ポップアップウィンドウを表示するプラグイン
-" Plug 'Shougo/pum.vim'
-" " カーソル周辺の既出単語を補完するsource
-" Plug 'Shougo/ddc-around'
-" " ファイル名を補完するsource
-" Plug 'LumaKernel/ddc-file'
-" " 入力中の単語を補完の対象にするfilter
-" Plug 'Shougo/ddc-matcher_head'
-" " 補完候補を適切にソートするfilter
-" Plug 'Shougo/ddc-sorter_rank'
-" " 補完候補の重複を防ぐためのfilter
-" Plug 'Shougo/ddc-converter_remove_overlap'
-" Plug 'Shougo/ddc-nvim-lsp'
-
 " ファイルやFinder
 "Telescope
 " telescope.nvimが依存
@@ -206,7 +184,6 @@ Plug 'scrooloose/syntastic'
 "Plug 'zchee/deoplete-jedi'
 Plug 'vim-scripts/dbext.vim'
 Plug 'majutsushi/tagbar'
-" Plug 'lighttiger2505/gtags.vim'
 " Plug 'prabirshrestha/async.vim'
 "Plug 'prabirshrestha/vim-lsp'
 "Plug 'prabirshrestha/asyncomplete.vim'
