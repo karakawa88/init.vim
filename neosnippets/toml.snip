@@ -1,0 +1,22 @@
+snippet     [p
+alias       [package
+abbr        [package] ....
+options     word, indent
+    [package]
+    name = "${0}"
+    version = ""
+    authors = [""]
+    description = ""
+    license = "MIT OR Apache-2.0"
+snippet      [b
+alias       build-op
+abbr        [profile.dev] .... [profile.relese] .....
+options     word, indent
+    # 最適化オプション
+    # 0-3の範囲で指定
+    [profile.dev]
+    opt-level = 0
+    [profile.release]
+    opt-level = 3
+    panic = 'abort'
+

@@ -73,6 +73,11 @@ options     word, indent
         use super::*;
         ${0}
     }
+snippet     ae
+alias       test_ae
+abbr        assert_eq!(...)
+options     word, indent
+    assert_eq!(${1},${2});${0}
 snippet     sfrom
 alias       sf
 abbr        String::from("...")
@@ -91,15 +96,37 @@ snippet     drop
 abbr        std::mem::drop(...);
 options     word, indent
     std::mem::drop(${0});
+snippet     use_th
+abbr        use std::thread;use std::time::Duration;
+options     word, indent
+    use std::thread;
+    use std::time::Duration;${0}
 snippet     th_spawn
 alias       th
 abbr        thread::spawn(|| { ... });
 options     word, indent
     thread::spawn(|| {${0}});
-snippet     use_ref
+snippet     join
+abbr        handle.join().unwrap();
+options     word, indent
+    handle.join().unwrap();${0}
+snippet     sleep
+abbr        std::thread::sleep(Duration::from_secs(${1}));${0}
+options     word, indent
+    std::thread::sleep(Duration::from_secs(${1}));${0}
+snippet     tx_clone
+abbr        mpsc::Sender::clone(&tx);
+options     word, indent
+    mpsc::Sender::clone(${1:&tx});${0}
+snippet     use_rc
+alias       rc
 abbr        use ....
 options     word, indent
-    use std::rc::Rc;
+    use std::rc::Rc;${0}
+snippet     use_ref
+alias       ref
+abbr        use ....
+options     word, indent
     use std::cell::RefCell;${0}
 snippet     clap_opt
 abbr        #[arg(name="", short='', long="", help="")]
