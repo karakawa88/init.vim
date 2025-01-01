@@ -546,6 +546,9 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 let g:airline_theme = 'papercolor'
+" airline aleの設定
+let g:airline#extensions#ale#enabled = 1
+
 " 挿入モードからEscでノーマルモードに戻す時、少し時間がかかる場合
 set ttimeoutlen=50
 
@@ -922,6 +925,7 @@ let g:ale_linters = {
 \       'tex': ['chktex'],
 \       'rust': ['cargo clippy'],
 \       'python': ['flake8'],
+\       'sh': ['shellcheck'],
 \ }
 let g:ale_tex_chktex_options = '-n 8'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
