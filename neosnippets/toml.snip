@@ -26,4 +26,10 @@ options     word, indent
     [target.aarch64]
     linker = "/bin/clang"
     rustflags = ["-Clink-arg=-fuse-ld=/usr/local/bin/mold"]${0}
+snippet     [dev
+abbr        [dev-dependencies] assert_cmd = "2" predicates = "2"
+options     word, indent
+    [dev-dependencies]
+    assert_cmd = "2"
+    predicates = "2"
 

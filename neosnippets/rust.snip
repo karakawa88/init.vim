@@ -57,9 +57,7 @@ snippet     #panic
 alias       #p
 abbr        #[should_panic(expected = "...")]
 options     word, indent
-    #[test]
     #[should_panic(expected = "${1}")]
-    fn ${0}() {}
 snippet     #ignore
 alias       #i
 abbr        #[ignore]
@@ -159,13 +157,6 @@ alias       #clap_com
 abbr        #[command(about="...")]
 options     word, indent
     #[command(about="${1}")]${0}
-snippet     #clap_args
-abbr        #[derive(Debug, Args)] pub struct ... {}
-options     word, indent
-    #[derive(Debug, Args)]
-    pub struct ${1} {
-        ${0}
-    }
 snippet     clap_value_enum
 alias       clap_enum
 abbr        ValueEnum
@@ -200,6 +191,10 @@ options     word, indent
 
     #[derive(Debug, Args)]
     pub struct ${4} {}
+snippet     #clap_setfalse
+abbr        #[arg(name="", short='', long="", action=clap::ArgAction::SetFalse)]
+options     word, indent
+    #[arg(name="${1}", short='${2}', long="${3}", help="${4}", action=clap::ArgAction::SetFalse)]${0}
 snippet     use_anyhow
 abbr        use anyhow::{bail, ensure, Result, Context};
 options     word, indent
@@ -223,6 +218,17 @@ options     word, indent
     unsafe {
         ${0}
     }
+snippet     exit
+abbr        std::process::exit()
+options     word, indent
+    std::process::exit(${1})${0}
+snippet     ui
+abbr        unimplemented!();
+options     word, indent
+    unimplemented!();${0}
+
+
+
 
 
 
