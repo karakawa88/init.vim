@@ -223,6 +223,19 @@ options     word, indent
     unsafe {
         ${0}
     }
+snippet     warn
+abbr        #![allow(unused_imports)]  #![allow(dead_code)]
+options     word, indent
+    #![allow(unused_imports)]
+    #![allow(dead_code)]${0}
+snippet     #trans
+abbr        #[repr(transparent)]
+options     word, indent
+    #[repr(transparent)]${0}
+
+
+
+
 
 
 
