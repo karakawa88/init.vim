@@ -565,6 +565,27 @@ inoremap " ""<esc>i
 inoremap ( ()<esc>i
 inoremap [ []<esc>i
 inoremap { {}<esc>i
+"----------------------------------------------------
+" シンタックスハイライト
+" ---------------------------------------------------
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,  --syntax highlightを有効にする
+    disable = {     -- 一部の言語では無効にする
+      'lua',
+      'ruby',
+      'toml',
+      'c_sharp',
+      'vue',
+    }
+  },
+  indent = {
+    enable = true, -- これを設定することでtree-sitterによるインデントを有効にできます
+  },
+  ensure_installed = { "c", "lua", "vim", "rust", "vimdoc", "query", "markdown", "markdown_inline" }
+}
+EOF
 
 "----------------------------------------------------
 " ctags
@@ -653,8 +674,8 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 " <C-g>u breaks current undo, please make your own choice
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-map  <Leader>o (CocOutline)
-nmap <Leader>o <Plug>(CocOutline)
+map  <Leader>o :CocOutline<CR>
+nmap <Leader>o :CocOutline<CR>
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -954,6 +975,14 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {'mode':'passive'}
 nnoremap <F10> :SyntasticCheck<CR> :SyntasticToggleMode<CR> :w<CR>
+
+"----------------------------------------------------
+" Markdown
+"----------------------------------------------------
+" render-markdown
+lua <<EOF
+    require('render-markdown').setup({})
+EOF
 
 "----------------------------------------------------
 " シェルスクリプト関連

@@ -218,6 +218,7 @@ options     word, indent
     unsafe {
         ${0}
     }
+<<<<<<< HEAD
 snippet     exit
 abbr        std::process::exit()
 options     word, indent
@@ -229,6 +230,22 @@ options     word, indent
 
 
 
+||||||| 8163bcd
+=======
+snippet     warn
+abbr        #![allow(unused_imports)]  #![allow(dead_code)]
+options     word, indent
+    #![allow(unused_imports)]
+    #![allow(dead_code)]${0}
+snippet     #trans
+abbr        #[repr(transparent)]
+options     word, indent
+    #[repr(transparent)]${0}
+
+
+
+
+>>>>>>> dev
 
 
 

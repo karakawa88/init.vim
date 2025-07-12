@@ -105,6 +105,9 @@ Plug 'LeafCage/vimhelpgenerator'
 " gundoがpython2.4+を必要としておりそれが面倒なのでundotree.vimに変更した。
 Plug 'mbbill/undotree'
 
+" シンタックスハイライト
+Plug 'nvim-treesitter/nvim-treesitter'
+
 " Git
 Plug 'tpope/vim-fugitive'
 " fzf
@@ -161,6 +164,10 @@ Plug 'osyo-manga/vim-textobj-multiblock'
 Plug 'glts/vim-textobj-indblock'
 Plug 'RyanMcG/vim-textobj-dash'
 Plug 'bps/vim-textobj-python'
+
+" Markdown
+Plug 'MeanderingProgrammer/render-markdown.nvim'
+
 " HTML5 CSS
 Plug 'othree/html5.vim'
 Plug 'alvan/vim-closetag'
