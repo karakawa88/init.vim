@@ -24,3 +24,12 @@ abbr clap = { version = "4.5.37", features = ["derive", "env"] }
 options     word, indent
     #clapでderive形式を使用する
     clap = { version = "4.5.37", features = ["derive", "env"] }{0}
+    panic = 'abort'${0}
+snippet     [l
+alias       linker
+abbr        [target.aarch64] linker = "/bin/clang" rustflags = ["-Clink-arg=-fuse-ld=/usr/local/bin/mold"]
+options     word, indent
+    [target.aarch64]
+    linker = "/bin/clang"
+    rustflags = ["-Clink-arg=-fuse-ld=/usr/local/bin/mold"]${0}
+
