@@ -18,6 +18,12 @@ options     word, indent
     opt-level = 0
     [profile.release]
     opt-level = 3
+    panic = 'abort'
+snippet depclap
+abbr clap = { version = "4.5.37", features = ["derive", "env"] }
+options     word, indent
+    #clapでderive形式を使用する
+    clap = { version = "4.5.37", features = ["derive", "env"] }{0}
     panic = 'abort'${0}
 snippet     [l
 alias       linker
@@ -32,6 +38,12 @@ options     word, indent
     [dev-dependencies]
     assert_cmd = "2"
     predicates = "2"
+    panic = 'abort'
+snippet depclap
+abbr clap = { version = "4.5.37", features = ["derive", "env"] }
+options     word, indent
+    #clapでderive形式を使用する
+    clap = { version = "4.5.37", features = ["derive", "env"] }{0}
     panic = 'abort'
 snippet depclap
 abbr clap = { version = "4.5.37", features = ["derive", "env"] }
