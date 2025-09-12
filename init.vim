@@ -578,12 +578,14 @@ require'nvim-treesitter.configs'.setup {
       'toml',
       'c_sharp',
       'vue',
+      'markdown',
+      'markdown_inline'
     }
   },
   indent = {
     enable = true, -- これを設定することでtree-sitterによるインデントを有効にできます
   },
-  ensure_installed = { "c", "lua", "vim", "rust", "vimdoc", "query", "markdown", "markdown_inline" }
+  ensure_installed = { "c", "lua", "vim", "rust", "vimdoc", "query" }
 }
 EOF
 
@@ -980,9 +982,16 @@ nnoremap <F10> :SyntasticCheck<CR> :SyntasticToggleMode<CR> :w<CR>
 " Markdown
 "----------------------------------------------------
 " render-markdown
-lua <<EOF
-    require('render-markdown').setup({})
-EOF
+" lua <<EOF
+"     require('render-markdown').setup({
+"         render_modes = false,
+"     })
+" EOF
+" preview-markdown
+" let g:preview_m1arkdown_parser = /bin/glow
+" let g:preview_markdown_vertical = 1
+
+
 
 "----------------------------------------------------
 " シェルスクリプト関連
