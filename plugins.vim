@@ -166,7 +166,8 @@ Plug 'RyanMcG/vim-textobj-dash'
 Plug 'bps/vim-textobj-python'
 
 " Markdown
-Plug 'MeanderingProgrammer/render-markdown.nvim'
+" Plug 'MeanderingProgrammer/render-markdown.nvim'
+" Plug 'skanehira/preview-markdown.vim'
 
 " HTML5 CSS
 Plug 'othree/html5.vim'
