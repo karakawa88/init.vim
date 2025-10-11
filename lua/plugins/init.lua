@@ -121,3 +121,5 @@ require('telescope').setup{
   }
 }
 
+require("skkeleton_indicator").setup {}
+

@@ -403,7 +403,24 @@ set sh=zsh
 " tnoremap <silent> <C-c><C-i> <C-\><C-n>
 tnoremap <silent> <ESC> <C-\><C-n>
 " tnoremap <silent> <C-g> <C-\><C-n>
+" ---------------------------------------------------
+" Skkelton
+" ---------------------------------------------------
+"  日本語入力プラグイン
+"  denoが必要
 "----------------------------------------------------
+call skkeleton#config({ 'globalDictionaries': [['/usr/local/share/skk/dict/SKK-JISYO.L', 'euc-jp']] })
+imap <C-j> <Plug>(skkeleton-toggle)
+cmap <C-j> <Plug>(skkeleton-toggle)
+lua<<EOF
+    require("skkeleton_indicator").setup {
+        alwaysShown=true,
+    }
+EOF
+" migemo
+"cnoremap <C-m> <Plug>(kensaku-search-replace)
+
+
 " NERDTree
 "----------------------------------------------------
 " C-eでNERDTreeの起動をトグルする
@@ -569,11 +586,10 @@ inoremap { {}<esc>i
 " シンタックスハイライト
 " ---------------------------------------------------
 lua <<EOF
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true,  --syntax highlightを有効にする
     disable = {     -- 一部の言語では無効にする
-      'lua',
       'ruby',
       'toml',
       'c_sharp',
@@ -585,7 +601,7 @@ require'nvim-treesitter.configs'.setup {
   indent = {
     enable = true, -- これを設定することでtree-sitterによるインデントを有効にできます
   },
-  ensure_installed = { "c", "lua", "vim", "rust", "vimdoc", "query" }
+  ensure_installed = { "c", "lua", "vim", "rust", "vimdoc", "query", "latex" }
 }
 EOF
 
@@ -1270,5 +1286,4 @@ filetype plugin indent on
 vnoremap <Space><CR> :!sh<CR>
 " 行選択していない状態から実行
 nnoremap <Space><CR> V:!sh<CR>
-
 

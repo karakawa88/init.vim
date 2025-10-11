@@ -23,7 +23,6 @@ Plug 'duane9/nvim-rg'
 " easy-motion
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/vim-easyoperator-line'
-Plug 'haya14busa/vim-migemo'
 
 " カラースキーム
 " カラースキームをスクロールする
@@ -32,6 +31,16 @@ Plug 'flazz/vimcolorschemes'
 Plug 'NLKNguyen/papercolor-theme'
 " カラースキームを順番に試せるプラグイン
 Plug 'vim-scripts/ScrollColors'
+
+"日本語入力SKK
+" skkeltoneにはdenoが必要
+Plug 'vim-denops/denops.vim'
+" skkeletone
+Plug 'vim-skk/skkeleton'
+" skkeletonがonなのか
+Plug 'delphinus/skkeleton_indicator.nvim'
+" migemo
+Plug 'lambdalisue/kensaku.vim'
 
 " ステータスライン
 " lightline
@@ -198,12 +207,14 @@ Plug 'majutsushi/tagbar'
 "Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'vim-scripts/a.vim'
 "Plug 'vim-latex/vim-latex'
-Plug 'lervag/vimtex'
-Plug 'w0rp/ale'
+
 " on_cmd = ['ALELint', 'ALEToggle', 'ALEEnable', 'ALEToggleBuffer', 'ALEEnableBuffer']
 Plug 'https://github.com/preservim/nerdtree'
 Plug 'https://github.com/tpope/vim-unimpaired'
+
+" LaTex
 Plug 'lervag/vimtex'
+
 "YouCompleteMeはコンパイルに時間がかかるためタイムアウトを伸ばす
 " let g:plug_timeout=300
 " Plug 'ycmcore/YouCompleteMe'

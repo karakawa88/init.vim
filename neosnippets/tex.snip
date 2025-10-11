@@ -1,11 +1,7 @@
-snippes     latexdocc
-abbr        \documentclass[uplatex,dvipdfmx,autodetect-engine,ja=standard,fleqn,a4paper,12pt]{bxjsarticle}
-options    word, indent
-   \documentclass[uplatex,dvipdfmx]{jsarticle}${0}
 snippet     docc
-abbr        \documentclass[ ... ]{bxjsarticle}
+abbr        \documentclass[ ... ]{jlreq}
 options    word, indent
-    \documentclass[ja=standard,fleqn,a4paper,12pt]{ltjsarticle}
+    \documentclass[paper=a5paper,fontsize=10pt,jafontscale=0.9247]{jlreq}
     \usepackage{luatexja}
     % まずはLuaTeXの日本語フォント設定の読み込み
     \usepackage{luatexja-fontspec}${0}
@@ -138,6 +134,7 @@ abbr        \section{....}
 options    word, indent
    \section{${0}}
 snippet     subsec
+alias       ss
 abbr        \subsection{}
 options    word, indent
    \subsection{${0}}
@@ -221,10 +218,11 @@ snippet     latex
 abbr        \LaTeX
 options    word, indent
    \LaTeX{}${0}
-snippet     fln
+snippet     mln
 abbr        forcing line
 options    word, indent
-    \mbox{} \\ ${0}
+    \mbox{} \\\\
+    ${0}
 snippet     hs
 abbr        \hspace*{...}
 options     word, indent
@@ -241,11 +239,12 @@ snippet     uline
 abbr        \underline{....}
 options     word, indent
     \underline{${1}} ${0}
-snippet     hr
+snippet     hf
 abbr        \hrulefill 
 options     word, indent
     \hrulefill ${0}
-snippet     dothr
+snippet     df
+alias       dotf
 abbr        \dotfill 
 options     word, indent
     \dotfill ${0}
@@ -263,6 +262,10 @@ abbr        \setlength{\fboxsep}{size} \setlength{\fboxrule}{size}
 options     word, indent
     \setlength{\fboxsep}{${1:#:size}}
     \setlength{\fboxrule}{${2:#:size}}${0}
+snippet     up_ruby
+abbr        \usepackage{pxrubrica}
+options     word, indent
+    \usepackage{pxrubrica}${0}
 snippet     ruby
 abbr        \ruby{漢字}{カナ}
 options     word, indent
@@ -576,11 +579,15 @@ options     word, indent
         \vspace*{-\intextsep}
         ${0}
     \end{wraptable}
-snippet     marginpar
+snippet     mp
 alias       mpar
 abbr        欄外の配置 \marginpar{...}
 options     word, indent
     \marginpar{${0}}
+snippet     mplr
+abbr        左右に欄外に配置 \marginpar[左]{右}
+options     word, indent
+    \marginpar[${1:#:left}]{${2:#:right}}${0}
 snippet     lb
 alias       label
 abbr        ラベル \label{...}
@@ -1113,4 +1120,16 @@ options     word, indent
     \setlength{\footskip}{2\zw}
     \usepackage{layout}
     \layout${0}
+snippet     comment
+abbr        複数行コメント
+options     word, indent
+    \usepackage{comment}
+    \begin{comment}
+    ${0}
+    \end{comment}
+snippet     lua
+abbr        埋め込みlua
+options     word, indent
+    \directlua{${0}}
+
 
