@@ -417,13 +417,17 @@ tnoremap <silent> <ESC> <C-\><C-n>
 "         alwaysShown=true,
 "     }
 " EOF
-autocmd InsertLeave * :silent !/opt/homebrew/bin/im-select com.apple.keylayout.ABC
+" autocmd InsertLeave * :silent !/opt/homebrew/bin/im-select com.apple.keylayout.ABC
 " migemo
 "cnoremap <silent> <CR> <Plug>(kensaku-search-replace)<CR>
 "cmap <CR> <Plug>(kensaku-search-replace)<CR>
 if executable('cmigemo')
   cnoremap <expr><CR> migemosearch#replace_search_word()."\<CR>"
 endif
+" im-select.nvim
+lua<<EOF
+    require("im_select").setup()
+EOF
 
 " NERDTree
 "----------------------------------------------------
