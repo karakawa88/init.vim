@@ -35,10 +35,14 @@ Plug 'vim-scripts/ScrollColors'
 "日本語入力SKK
 " skkeltoneにはdenoが必要
 Plug 'vim-denops/denops.vim'
+" im-select.nvimでInsertmodeとCmdmodeで自動的に英数入力に切り替える。
+Plug 'keaising/im-select.nvim'
+
 " skkeletone
 " Plug 'vim-skk/skkeleton'
 " skkeletonがonなのか
 " Plug 'delphinus/skkeleton_indicator.nvim'
+
 " migemo
 "Plug 'lambdalisue/kensaku.vim'
 " kensaku.vimは専用のUIを持っていないためkensaku-search.vimを導入。
