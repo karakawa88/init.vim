@@ -36,9 +36,9 @@ Plug 'vim-scripts/ScrollColors'
 " skkeltoneにはdenoが必要
 Plug 'vim-denops/denops.vim'
 " skkeletone
-Plug 'vim-skk/skkeleton'
+" Plug 'vim-skk/skkeleton'
 " skkeletonがonなのか
-Plug 'delphinus/skkeleton_indicator.nvim'
+" Plug 'delphinus/skkeleton_indicator.nvim'
 " migemo
 Plug 'lambdalisue/kensaku.vim'
 
