@@ -422,7 +422,7 @@ autocmd InsertLeave * :silent !/opt/homebrew/bin/im-select com.apple.keylayout.A
 "cnoremap <silent> <CR> <Plug>(kensaku-search-replace)<CR>
 "cmap <CR> <Plug>(kensaku-search-replace)<CR>
 if executable('cmigemo')
-   cnoremap <expr><CR> migemosearch#replace_search_word()."\<CR>"
+  cnoremap <expr><CR> migemosearch#replace_search_word()."\<CR>"
 endif
 
 " NERDTree
