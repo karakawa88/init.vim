@@ -40,7 +40,10 @@ Plug 'vim-denops/denops.vim'
 " skkeletonがonなのか
 " Plug 'delphinus/skkeleton_indicator.nvim'
 " migemo
-Plug 'lambdalisue/kensaku.vim'
+"Plug 'lambdalisue/kensaku.vim'
+" kensaku.vimは専用のUIを持っていないためkensaku-search.vimを導入。
+"Plug 'kensaku-search.vim'
+Plug 'rhysd/migemo-search.vim'
 
 " ステータスライン
 " lightline
