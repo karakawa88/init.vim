@@ -409,14 +409,14 @@ tnoremap <silent> <ESC> <C-\><C-n>
 "  日本語入力プラグイン
 "  denoが必要
 "----------------------------------------------------
-" call skkeleton#config({ 'globalDictionaries': [['/usr/local/share/skk/dict/SKK-JISYO.L', 'euc-jp']] })
-" imap <C-j> <Plug>(skkeleton-toggle)
-" cmap <C-j> <Plug>(skkeleton-toggle)
-" lua<<EOF
-"     require("skkeleton_indicator").setup {
-"         alwaysShown=true,
-"     }
-" EOF
+call skkeleton#config({ 'globalDictionaries': [['/usr/local/share/skk/dict/SKK-JISYO.L', 'euc-jp']] })
+imap <C-j> <Plug>(skkeleton-toggle)
+cmap <C-j> <Plug>(skkeleton-toggle)
+lua<<EOF
+    require("skkeleton_indicator").setup {
+        alwaysShown=true,
+    }
+EOF
 " autocmd InsertLeave * :silent !/opt/homebrew/bin/im-select com.apple.keylayout.ABC
 " migemo
 "cnoremap <silent> <CR> <Plug>(kensaku-search-replace)<CR>
@@ -428,6 +428,7 @@ endif
 lua<<EOF
     require("im_select").setup()
 EOF
+
 
 " NERDTree
 "----------------------------------------------------

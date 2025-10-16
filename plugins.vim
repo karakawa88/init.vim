@@ -39,12 +39,12 @@ Plug 'vim-denops/denops.vim'
 Plug 'keaising/im-select.nvim'
 
 " skkeletone
-" Plug 'vim-skk/skkeleton'
+Plug 'vim-skk/skkeleton'
 " skkeletonがonなのか
-" Plug 'delphinus/skkeleton_indicator.nvim'
+Plug 'delphinus/skkeleton_indicator.nvim'
 
 " migemo
-"Plug 'lambdalisue/kensaku.vim'
+Plug 'lambdalisue/kensaku.vim'
 " kensaku.vimは専用のUIを持っていないためkensaku-search.vimを導入。
 "Plug 'kensaku-search.vim'
 Plug 'rhysd/migemo-search.vim'
