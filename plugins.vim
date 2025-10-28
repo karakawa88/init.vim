@@ -56,6 +56,8 @@ Plug 'rhysd/migemo-search.vim'
 " airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" winresizer
+Plug 'pogyomo/winresize.nvim'
 
 "補完
 " neovimのビルトインのLSPを使用する

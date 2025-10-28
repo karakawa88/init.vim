@@ -1,10 +1,11 @@
 snippet     docc
 abbr        \documentclass[ ... ]{jlreq}
 options    word, indent
-    \documentclass[paper=a5paper,fontsize=10pt,jafontscale=0.9247]{jlreq}
+    \documentclass[fleqn,paper=a5paper,fontsize=10pt,jafontscale=0.9247]{jlreq}
     \usepackage{luatexja}
     % まずはLuaTeXの日本語フォント設定の読み込み
-    \usepackage{luatexja-fontspec}${0}
+    \usepackage{luatexja-fontspec}
+    ${0}
 snippet     doc
 abbr        \begin{document}...\end{document}
 options    word, indent
@@ -52,7 +53,13 @@ abbr        luatex font default usepackage.
 options    word, indent
     % 欧文フォント基本設定
     %\usepackage[no-math]{fontspec}
-    \usepackage{fontspec}
+    %\usepackage{fontspec}
+    % 数式関係を強力にする
+    % フォントはLatin Modernになる
+    % \usepackage{unicode-math}
+    % 以下を入力するとunicode-mathパッケージも入る
+    % フォントはNew Computer Modernになる
+    \usepackage[olddefault]{fontsetup}
     % まずはLuaTeXの日本語フォント設定の読み込み
     % 欧文基本14書体の中のPostScript記号用フォント
     % Symbol, ZapfDingbatsフォントを使う
