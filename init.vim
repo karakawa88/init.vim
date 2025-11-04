@@ -430,10 +430,10 @@ lua<<EOF
     require("im_select").setup()
 EOF
 
-" N/Users/jkdbadev ERDTree
+" NERDTree
 "----------------------------------------------------
 " C-eでNERDTreeの起動をトグルする
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
+" nnoremap <silent><C-e> :NERDTreeToggle<CR>
 "起動時にブックマークを表示
 let NERDTreeShowBookmarks = 1
 "Vim起動時にNERDTreeを開く
@@ -577,6 +577,20 @@ let g:airline#extensions#ale#enabled = 1
 
 " 挿入モードからEscでノーマルモードに戻す時、少し時間がかかる場合
 set ttimeoutlen=50
+
+" winresizer
+lua<<EOF
+    local resize = function(win, amt, dir)
+                        return function()
+                                    require("winresize").resize(win, amt, dir)
+                                end
+    end
+
+    vim.keymap.set("n", "rh", resize(0, 2, "left"))
+    vim.keymap.set("n", "rj", resize(0, 1, "down"))
+    vim.keymap.set("n", "rk", resize(0, 1, "up"))
+    vim.keymap.set("n", "rl", resize(0, 2, "right"))
+EOF
 
 "----------------------------------------------------
 " プログラム関連
@@ -735,14 +749,14 @@ nnoremap <C-f> :Fern . -reveal=% -drawer -toggle
 " fzf
 nnoremap <C-p> :FZFFileList<CR>
 command! FZFFileList call fzf#run({
-            \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
-            \ 'sink': 'e'})
+           \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
+           \ 'sink': 'e'})
 command! Mru FZFMru
 command! FZFMru call fzf#run({
-            \  'source':  v:oldfiles,
-            \  'sink':    'tabe',
-            \  'options': '-m -x +s',
-            \  'down':    '40%'})
+           \  'source':  v:oldfiles,
+           \  'sink':    'tabe',
+           \  'options': '-m -x +s',
+           \  'down':    '40%'})
 map  <Leader>m :Mru<CR>
 nnoremap <silent> <Leader>m :Mru<CR>
 
