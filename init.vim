@@ -409,14 +409,15 @@ tnoremap <silent> <ESC> <C-\><C-n>
 "  日本語入力プラグイン
 "  denoが必要
 "----------------------------------------------------
-" call skkeleton#config({ 'globalDictionaries': [['/usr/local/share/skk/dict/SKK-JISYO.L', 'euc-jp']] })
-" imap <C-j> <Plug>(skkeleton-toggle)
-" cmap <C-j> <Plug>(skkeleton-toggle)
-" lua<<EOF
-"     require("skkeleton_indicator").setup {
-"         alwaysShown=true,
-"     }
-" EOF
+call skkeleton#config({ 'globalDictionaries': [['/usr/local/share/skk/dict/SKK-JISYO.L', 'euc-jp']] })
+imap <C-j> <Plug>(skkeleton-toggle)
+cmap <C-j> <Plug>(skkeleton-toggle)
+lua<<EOF
+    require("skkeleton_indicator").setup {
+        alwaysShown=true,
+    }
+EOF
+
 " autocmd InsertLeave * :silent !/opt/homebrew/bin/im-select com.apple.keylayout.ABC
 " migemo
 "cnoremap <silent> <CR> <Plug>(kensaku-search-replace)<CR>
@@ -429,7 +430,7 @@ lua<<EOF
     require("im_select").setup()
 EOF
 
-" NERDTree
+" N/Users/jkdbadev ERDTree
 "----------------------------------------------------
 " C-eでNERDTreeの起動をトグルする
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
@@ -609,9 +610,9 @@ require('nvim-treesitter.configs').setup {
   indent = {
     enable = true, -- これを設定することでtree-sitterによるインデントを有効にできます
   },
-  ensure_installed = { "c", "lua", "vim", "rust", "vimdoc", "query", "latex" }
 }
 EOF
+" ensure_installed = { "c", "lua", "vim", "rust", "vimdoc", "query", "latex" }
 
 "----------------------------------------------------
 " ctags
@@ -656,7 +657,6 @@ set spelllang=en,cjk
 "set spellfile=/Users/jkdbadev/.vim/spell/practical_vim_jargon.utf-8.add
 "set spellfile=/home/jkdbadev/.vim/spell/practical_vim_jargon.utf-8.add
 "setlocal spellfile+=~/.vim/spell/en.utf-8.add
-
 
 "----------------------------------------------------
 " その他
