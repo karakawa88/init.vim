@@ -370,11 +370,11 @@ snippet     kakko
 alias       lr
 abbr        数式内様々な文字の括弧(||{}..) \left ... \right
 options     word, indent
-    \left${1} ${0} \right${2}
+    \left${1} ${0:TARGET} \right${2}
 snippet     biglr
 abbr        数式内様々な文字の括弧(||{}..) \bigl ... \bigr
 options     word, indent
-    \bigl${1} ${0} \bigr${2}
+    \bigl${1} ${0} \bigr$1
 snippet     Biglr
 abbr        数式内様々な文字の括弧(||{}..) \bigl ... \bigr
 options     word, indent

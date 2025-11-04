@@ -750,14 +750,14 @@ nnoremap <C-f> :Fern . -reveal=% -drawer -toggle
 " fzf
 nnoremap <C-p> :FZFFileList<CR>
 command! FZFFileList call fzf#run({
-            \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
-            \ 'sink': 'e'})
+           \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
+           \ 'sink': 'e'})
 command! Mru FZFMru
 command! FZFMru call fzf#run({
-            \  'source':  v:oldfiles,
-            \  'sink':    'tabe',
-            \  'options': '-m -x +s',
-            \  'down':    '40%'})
+           \  'source':  v:oldfiles,
+           \  'sink':    'tabe',
+           \  'options': '-m -x +s',
+           \  'down':    '40%'})
 map  <Leader>m :Mru<CR>
 nnoremap <silent> <Leader>m :Mru<CR>
 
