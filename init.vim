@@ -419,18 +419,18 @@ lua<<EOF
         alwaysShown=true,
     }
 EOF
+
 " autocmd InsertLeave * :silent !/opt/homebrew/bin/im-select com.apple.keylayout.ABC
 " migemo
 "cnoremap <silent> <CR> <Plug>(kensaku-search-replace)<CR>
 "cmap <CR> <Plug>(kensaku-search-replace)<CR>
 if executable('cmigemo')
-   cnoremap <expr><CR> migemosearch#replace_search_word()."\<CR>"
+  cnoremap <expr><CR> migemosearch#replace_search_word()."\<CR>"
 endif
 " im-select.nvim
 lua<<EOF
     require("im_select").setup()
 EOF
-
 
 " NERDTree
 "----------------------------------------------------
@@ -626,9 +626,9 @@ require('nvim-treesitter.configs').setup {
   indent = {
     enable = true, -- これを設定することでtree-sitterによるインデントを有効にできます
   },
-  ensure_installed = { "c", "lua", "vim", "rust", "vimdoc", "query", "latex" }
 }
 EOF
+" ensure_installed = { "c", "lua", "vim", "rust", "vimdoc", "query", "latex" }
 
 "----------------------------------------------------
 " ctags
@@ -673,7 +673,6 @@ set spelllang=en,cjk
 "set spellfile=/Users/jkdbadev/.vim/spell/practical_vim_jargon.utf-8.add
 "set spellfile=/home/jkdbadev/.vim/spell/practical_vim_jargon.utf-8.add
 "setlocal spellfile+=~/.vim/spell/en.utf-8.add
-
 
 "----------------------------------------------------
 " その他
