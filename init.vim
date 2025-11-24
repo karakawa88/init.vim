@@ -80,7 +80,8 @@ set ttimeoutlen=50
 " set clipboard+=unnamed,autoselect
 set clipboard+=unnamed
 " vim数値編集コマンド 加算 C-a 減算 C-x コマンドを使用するとき
-" 0007を認識する時8進数でなく10進数で認識するようにする
+" 0007を認識する時10進数でなく8進数で認識する
+" これを10進数にする
 set nrformats=
 
 "----------------------------------------------------
@@ -402,7 +403,8 @@ set sh=zsh
 " tnoremap <silent> <ESC> <C-\><C-n>
 " tnoremap <silent> <C-c><C-i> <C-\><C-n>
 tnoremap <silent> <ESC> <C-\><C-n>
-" tnoremap <silent> <C-g> <C-\><C-n>
+" tnoremap <silent> <C-w>k :wincmd k<CR>
+
 " ---------------------------------------------------
 " Skkelton
 " ---------------------------------------------------
