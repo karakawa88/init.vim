@@ -5,6 +5,10 @@ options    word, indent
     \usepackage{luatexja}
     % まずはLuaTeXの日本語フォント設定の読み込み
     \usepackage{luatexja-fontspec}
+    % 出力pdfのバージョンを指定。
+    \usepackage{bxpdfver}
+    % 出力PDFバージョンを1.7にする
+    \setpdfversion{1.7}
     ${0}
 snippet     doc
 abbr        \begin{document}...\end{document}
@@ -287,7 +291,7 @@ alias       rc
 abbr        \renewcommand{\コマンド名}{...}
 options     word, indent
     \renewcommand{${1}}{${0}}
-snippet     newenv
+snippet     new
 abbr        \newenvironment{...}{....}{.....}
 options     word, indent
     \newenvironment{${1}}{${0}}{}
@@ -390,7 +394,7 @@ options     word, indent
     \usepackage{xcolor}
     % 色の定義 色を名前で指定できるパケージ
     % pythonプログラム create_latex_color_name_sty.pyで自動作成したスタイルファイル
-    \usepackage{defcolor}
+    % \usepackage{defcolor}
     % .を複数含んでいたり空白を含むファイル名に対してlatexはデフォルトではエラー
     % grffileパッケージで対処する。
     % しかし\includegraphics命令のみ対応しており、その他の場面では使えない。
@@ -401,7 +405,11 @@ options     word, indent
     % tcolorboxのライブラリ
     % breakable     ボックスがページまたぎに対応する 
     % skins         ボックスに影を作る際にskinライブラリが必要
-    \tcbuselibrary{breakable,raster,skins}${0}
+    \tcbuselibrary{breakable,raster,skins}
+    % svg画像を表示するパッケージ
+    % Inkscapeをインストールしていると自動でPDFに変換してくれる。
+    \usepackage{svg}
+    ${0}
 snippet      img
 abbr        LaTeX画像出力命令 \includegraphics[...]{画像ファイル名}
 options     word, indent
@@ -414,7 +422,7 @@ snippet     cc
 alias       textcolor
 abbr        文字列の色の命令 \color[HTML]{RGB16進指定}{...}
 options     word, indent
-    {\color[HTML]{${0}} }
+    \textcolor[HTML]{${1:rgb}}{${2:text}}${0}
 snippet     pagecc
 abbr        ページの背景色 \pagecolor[HTML]{RGB16進指定}{...}
 options     word, indent
@@ -424,6 +432,7 @@ abbr        文字の背景の色 \colorbox[HTML]{RGB16進指定}{...}
 options     word, indent
     \colorbox[HTML]{${0}}{}
 snippet     fccbox
+alias       fcc
 abbr        文字の背景の色 \fcolorbox[HTML]{枠の色 RGB16進指定}{背景の色 RGB16進指定}{...}
 options     word, indent
     \fcolorbox[HTML]{${0}}{}{}
@@ -859,7 +868,7 @@ options     word, indent
     % \usepackage{amstext}
     % 以下を入力するとunicode-mathパッケージも入る
     % フォントはNew Computer Modernになる
-    \usepackage[olddefault]{fontsetup}
+    % \usepackage[olddefault]{fontsetup}
     % 標準の数式フォンとは\small,\largeを使っても拡大縮小されない。
     % exscaleパッケージを使用してこの問題を回避する。
     \usepackage{exscale}
@@ -934,19 +943,36 @@ abbr        枠囲みを作成するパッケージtcolorパッケージ
 options     word, indent
     \usepackage{tcolorbox}
     \tcbuselibrary{raster,skins,breakable}${0}
+snippet     tcolorbox
+abbr        枠囲みを作成する
+options     word, indent
+    \begin{tcolorbox}[
+        title=${1},
+        left=,           %余白の調整 top,left,right,bottom
+        top=,
+        right=,
+        bottom=,
+    ]
+        ${0}
+    \end{tcolorbox}
 snippet     tcb
 alias       tcolorbox
 abbr        枠囲みを作成する
 options     word, indent
     \begin{tcolorbox}[]
-        ${0}
+        ${0:TARGET}
     \end{tcolorbox}
+snippet     tc
+alias       tcbox
+abbr        インラインのtcolorbox
+options     word, indent
+    \tcbox[box align=${1:center}]{${2:TARGET}}${0}
 snippet     raster
 alias       tcbraster
 abbr        tcbraster tcolorboxを並べる
     \begin{tcbraster}[raster columns=,raster equal height]
         ${0:TARGET}
-    \end{tcbraster}
+    \end{tcbrater}
 snippet     ast
 abbr        *
 options     word, indent
@@ -1214,5 +1240,18 @@ snippet     cases
 abbr        \begin{cases} ... \end{cases}
 options     word, indent
     \begin{cases} ${0:TARGET} \end{cases}
-
+snippet     rbox
+alias       rotatebox
+abbr        \rotatebox{角度}{文字列}
+options     word, indent
+    \rotatebox{${1}}{${2:TARGET}}${0}
+snippet     defcc 
+alias       def_color
+abbr        \definecolor{name..}{HTML}{RGB..}
+options     word, indent
+    \definecolor{${1}}{HTML}{${2}}${0}
+snippet     svg
+abbr        \includesvg{...}
+options     word, indent
+    \includesvg{${1}}${0}
 

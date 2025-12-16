@@ -602,11 +602,11 @@ EOF
 "----------------------------------------------------
 " 対応する閉じ括弧や引用符を入力する
 " <esc>でInsertモードから抜けているのは真ん中にカーソルを入れるため。
-inoremap ' ''<esc>i
-inoremap " ""<esc>i
-inoremap ( ()<esc>i
-inoremap [ []<esc>i
-inoremap { {}<esc>i
+" inoremap ' ''<esc>i
+" inoremap " ""<esc>i
+" inoremap ( ()<esc>i
+" inoremap [ []<esc>i
+" inoremap { {}<esc>i
 "----------------------------------------------------
 " シンタックスハイライト
 " ---------------------------------------------------
@@ -654,7 +654,7 @@ let g:Gtags_OpenQuickfixWindow = 1
 " Show definetion of function cousor word on quickfix
 nmap <silent> K :<C-u>exe("Gtags ".expand('<cword>'))<CR>
 " Show reference of cousor word on quickfix
-nmap <silent> R :<C-u>exe("Gtags -r ".expand('<cword>'))<CR>
+" nmap <silent> R :<C-u>exe("Gtags -r ".expand('<cword>'))<CR>
 nnoremap <silent> <Space>f :Gtags -f %<CR>
 nnoremap <silent> <Space>j :GtagsCursor<CR>
 nnoremap <silent> <Space>d :<C-u>exe('Gtags '.expand('<cword>'))<CR>

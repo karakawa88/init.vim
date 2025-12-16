@@ -127,7 +127,7 @@ Plug 'mbbill/undotree'
 Plug 'nvim-treesitter/nvim-treesitter'
 
 " Git
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
