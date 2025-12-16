@@ -1,10 +1,14 @@
 snippet     docc
 abbr        \documentclass[ ... ]{jlreq}
 options    word, indent
-    \documentclass[fleqn,paper=a5paper,fontsize=10pt,jafontscale=0.9247]{jlreq}
+    \documentclass[fleqn,paper=a5paper,titlepage,fontsize=10pt,jafontscale=0.9247]{jlreq}
     \usepackage{luatexja}
     % まずはLuaTeXの日本語フォント設定の読み込み
     \usepackage{luatexja-fontspec}
+    % 出力pdfのバージョンを指定。
+    \usepackage{bxpdfver}
+    % 出力PDFバージョンを1.7にする
+    \setpdfversion{1.7}
     ${0}
 snippet     doc
 abbr        \begin{document}...\end{document}
@@ -42,11 +46,11 @@ options    word, indent
     \usepackage[sc]{mathpazo}
     \usepackage{textcomp,mathcomp}                   % 追加フォントを使う(記号など) TS1
     \usepackage{otf}                        % 使える漢字の数を増やす
-    \usepackage{ascmac}                     % \yenで円記号が出力できる${0}
+    \usepackage{ascmac}                     % \yenで円記号が出力できる
     % デフォルトのセリフ・サンセリフ・タイプライタフォント設定
     %\renewcommand{\rmdefault}{qcs}          % デフォルトのセリフ(ローマン)体 New Century Schoolbook
     %\renewcommand{\sfdefault}{qhv}          % デフォルトのサンセリフ体 TeX Gyre Heros
-    %\renewcommand{\ttdefault}{zi4}         % デフォルトのタイプライタ体(等幅フォント)
+    %\renewcommand{\ttdefault}{zi4}         % デフォルトのタイプライタ体(等幅フォント) ${0}
 snippet     upfont
 alias       luatexfont
 abbr        luatex font default usepackage.
@@ -287,7 +291,7 @@ alias       rc
 abbr        \renewcommand{\コマンド名}{...}
 options     word, indent
     \renewcommand{${1}}{${0}}
-snippet     newenv
+snippet     new
 abbr        \newenvironment{...}{....}{.....}
 options     word, indent
     \newenvironment{${1}}{${0}}{}
@@ -318,27 +322,31 @@ options     word, indent
 snippet     $[
 abbr        別行立て数式 \[ .... \]
 options     word, indent
-    \[ ${0} \]
+    \[ ${0:TARGET} \]
 snippet     equ
 abbr        番号付き別行立て数式 \begin{equation}...\end{equation}
 options     word, indent
-    \begin{equation}${0}\end{equation}
+    \begin{equation}${0:TARGET}\end{equation}
 snippet     equ*
 abbr        番号なし別行立て数式 \begin{equation*}...\end{equation*}
 options     word, indent
-    \begin{equation*}${0}\end{equation*}
+    \begin{equation*}${0:TARGET}\end{equation*}
 snippet     gather
 abbr        複数別行立て数式 \begin{gather}...\end{gather}
 options     word, indent
-    \begin{gather}${0}\end{gather}
+    \begin{gather}${0:TARGET}\end{gather}
 snippet     gather*
 abbr        複数別行立て数式 \begin{gather*}...\end{gather*}
 options     word, indent
-    \begin{gather*}${0}\end{gather*}
+    \begin{gather*}${0:TARGET}\end{gather*}
 snippet     align
 abbr        複数別行立て数式 \begin{align}...\end{align}
 options     word, indent
-    \begin{align}${0}\end{align}
+    \begin{align}${0:TARGET}\end{align}
+snippet     align*
+abbr        複数別行立て数式 \begin{align*}...\end{align*}
+options     word, indent
+    \begin{align*}${0:TARGET}\end{align*}
 snippet     alignat
 abbr        複数別行立て数式 空きを自分で制御 \begin{alignat}...\end{alignat}
 options     word, indent
@@ -355,12 +363,6 @@ snippet     sqrt
 abbr        平方根 \sqrt{...}
 options     word, indent
     \sqrt{${0}}
-snippet     ams
-abbr        \usepackage{amsmath}
-alias       amsmath
-options     word, indent
-    \usepackage{amsmath}
-    \usepackage{amssymb}${0}
 snippet     bra
 alias       brackets
 abbr        数式内括弧 ( ... ) \left( ... \right)
@@ -392,7 +394,7 @@ options     word, indent
     \usepackage{xcolor}
     % 色の定義 色を名前で指定できるパケージ
     % pythonプログラム create_latex_color_name_sty.pyで自動作成したスタイルファイル
-    \usepackage{defcolor}
+    % \usepackage{defcolor}
     % .を複数含んでいたり空白を含むファイル名に対してlatexはデフォルトではエラー
     % grffileパッケージで対処する。
     % しかし\includegraphics命令のみ対応しており、その他の場面では使えない。
@@ -403,7 +405,11 @@ options     word, indent
     % tcolorboxのライブラリ
     % breakable     ボックスがページまたぎに対応する 
     % skins         ボックスに影を作る際にskinライブラリが必要
-    \tcbuselibrary{breakable,raster,skins}${0}
+    \tcbuselibrary{breakable,raster,skins}
+    % svg画像を表示するパッケージ
+    % Inkscapeをインストールしていると自動でPDFに変換してくれる。
+    \usepackage{svg}
+    ${0}
 snippet      img
 abbr        LaTeX画像出力命令 \includegraphics[...]{画像ファイル名}
 options     word, indent
@@ -416,7 +422,7 @@ snippet     cc
 alias       textcolor
 abbr        文字列の色の命令 \color[HTML]{RGB16進指定}{...}
 options     word, indent
-    {\color[HTML]{${0}} }
+    \textcolor[HTML]{${1:rgb}}{${2:text}}${0}
 snippet     pagecc
 abbr        ページの背景色 \pagecolor[HTML]{RGB16進指定}{...}
 options     word, indent
@@ -426,6 +432,7 @@ abbr        文字の背景の色 \colorbox[HTML]{RGB16進指定}{...}
 options     word, indent
     \colorbox[HTML]{${0}}{}
 snippet     fccbox
+alias       fcc
 abbr        文字の背景の色 \fcolorbox[HTML]{枠の色 RGB16進指定}{背景の色 RGB16進指定}{...}
 options     word, indent
     \fcolorbox[HTML]{${0}}{}{}
@@ -846,7 +853,22 @@ options     word, indent
     % \usepackage{amsmath,amssymb}
     % amsmathパッケージをさらに拡張し、不具合を修正したmathtoolsパッケージ
     % mathtoolsパッケージは内部でamsmathを読み込んでいる。
-    \usepackage{mathtools,amssymb}
+    \usepackage{mathtools}
+    % 数式のフォントはレガシーLaTeXがデフォルトではComputer Modernで、
+    % モダーンなLaTeXがLatin Modernになる。
+    % \usepackage{lmodern}
+    % ですべてLatin Modernにすることができる。
+    % モダーンな数式パッケージ
+    % 内部でamsmathパッケージも読みこむ
+    % 内部でlmodernを読みこむ
+    % \usepackage{unicode-math}
+    % ギリシャ文字の追大文字と小文字ともにItalicにする。
+    % \usepackage[math-style=ISO,bold-style=ISO]{unicode-math}
+    % \text{}が定義されている
+    % \usepackage{amstext}
+    % 以下を入力するとunicode-mathパッケージも入る
+    % フォントはNew Computer Modernになる
+    % \usepackage[olddefault]{fontsetup}
     % 標準の数式フォンとは\small,\largeを使っても拡大縮小されない。
     % exscaleパッケージを使用してこの問題を回避する。
     \usepackage{exscale}
@@ -858,24 +880,25 @@ options     word, indent
     % \si{\micro}でマイクロは出力できる。
     \usepackage{siunitx}
     % 数式モードで使う大文字の筆記体のフォント
-    \usepackage{eucal}
+    % \usepackage{eucal}
     % 物理でハミルトニアンやグランジニアンなどのHやLを括弧よく出力するには
     % RSFS（Ralph Smith’s Formal Script)フォントを使用します。
     % mathrsfsパッケージを使い、出力したい場所に\mathscr{H}のようにします.
-    \usepackage{mathrsfs}
+    % \usepackage{mathrsfs}
     % RSFSが大胆に思うのならばrsfsoパッケージを使用することもできる。
     % 出力する時は\mathcal{H}のように使用する。
-    \usepackage{rsfso}
-    % okumacroパッケージ
-    % \GEQQ,\LEQQ命令で>=,<=の文字が綺麗に出力できる.
-    \usepackage{bxokumacro}
+    % \usepackage{rsfso}
+    % 文字の上に斜線を引くパッケージ
+    % \slashed{D}のように使用する。
+    \usepackage{slashed}
+    % 長い関係演算子の真ん中に否定の線を引く
+    % \centernot 関係演算子 のように使用する。
+    \usepackage{centernot}
     % textcompの数式モードパッケージ
     % 注意: 通常はComputerModernフォントが使用されるが[ppl]と指定することで
     % フォントをPlatinoにできる。しかしコンパイルが通らない為、ここでは[ppl]を使用しない。
     % \usepackage[ppl]{mathcomp}
     \usepackage{mathcomp}
-    % 数式で使用するマクロのユーティリティー
-    \usepackage{mathutil}
     % \usepackage{mathptmx}
     % \usepackage{mathpazo}
     % \usepackage{newpxtext, newpxmath}
@@ -887,19 +910,25 @@ options     word, indent
     % 根号と括弧などのフォント。普通はComputer Modernの数式フォントと組み合わせるが
     % 他のフォントでも可能。\let\widering\relaxは普通に読み込むと
     % パッケージの命令が衝突するので命令を無効化している
-    \let\widering\relax
-    \usepackage{yhmath}
+    % \let\widering\relax
+    % \usepackage{yhmath}
     % 数式のフォントをfourierncにする
-    \let\widering\relax         % yhmathを読み込む時これがないと衝突する
-    \usepackage{fouriernc}
+    % \let\widering\relax         % yhmathを読み込む時これがないと衝突する
+    % \usepackage{fouriernc}
     % 数式で太字にするには\mathbf{...}を使用できるが、出力がローマン体の太字でイタリックでなく、
     % またギリシア文字の小文字と記号は太字にはならない。
     % そこでbm(BoldMath)パッケージを使う。
     % bmパッケージは4つの数式記号用フォントを定義している。これを無効にする。
     % またbmは数式フォントパッケージの後にimportする
-    \newcommand{\bmmax}{0}
-    \newcommand{\hmmax}{0}
-    \usepackage{bm}${0}
+    % \newcommand{\bmmax}{0}
+    % \newcommand{\hmmax}{0}
+    %\usepackage{bm}
+    ${0}
+snippet     slashr
+alias       slash_right
+abbr        デフォルトの左から右に入るスラッシュではなく右から左に入るスラッシュを入れる。
+options     word, indent
+        {\mathrel{\reflectbox{$\neq$}}} ${0}
 snippet     split
 abbr        複数の別行立て数式で一つの数式番号を真ん中に出力する。
 options     word, indent
@@ -914,19 +943,36 @@ abbr        枠囲みを作成するパッケージtcolorパッケージ
 options     word, indent
     \usepackage{tcolorbox}
     \tcbuselibrary{raster,skins,breakable}${0}
+snippet     tcolorbox
+abbr        枠囲みを作成する
+options     word, indent
+    \begin{tcolorbox}[
+        title=${1},
+        left=,           %余白の調整 top,left,right,bottom
+        top=,
+        right=,
+        bottom=,
+    ]
+        ${0}
+    \end{tcolorbox}
 snippet     tcb
 alias       tcolorbox
 abbr        枠囲みを作成する
 options     word, indent
     \begin{tcolorbox}[]
-        ${0}
+        ${0:TARGET}
     \end{tcolorbox}
+snippet     tc
+alias       tcbox
+abbr        インラインのtcolorbox
+options     word, indent
+    \tcbox[box align=${1:center}]{${2:TARGET}}${0}
 snippet     raster
 alias       tcbraster
 abbr        tcbraster tcolorboxを並べる
     \begin{tcbraster}[raster columns=,raster equal height]
         ${0:TARGET}
-    \end{tcbraster}
+    \end{tcbrater}
 snippet     ast
 abbr        *
 options     word, indent
@@ -1035,7 +1081,7 @@ options     word, indent
 snippet     multline
 abbr        複数行に渡る一つの数式
 options     word, indent
-    \begin{multline}${0}\end{multline}
+    \begin{multline}${0:TARGET}\end{multline}
 snippet     text
 abbr        \text{ ... }
 options     word, indent
@@ -1138,5 +1184,74 @@ snippet     lua
 abbr        埋め込みlua
 options     word, indent
     \directlua{${0}}
+snippet     text
+abbr        本文のテキストを挿入する
+options     word, indent
+    \text{${0:TARGET}}
+snippet     intertext
+abbr        数式で本文のテキストを挿入する
+options     word, indent
+    \intertext{${0:TARGET}}
+snippet     upmy
+abbr        自前のパケージ
+options     word, indent
+    \usepackage{bxokumacro}
+    \usepackage{mymacro}${0}
+snippet     lm
+abbr        別行立て数式
+options     word, indent
+    \[ ${0:TARGET} \]
+snippet     @,
+abbr        @{\,}...@{\,}
+options     word, indent
+    @{\,}${0:TARGET}@{\,}
 
+snippet     mat
+abbr        \begin{matrix}...\end{matrix}
+options     word, indent
+    \begin{matrix}
+        ${0:TARGET}
+    \end{matrix}
+snippet     pmat
+abbr        \begin{pmatrix}...\end{pmatrix}
+options     word, indent
+    \begin{pmatrix}
+        ${0:TARGET}
+    \end{pmatrix}
+snippet     Bmat
+abbr        \begin{Bmatrix}...\end{Bmatrix}
+options     word, indent
+    \begin{Bmatrix}
+        ${0:TARGET}
+    \end{Bmatrix}
+snippet     vmat
+abbr        \begin{vmatrix}...\end{vmatrix}
+options     word, indent
+    \begin{vmatrix}
+        ${0:TARGET}
+    \end{vmatrix}
+snippet     Vmat
+abbr        \begin{Vmatrix}...\end{Vmatrix}
+options     word, indent
+    \begin{Vmatrix}
+        ${0:TARGET}
+    \end{Vmatrix}
+snippet     cases
+abbr        \begin{cases} ... \end{cases}
+options     word, indent
+    \begin{cases} ${0:TARGET} \end{cases}
+snippet     rbox
+alias       rotatebox
+abbr        \rotatebox{角度}{文字列}
+options     word, indent
+    \rotatebox{${1}}{${2:TARGET}}${0}
+snippet     defcc 
+alias       def_color
+abbr        \definecolor{name..}{HTML}{RGB..}
+options     word, indent
+    \definecolor{${1}}{HTML}{${2}}${0}
+snippet     svg
+abbr        \includesvg{...}
+options     word, indent
+    \includesvg{${1}}${0}
 
