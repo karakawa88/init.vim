@@ -44,11 +44,12 @@ Plug 'vim-skk/skkeleton'
 Plug 'delphinus/skkeleton_indicator.nvim'
 
 " migemo
-Plug 'lambdalisue/kensaku.vim'
+"Plug 'lambdalisue/kensaku.vim'
 " kensaku.vimは専用のUIを持っていないためkensaku-search.vimを導入。
 "Plug 'kensaku-search.vim'
 Plug 'rhysd/migemo-search.vim'
 
+Plug 'pogyomo/winresize.nvim'
 " ステータスライン
 " lightline
 " Plug 'itchyny/lightline.vim'
@@ -56,8 +57,6 @@ Plug 'rhysd/migemo-search.vim'
 " airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" winresizer
-Plug 'pogyomo/winresize.nvim'
 
 "補完
 " neovimのビルトインのLSPを使用する
