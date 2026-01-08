@@ -123,6 +123,8 @@ Plug 'LeafCage/vimhelpgenerator'
 " gundoがpython2.4+を必要としておりそれが面倒なのでundotree.vimに変更した。
 Plug 'mbbill/undotree'
 
+"カラースキーム
+Plug 'mitch1000/backpack.nvim'
 " シンタックスハイライト
 Plug 'nvim-treesitter/nvim-treesitter'
 

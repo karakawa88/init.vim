@@ -8,7 +8,9 @@ let $CONFIG = empty($XDG_CONFIG_HOME) ? expand('$HOME/.config') : $XDG_CONFIG_HO
 let g:python3_host_prog = expand('/usr/local/bin/python3')
 let g:python_host_prog = expand('/usr/local/bin/python2')
 "let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-" test
+" 環境変数を展開できるようにする
+set env
+
 
 " <eader>キーの変更
 " \ からスペースキーに切り替える
@@ -67,7 +69,7 @@ set runtimepath+=/opt/local/share/nvim/runtime/
 " ここに-1を設定してあるとtimeoutlenの値が使われる timeoutlenが1000なら1秒待つ。デフォルトの設定。
 " set timeout timeoutlen=1000 ttimeoutlen=50
 set timeout 
-set timeoutlen=500
+set timeoutlen=1000
 set ttimeoutlen=50
 
 "----------------------------------------------------
@@ -260,9 +262,9 @@ nnoremap <silent> ]B :blast<CR>
 " バッファを切替えてもundoの効力を失わない
 " また変更したバッファをファイルに書き込まずに移動したりしても、
 " 警告メッセージを出力しない。:argdoや:bufdoなどのExコマンドで有効。
-set hidden
+set ridden
 
-"----------------------------------------------------
+"---------------------------------------------------
 " ウィンドウ
 "----------------------------------------------------
 "ウィンドウを閉じずにバッファを閉じる
@@ -273,7 +275,7 @@ command! Bd :bp | :sp | :bn | :bd
 "----------------------------------------------------
 " vim path設定
 " ,,などの空文字列の指定は現在の作業ディレクトリーを表す
-set path=.,./,,/usr/include
+set path=.,./,,$HOME/.config/nvim
 " :edit %:hでファイル名を除いたそのバッファのカレントディレクトリを補完
 " してくれるがそれを%%で行うようにする。
 " write, saves, readなどのExコマンドでも可能。
@@ -404,6 +406,9 @@ set sh=zsh
 " tnoremap <silent> <C-c><C-i> <C-\><C-n>
 tnoremap <silent> <ESC> <C-\><C-n>
 " tnoremap <silent> <C-w>k :wincmd k<CR>
+
+" init.lua
+source lua/init.lua
 
 " ---------------------------------------------------
 " Skkelton
