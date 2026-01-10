@@ -60,6 +60,7 @@ set backspace=indent,eol,start
 " デフォルトのプラグインのパス
 set runtimepath+=~/.config/nvim/plugin/
 set runtimepath+=/opt/local/share/nvim/runtime/
+set runtimepath+=~/.config/nvim/lua/
 
 " キー入力
 " timeoutlen
@@ -408,7 +409,7 @@ tnoremap <silent> <ESC> <C-\><C-n>
 " tnoremap <silent> <C-w>k :wincmd k<CR>
 
 " init.lua
-source lua/init.lua
+luafile ~/.config/nvim/lua/init.lua
 
 " ---------------------------------------------------
 " Skkelton
