@@ -183,6 +183,7 @@ Plug 'osyo-manga/vim-textobj-multiblock'
 Plug 'glts/vim-textobj-indblock'
 Plug 'RyanMcG/vim-textobj-dash'
 Plug 'bps/vim-textobj-python'
+Plug 'windwp/nvim-autopairs'
 
 " Markdown
 " Plug 'MeanderingProgrammer/render-markdown.nvim'

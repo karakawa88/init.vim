@@ -9,7 +9,7 @@ let g:python3_host_prog = expand('/usr/local/bin/python3')
 let g:python_host_prog = expand('/usr/local/bin/python2')
 "let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 " 環境変数を展開できるようにする
-set env
+" set env
 
 
 " <eader>キーの変更
@@ -353,7 +353,7 @@ set mouse=
 " 文字コードの設定
 " fileencodingsの設定ではencodingの値を一番最後に記述する
 set encoding=utf-8
-set termencoding=utf-8
+"set termencoding=utf-8
 set fileencoding=utf-8
 "set fileencodings=ucs-bom,euc-jp,cp932,iso-2022-jp
 "set fileencodings+=,ucs-2le,ucs-2,utf-8
@@ -434,9 +434,9 @@ if executable('cmigemo')
   cnoremap <expr><CR> migemosearch#replace_search_word()."\<CR>"
 endif
 " im-select.nvim
-lua<<EOF
-    require("im_select").setup()
-EOF
+" lua<<EOF
+"     require("im_select").setup()
+" EOF
 
 " NERDTree
 "----------------------------------------------------
@@ -965,6 +965,11 @@ vmap <Leader>c <Plug>(caw:zeropos:toggle)
 "----------------------------------------------------
 " プログラム関連
 "----------------------------------------------------
+"(){}などのペアの入力を自動で行なう
+lua << EOF
+    require("nvim-autopairs").setup { enabled = function(bufnr) return true end }
+EOF
+
 " シンタックスチェック
 " ALE
 " エラー行に表示するマーク
