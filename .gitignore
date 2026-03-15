@@ -11,4 +11,6 @@ tags
 plugins/pack
 .netrwhist
 .ycm_extra_conf.py
+lazy-lock.json
+plugins.vim
 

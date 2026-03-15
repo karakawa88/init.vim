@@ -1,4 +1,57 @@
 snippet     pf
 abbr        print(string.format(""))
 options     word, indent
-        print(string.format("${0}"))
+        print(string.format("${0}", ))
+snippet     fn
+abbr        function fname(...) ... end
+options     word, indent
+        function ${1}(${0}) end
+snippet     lfn
+abbr        local function fname(...) ... end
+options     word, indent
+        local function ${1}(${0}) end
+snippet     lam
+abbr        function() ... end
+options     word, indent
+        function(${0}) end
+snippet     random_seed
+abbr        math.randomseed(os.time())
+options     word, indent
+    math.randomseed(os.time())${0}
+snippet     random
+abbr        math.random(.. ,..)
+options     word, indent
+    math.random(${1}, ${2})${0}
+snippet     cl
+abbr        class definition
+options     word, indent
+    ${1} = {}
+    $1.__index = $1
+    function $1:new(${0}) 
+        local self = setmetatable({},$1)
+        
+        return self
+    end
+snippet     ext
+abbr        class definition extends
+options     word, indent
+    ${1} = setmetatable({}, { __index=${2:extends} })
+    $1.__index = $1
+    function $1:new(${0}) 
+        local obj = $2.new(self,)
+        setmetatable(obj, $1)
+        
+        return obj
+    end
+snippet     unitrun
+alias       urun
+abbr        luaunit.LuaUnit.run()
+options     word, indent
+    os.exit(luaunit.LuaUnit.run())${0}
+
+
+
+
+
+
+
