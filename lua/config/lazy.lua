@@ -30,6 +30,7 @@ require("lazy").setup({
         { import = "plugins.motion" },
          { import = "plugins.edit" },
         { import = "plugins.coc" },
+        { import = "plugins.obsidian" },
     },
 -- automatically check for plugin updates
   checker = { enabled = true },

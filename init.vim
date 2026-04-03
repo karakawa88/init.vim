@@ -680,12 +680,6 @@ nnoremap <silent> ]w :cclose<CR>
 " nmap <C-p> <Plug>(yankround-prev)
 " nmap <C-n> <Plug>(yankround-next)
 
-"コメント関連
-"caw-vim
-nmap <Leader>c <Plug>(caw:zeropos:toggle)
-vmap <Leader>c <Plug>(caw:zeropos:toggle)
-
-
 "----------------------------------------------------
 " プログラム関連
 "----------------------------------------------------

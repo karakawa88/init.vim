@@ -27,7 +27,8 @@ return {
 		  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
 		end, {remap=true})
 
-		vim.keymap.set("","/", function() hop.hint_patterns() end,
+		--vim.keymap.set("","/", function() hop.hint_patterns() end,
+		vim.keymap.set("n","<leader>/", function() hop.hint_patterns() end,
 			{ desc = [[]]})
   	end
 }
