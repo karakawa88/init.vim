@@ -1,3 +1,4 @@
+-- vaultパス
 local vault_path = vim.fn.expand("$obsidian_vault_path")
 
 local vaults = {
@@ -206,6 +207,9 @@ return {
             local current_dir = vim.fn.expand("%:p:h")
             return require("plenary.path"):new(current_dir) / (spec.id .. ".md")
         end,
+        ui = {
+            enable = false,
+        },
 	},
 }}
 
