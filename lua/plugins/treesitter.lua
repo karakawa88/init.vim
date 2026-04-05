@@ -2,7 +2,7 @@ return {
     { 
         "nvim-treesitter/nvim-treesitter",
         lazy = false,
-  	build = ':TSUpdate',
+  	    build = ':TSUpdate',
         config = function() 
                 vim.api.nvim_create_autocmd("FileType", {
                     group = vim.api.nvim_create_augroup("vim-treesitter-start", {}),
@@ -12,7 +12,20 @@ return {
                         pcall(vim.treesitter.start)
                     end,
                 })
-        end
+        end,
+        opts = {
+          highlight = {
+            enable = true,  --syntax highlightを有効にする
+            disable = {     -- 一部の言語では無効にする
+                    'ruby',
+                    'toml',
+                    'c_sharp',
+                    'vue',
+                    -- 'markdown',
+                    -- 'markdown_inline'
+                }
+            }
+        }
     },
     {
         'andymass/vim-matchup',
