@@ -22,7 +22,7 @@ require("lazy").setup({
         { import = "plugins.jp" },
         { import ="plugins.file" },
         { import = "plugins.autopairs" },
-        { import = "plugins.treesitter" },
+        -- { import = "plugins.treesitter" },
         { import = "plugins.fzf" },
         -- { import = "plugins.textobj" },
         { import = "plugins.latex" },

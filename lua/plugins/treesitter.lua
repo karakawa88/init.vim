@@ -21,8 +21,8 @@ return {
                     'toml',
                     'c_sharp',
                     'vue',
-                    -- 'markdown',
-                    -- 'markdown_inline'
+                    'markdown',
+                    'markdown_inline'
                 }
             }
         }
