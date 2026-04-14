@@ -197,11 +197,12 @@ return {
             template = "diarynote_template.template"
         },
         note_id_func = function(title)
-            if title ~= nil then
-                return title:gsub('[\\/:%*%?"<>|]', "")
-            else
-                return tostring(os.time())
-            end
+            -- if title ~= nil then
+            --     return title:gsub('[\\/:%*%?"<>|]', "")
+            -- else
+            --     return tostring(os.time())
+            -- end
+            return title
         end,
         note_path_func = function(spec)
             local current_dir = vim.fn.expand("%:p:h")
