@@ -50,7 +50,7 @@ vim.api.nvim_create_user_command(
         end
         fzf.files({ cwd = dir })
     end,
-  { desc = 'ディレクトリーを指定して検索', nargs = '?' } -- オプション（引数設定など）
+  { desc = 'ディレクトリーを指定して検索', nargs = '?' , complete = "dir"} -- オプション（引数設定など）
 )
 -- vim.keymap.set('n', '<leader>r', "<cmd>lua require('fzf-lua').lsp_references()<CR>")
 -- vim.keymap.set('n', '<leader>d', "<cmd>lua require('fzf-lua').lsp_definitions()<CR>")
