@@ -1,6 +1,7 @@
 return {
     "lervag/vimtex",
-    lazy = false,
+    lazy = true,
+    ft = "tex",
     init = function()
 -- VimのTex関連のconceal機能
 -- 数式を入力する$$の中に特殊文字(累乗や記号など)をカーソル行でない場合はその特殊文字を表示する機能。

@@ -30,4 +30,44 @@ return {
 vim.g.rg_command='rg --vimgrep'
 	end 
 },
+{
+    "nvim-tree/nvim-tree.lua",
+    lazy =true,
+    cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+        -- disable netrw at the very start of your init.lua
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+
+      -- optionally enable 24-bit colour
+      vim.opt.termguicolors = true
+
+     -- empty setup using defaults
+        require("nvim-tree").setup()
+      -- OR setup with a config
+      ---@type nvim_tree.config
+      local config = {
+        sort = {
+          sorter = "case_sensitive",
+        },
+        view = {
+          width = 30,
+          side = "left",
+        },
+        renderer = {
+          group_empty = true,
+          icons =
+            {
+                show = { git = true, folder = true, file = true,},
+            }
+        },
+        filters = {
+          dotfiles = false,
+        },
+      }
+      require("nvim-tree").setup(config)
+    end,
+
+}
 }
