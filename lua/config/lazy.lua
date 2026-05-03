@@ -29,9 +29,10 @@ require("lazy").setup({
         { import = "plugins.rust" },
         { import = "plugins.motion" },
         { import = "plugins.edit" },
-        { import = "plugins.coc" },
+        -- { import = "plugins.coc" },
         { import = "plugins.obsidian" },
         { import = "plugins.prog" },
+        { import = "plugins.lsp" },
     },
 -- automatically check for plugin updates
   checker = { enabled = true },

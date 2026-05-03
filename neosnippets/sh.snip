@@ -142,4 +142,34 @@ snippet     lastpipe
 alias       lpipe
 abbr        shopt -s lastpipe
     shopt -s lastpipe${0}
+snippet     getoptions
+alias getop
+abbr    getoptions
+    set -eu
+    
+    PROG=${0##*/}
+    VERSION="${1}"
+
+    #@getoptions
+    parser_definition() {
+        setup   REST help:usage -- "Usage: $PROG [options]... [arguments]..." ''
+        msg -- 'Options:'
+        flag    FLAG    -f --flag                 -- "takes no arguments"
+        param   PARAM   -p --param                -- "takes one argument"
+        option  OPTION  -o --option on:"default"  -- "takes one optional argument"
+        disp    :usage  -h --help
+        disp    VERSION    --version
+        }
+    #@end
+    
+    #@gengetoptions parser -i parser_definition parse
+    #@end
+    
+    parse "$@"
+    eval "set -- $REST"
+    printf "%s\n" "$@"${0}
+snippet     getop_num
+alias       getop_number
+abbr        validate number
+    number() { case "$OPTARG" in (*[!0-9]*) return 1; esac; }${0}
 
