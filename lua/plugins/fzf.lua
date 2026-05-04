@@ -27,6 +27,15 @@ vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<CR>")
 vim.keymap.set('n', '<leader>o', "<cmd>lua require('fzf-lua').oldfiles()<CR>")
 vim.keymap.set('n', '<leader>c', "<cmd>lua require('fzf-lua').commands()<CR>")
 
+-- -- lsp関連
+vim.keymap.set('n', '<leader>r', "<cmd>lua require('fzf-lua').lsp_references()<CR>")
+vim.keymap.set('n', '<leader>d', "<cmd>lua require('fzf-lua').lsp_definitions()<CR>")
+vim.keymap.set('n', '<leader>D', "<cmd>lua require('fzf-lua').lsp_declarations()<CR>")
+vim.keymap.set('n', '<leader>i', "<cmd>lua require('fzf-lua').lsp_implementations()<CR>")
+vim.keymap.set('n', '<leader>s', "<cmd>lua require('fzf-lua').lsp_document_symbols()<CR>")
+vim.keymap.set('n', '<leader>t', "<cmd>lua require('fzf-lua').lsp_typedefs()<CR>")
+vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').diagnostics_document()<CR>")
+
 --fzf.vimのように:Files <dir>でファイルを選択したい。
 vim.api.nvim_create_user_command(
         "Files",
