@@ -1,69 +1,113 @@
 return {
 {
   "https://github.com/neovim/nvim-lspconfig",
-  dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
+  -- dependencies = { "saghen/blink.cmp", },
   -- or if using mini.icons/mini.nvim
   -- dependencies = { "nvim-mini/mini.icons" },
   event = { "BufReadPre", "BufNewFile" },
   config = function()
-    
     -- 共通設定（nvim-cmpとの連携）
   end,
 },
 {
     'saghen/blink.cmp',
-  -- optional: provides snippets for the snippet source
-  dependencies = { 'rafamadriz/friendly-snippets' },
-  -- use a release tag to download pre-built binaries
-  version = '1.*',
-  -- AND/OR build from source
-  -- build = 'cargo build --release',
-  -- If you use nix, you can build from source with:
-  -- build = 'nix run .#build-plugin',
-
-  ---@module 'blink.cmp'
-  ---@type blink.cmp.Config
-  opts = {
-    -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
-    -- 'super-tab' for mappings similar to vscode (tab to accept)
-    -- 'enter' for enter to accept
-    -- 'none' for no mappings
-    --
-    -- All presets have the following mappings:
-    -- C-space: Open menu or open docs if already open
-    -- C-n/C-p or Up/Down: Select next/previous item
-    -- C-e: Hide menu
-    -- C-k: Toggle signature help (if signature.enabled = true)
-    --
-    -- See :h blink-cmp-config-keymap for defining your own keymap
-    keymap = { preset = 'super-tab',
-        ["<CR>"] = { "select_and_accept", "fallback" },
+    dependencies = {
+        "saghen/blink.lib", -- これを依存関係に追加
     },
-
-    appearance = {
-      -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-      -- Adjusts spacing to ensure icons are aligned
-      nerd_font_variant = 'Nerd Font Mono'
-    },
-
-    -- (Default) Only show the documentation popup when manually triggered
-    completion = { documentation = { auto_show = false } },
-
-    -- Default list of enabled providers defined so that you can extend it
-    -- elsewhere in your config, without redefining it, due to `opts_extend`
+    build = function() require('blink.cmp').build():pwait() end,
+    opts = {
+        keymap = { preset = 'default' },
+--   -- optional: provides snippets for the snippet source
+--   dependencies = { 'rafamadriz/friendly-snippets' },
+--   -- use a release tag to download pre-built binaries
+--   version = '1.*',
+--   -- AND/OR build from source
+--   -- build = 'cargo build --release',
+--   -- If you use nix, you can build from source with:
+--   -- build = 'nix run .#build-plugin',
+--     config = function()
+--     require("luasnip.loaders.from_lua").load({ paths = { "~/.config/nvim/lua/luasnippets" } })
+--     end,
+--   ---@module 'blink.cmp'
+--   ---@type blink.cmp.Config
+--   opts = {
+--     -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+--     -- 'super-tab' for mappings similar to vscode (tab to accept)
+--     -- 'enter' for enter to accept
+--     -- 'none' for no mappings
+--     --
+--     -- All presets have the following mappings:
+--     -- C-space: Open menu or open docs if already open
+--     -- C-n/C-p or Up/Down: Select next/previous item
+--     -- C-e: Hide menu
+--     -- C-k: Toggle signature help (if signature.enabled = true)
+--     --
+--     -- See :h blink-cmp-config-keymap for defining your own keymap
+    -- keymap = { preset = 'default',
+    --     ["<CR>"] = { "select_and_accept", "fallback" },
+    --     ['<C-k>'] = { function() require('luasnip').expand() end, 'snippet_forward', 'fallback' },
+    --     ['<Tab>'] = {
+    --         function(cmp)
+    --             if require('luasnip').expand_or_jumpable() then
+    --                 require('luasnip').expand_or_jump()
+    --             else
+    --                 cmp.select_next()
+    --             end
+    --         end,
+    --         'snippet_forward',
+    --         'fallback'
+    --     },
+    --     ['<S-Tab>'] = {
+    --         function(cmp)
+    --             if require('luasnip').jumpable(-1) then
+    --                 require('luasnip').jump(-1)
+    --             else
+    --                 cmp.select_prev()
+    --             end
+    --         end,
+    --     },
+    -- },
+--     -- デフォルトのキーマップをLuaSnip用に設定
+        snippets = { preset = 'luasnip' },
+--     -- ensure you have the `snippets` source (enabled by default)
+--     appearance = {
+--       -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+--       -- Adjusts spacing to ensure icons are aligned
+--       nerd_font_variant = 'Nerd Font Mono'
+--     },
+--
+--     -- (Default) Only show the documentation popup when manually triggered
+--     completion = { documentation = { auto_show = false } },
+--
+--     -- Default list of enabled providers defined so that you can extend it
+--     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        providers = {
+            lsp = { name = 'LSP', enabled = true },
+            path = { name = 'Path', enabled = true },
+            buffer = { name = 'Buffer', enabled = true },
+            snippets = {
+                name = 'Snippets',
+                enabled = true,
+                module = 'blink.cmp.sources.snippets',
+                -- LuaSnipをソースとして明示的に指定
+                opts = {
+                    search_paths = { '~/.config/nvim/lua/luasnippets' },
+                },
+            },
+        },
     },
-
-    -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
-    -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
-    -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
-    --
-    -- See the fuzzy documentation for more information
-    fuzzy = { implementation = "prefer_rust_with_warning" }
-  },
-  opts_extend = { "sources.default" },
-},
+--
+--     -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+--     -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+--     -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+--     --
+--     -- See the fuzzy documentation for more information
+--     fuzzy = { implementation = "prefer_rust_with_warning" }
+--   },
+--   opts_extend = { "sources.default" },
+-- },
 -- {
 --     'https://github.com/hrsh7th/nvim-cmp',
 --     dependencies = {
@@ -72,7 +116,8 @@ return {
 --       'hrsh7th/cmp-buffer',
 --       'hrsh7th/cmp-path',
 --       'hrsh7th/cmp-cmdline',
---     },
+    },
+},
 {
     "mason-org/mason.nvim",
     opts = {}
@@ -84,6 +129,6 @@ return {
         "mason-org/mason.nvim",
         "neovim/nvim-lspconfig",
     },
-},}
-
+},
+}
 

@@ -105,7 +105,7 @@ set writebackup
 " スワップファイルを作るディレクトリ
 set directory=~/.cache/swap
 " スワップファイルの無効化
-" set noswapfile
+set noswapfile
 " crontabで編集できるようにする
 set backupskip=/tmp/*,/private/tmp/*
 
@@ -360,6 +360,18 @@ endif
 
 " init.lua
 luafile ~/.config/nvim/lua/init.lua
+" press <Tab> to expand or jump in a snippet. These can also be mapped separately
+" via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
+" -1 for jumping backwards.
+inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+
+snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+
+" For changing choices in choiceNodes (not strictly necessary for a basic setup).
+imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
 
 "----------------------------------------------------
 " vim-plug
@@ -571,29 +583,29 @@ set helplang=ja,en
 nnoremap <F5> :UndotreeToggle<CR>
 
 " 補完
-" Coc
-" 処理をステータスラインに表示
-" Add (Neo)Vim's native statusline support
-" NOTE: Please see `:h coc-status` for integrations with external pjlugins that
-" provide custom statusline: lightline.vim, vim-airline
-"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-" map  <Leader>o :CocOutline<CR>
-" nmap <Leader>o :CocOutline<CR>
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
+" " Coc
+" " 処理をステータスラインに表示
+" " Add (Neo)Vim's native statusline support
+" " NOTE: Please see `:h coc-status` for integrations with external pjlugins that
+" " provide custom statusline: lightline.vim, vim-airline
+" "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" inoremap <silent><expr> <TAB>
+"       \ coc#pum#visible() ? coc#pum#next(1) :
+"       \ CheckBackspace() ? "\<Tab>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+"
+" " Make <CR> to accept selected completion item or notify coc.nvim to format
+" " <C-g>u breaks current undo, please make your own choice
+" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" " map  <Leader>o :CocOutline<CR>
+" " nmap <Leader>o :CocOutline<CR>
+" function! CheckBackspace() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+"
 
 
 "----------------------------------------------------
@@ -601,29 +613,29 @@ endfunction
 "----------------------------------------------------
 
 "----------------------------------------------------
-" NeoSnippet
-"----------------------------------------------------
-" デフォルトで定義し使用可能なsnippet集
-" NeoBundle 'Shougo/neosnippet-snippets'
-" neosnippetのplaceholderの:TARGETに対応する設定
-" ビジュアルモード中にC-sを押すとコマンドラインモードにPlease input snippet trigger:
-" と表示されここに:TARGETがあるsnipet名を入力すると
-" そのsnippetが展開されビジュアルモードで選択された文字列が:TARGETに挿入される。
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-" Plugin key-mappings.
-"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" " NeoSnippet
+" "----------------------------------------------------
+" " デフォルトで定義し使用可能なsnippet集
+" " NeoBundle 'Shougo/neosnippet-snippets'
+" " neosnippetのplaceholderの:TARGETに対応する設定
+" " ビジュアルモード中にC-sを押すとコマンドラインモードにPlease input snippet trigger:
+" " と表示されここに:TARGETがあるsnipet名を入力すると
+" " そのsnippetが展開されビジュアルモードで選択された文字列が:TARGETに挿入される。
+" imap <C-k> <Plug>(neosnippet_expand_or_jump)
+" smap <C-k> <Plug>(neosnippet_expand_or_jump)
+" xmap <C-k>     <Plug>(neosnippet_expand_target)
+" " Plugin key-mappings.
+" "imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" "smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" " SuperTab like snippets behavior.
+" imap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+" smap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 "let g:neosnippet#enable_snipmate_compatibility = 1
 " For snippet_complete marker.
 if has('conceal')
     set conceallevel=2 concealcursor=niv
 endif
-let g:neosnippet#snippets_directory='~/.config/nvim/neosnippets/'
+" let g:neosnippet#snippets_directory='~/.config/nvim/neosnippets/'
 
 "----------------------------------------------------
 " ファイル関連

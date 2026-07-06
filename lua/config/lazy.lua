@@ -33,6 +33,7 @@ require("lazy").setup({
         { import = "plugins.obsidian" },
         { import = "plugins.prog" },
         { import = "plugins.lsp" },
+        -- { import = "plugins.ai" },
     },
 -- automatically check for plugin updates
   checker = { enabled = true },
