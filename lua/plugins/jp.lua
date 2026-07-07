@@ -31,6 +31,7 @@ return {
 { "vim-denops/denops.vim" },
 {
         	"vim-skk/skkeleton",
+            lazy = false,
         	dependencies = {"vim-denops/denops.vim",},
          config= function()
 -- --  				vim.cmd([[ call skkeleton#config({
