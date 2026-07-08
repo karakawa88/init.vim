@@ -16,7 +16,7 @@ return {
     },
     build = function() require('blink.cmp').build():pwait() end,
     opts = {
-        keymap = { preset = 'default' },
+        -- keymap = { preset = 'default' },
 --   -- optional: provides snippets for the snippet source
 --   dependencies = { 'rafamadriz/friendly-snippets' },
 --   -- use a release tag to download pre-built binaries
@@ -43,31 +43,23 @@ return {
 --     -- C-k: Toggle signature help (if signature.enabled = true)
 --     --
 --     -- See :h blink-cmp-config-keymap for defining your own keymap
-    -- keymap = { preset = 'default',
-    --     ["<CR>"] = { "select_and_accept", "fallback" },
-    --     ['<C-k>'] = { function() require('luasnip').expand() end, 'snippet_forward', 'fallback' },
-    --     ['<Tab>'] = {
-    --         function(cmp)
-    --             if require('luasnip').expand_or_jumpable() then
-    --                 require('luasnip').expand_or_jump()
-    --             else
-    --                 cmp.select_next()
-    --             end
-    --         end,
-    --         'snippet_forward',
-    --         'fallback'
-    --     },
-    --     ['<S-Tab>'] = {
-    --         function(cmp)
-    --             if require('luasnip').jumpable(-1) then
-    --                 require('luasnip').jump(-1)
-    --             else
-    --                 cmp.select_prev()
-    --             end
-    --         end,
-    --     },
-    -- },
---     -- デフォルトのキーマップをLuaSnip用に設定
+    keymap = { preset = 'default',
+        ["<CR>"] = { "select_and_accept", "fallback" },
+        ['<C-k>'] = { function() require('luasnip').expand() end, 'snippet_forward', 'fallback' },
+        ['<Tab>'] = {
+            'snippet_forward',
+            'fallback'
+        },
+        ['<S-Tab>'] = {
+            function(cmp)
+                if require('luasnip').jumpable(-1) then
+                    require('luasnip').jump(-1)
+                -- else
+                --     cmp.select_prev()
+                end
+            end,
+         },
+     },
         snippets = { preset = 'luasnip' },
 --     -- ensure you have the `snippets` source (enabled by default)
 --     appearance = {
