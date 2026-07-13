@@ -13,6 +13,7 @@ return {
     'saghen/blink.cmp',
     dependencies = {
         "saghen/blink.lib", -- これを依存関係に追加
+        'L3MON4D3/LuaSnip',
     },
     build = function() require('blink.cmp').build():pwait() end,
     opts = {
@@ -43,24 +44,23 @@ return {
 --     -- C-k: Toggle signature help (if signature.enabled = true)
 --     --
 --     -- See :h blink-cmp-config-keymap for defining your own keymap
-    keymap = { preset = 'default',
-        ["<CR>"] = { "select_and_accept", "fallback" },
-        ['<C-k>'] = { function() require('luasnip').expand() end, 'snippet_forward', 'fallback' },
+    keymap = {
+        preset = 'enter', -- または 'default'
         ['<Tab>'] = {
-            'snippet_forward',
-            'fallback'
-        },
-        ['<S-Tab>'] = {
             function(cmp)
-                if require('luasnip').jumpable(-1) then
-                    require('luasnip').jump(-1)
-                -- else
-                --     cmp.select_prev()
+                if cmp.snippet_active() then
+                    return require('luasnip').jump(1)
+                elseif cmp.is_visible() then
+                    return cmp.accept()
+                else
+                    return cmp.select_next()
                 end
-            end,
-         },
-     },
-        snippets = { preset = 'luasnip' },
+            end, 'snippet_forward', 'fallback' },
+        ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+    },
+    snippets = {
+        preset = 'luasnip',
+    },
 --     -- ensure you have the `snippets` source (enabled by default)
 --     appearance = {
 --       -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
@@ -123,4 +123,5 @@ return {
     },
 },
 }
+
 
