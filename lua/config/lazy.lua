@@ -22,7 +22,7 @@ require("lazy").setup({
         { import = "plugins.jp" },
         { import ="plugins.file" },
         { import = "plugins.autopairs" },
-        -- { import = "plugins.treesitter" },
+        { import = "plugins.treesitter" },
         { import = "plugins.fzf" },
         -- { import = "plugins.textobj" },
         { import = "plugins.latex" },
@@ -33,6 +33,7 @@ require("lazy").setup({
         { import = "plugins.obsidian" },
         { import = "plugins.prog" },
         { import = "plugins.lsp" },
+        -- { import = "plugins.ai" },
     },
 -- automatically check for plugin updates
   checker = { enabled = true },

@@ -3,7 +3,7 @@ return {
 { "mbbill/undotree" },
 { "Shougo/neoyank.vim" },
 -- { "nixprime/cpsm" },
-{ "Shougo/neosnippet" },
+-- { "Shougo/neosnippet" },
 { "tpope/vim-surround" },
 { "LeafCage/yankround.vim" },
 -- コメント関連
