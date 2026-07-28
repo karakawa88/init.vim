@@ -57,8 +57,8 @@ return {
                 end
             end, 'snippet_forward', 'fallback' },
         ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
-        ['<C-j>'] = { 
-            function(cmp) 
+        ['<C-j>'] = {
+            function(cmp)
                 cmp.hide()
             end, 'fallback' }
     },

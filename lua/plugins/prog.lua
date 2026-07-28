@@ -58,7 +58,11 @@ return {
              -- これにより、LuaSnip が勝手に Tab を使うのを防ぎます
       -- history = true,
       -- updateevents = "TextChanged,TextChangedI",
-        })
+    })
+      vim.api.nvim_create_user_command(
+            "LuaSnipEdit",
+            ':lua require("luasnip.loaders").edit_snippet_files()',
+            {})
         -- vim.keymap.set({"i", "s"}, "<Tab>", function()
         --         if ls.expand_or_jumpable() then
         --             ls.expand_or_jump()
