@@ -2,8 +2,12 @@
 return {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
-    config = true,
+    config =    function()
+        require('nvim-autopairs').setup({
+            disable_filetype = { "TelescopePrompt", "vim", "markdown" }, -- マークダウンを除外
+        })
+    end,
     -- use opts = {} for passing setup options
     -- this is equivalent to setup({}) function
-    opts = { disable_filetype = { "markdown", } },
+    opts = {},
 }

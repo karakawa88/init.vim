@@ -51,10 +51,14 @@ return {
         $TM_SELECTED_TEXT{}
     ]], { i(0) })),
     s("test", fmt([[
-        if {}
+        if {} then
+            {}
+        end
+    ]], { i(1, ""), d(2, get_visual), })),
+    s({trig = "test", name="test",}, fmt([[
+        if {} then
             {}
         end
     ]], { i(1, ""), d(2, get_visual), })),
 }
-
 

@@ -65,6 +65,17 @@ return {
     snippets = {
         preset = 'luasnip',
     },
+    completion = {
+      -- ドキュメントウィンドウの設定
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 100,
+        -- ウィンドウの余白や表示位置の挙動
+        window = {
+          -- border = "padded",
+        },
+      },
+    },
 --     -- ensure you have the `snippets` source (enabled by default)
 --     appearance = {
 --       -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'

@@ -9,13 +9,14 @@ return {
   ---@type fzf-lua.Config|{}
   ---@diagnostic disable: missing-fields
   config = function()
-vim.cmd [[
-highlight FzfLuaNormal guibg=#383850
-highlight FzfLuaBorder guibg=#383850
-]]
+        require("fzf-lua").setup({})
+        vim.cmd [[
+            highlight FzfLuaNormal guibg=#383850
+            highlight FzfLuaBorder guibg=#383850
+        ]]
 
-vim.opt.winblend = 5
-vim.opt.termguicolors = true
+        vim.opt.winblend = 5
+        vim.opt.termguicolors = true
 
 vim.keymap.set('n', '<leader>f', "<cmd>lua require('fzf-lua').files()<CR>")
 -- vim.keymap.set('n', '<leader>g', "<cmd>lua require('fzf-lua').git_status()<CR>")
@@ -57,7 +58,13 @@ vim.api.nvim_create_user_command(
         if not (stat and stat.type == "directory") then
             error(dir .. "は存在しません。")
         end
-        fzf.files({ cwd = dir })
+        fzf.files({ 
+            cwd = dir, 
+            -- 隠しファイル（. から始まるファイル）を含める
+            hidden = true,
+            -- .gitignore に無視されているファイルも含める場合
+            no_ignore = true, 
+        })
     end,
   { desc = 'ディレクトリーを指定して検索', nargs = '?' , complete = "dir"} -- オプション（引数設定など）
 )

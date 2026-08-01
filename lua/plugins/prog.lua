@@ -56,8 +56,8 @@ return {
         ls.setup({
             store_selection_keys = "<Tab>", -- ビジュアルモードでTabを押すと選択範囲が保存されます
              -- これにより、LuaSnip が勝手に Tab を使うのを防ぎます
-      -- history = true,
-      -- updateevents = "TextChanged,TextChangedI",
+      history = true,
+      updateevents = "TextChanged,TextChangedI",
     })
       vim.api.nvim_create_user_command(
             "LuaSnipEdit",
