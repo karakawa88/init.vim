@@ -60,7 +60,12 @@ return {
         ['<C-j>'] = {
             function(cmp)
                 cmp.hide()
-            end, 'fallback' }
+            end, 'fallback'
+        },
+        ['`'] ={
+            function(cmp)
+            end, 'fallback'
+        },
     },
     snippets = {
         preset = 'luasnip',
