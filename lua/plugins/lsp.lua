@@ -62,10 +62,7 @@ return {
                 cmp.hide()
             end, 'fallback'
         },
-        ['`'] ={
-            function(cmp)
-            end, 'fallback'
-        },
+        ['`'] ={},
     },
     snippets = {
         preset = 'luasnip',

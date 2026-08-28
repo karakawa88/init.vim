@@ -13,6 +13,13 @@ return {
                         pcall(vim.treesitter.start)
                     end,
                 })
+                vim.api.nvim_create_autocmd("FileType", {
+                        pattern = "markdown",
+                        callback = function()
+                        -- 必要に応じて一時的にtreesitterハイライトをオフにする場合
+                         vim.treesitter.stop()
+                        end,
+                })
         end,
         opts = {
           highlight = {
