@@ -27,6 +27,7 @@ vim.keymap.set('n', '<leader>t', "<cmd>lua require('fzf-lua').tabs()<CR>")
 vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<CR>")
 vim.keymap.set('n', '<leader>o', "<cmd>lua require('fzf-lua').oldfiles()<CR>")
 vim.keymap.set('n', '<leader>c', "<cmd>lua require('fzf-lua').commands()<CR>")
+vim.keymap.set('n', '<leader>q', "<cmd>lua require('fzf-lua').quickfix()<CR>")
 
 -- -- lsp関連
 vim.keymap.set('n', '<leader>r', "<cmd>lua require('fzf-lua').lsp_references()<CR>")

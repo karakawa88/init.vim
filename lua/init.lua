@@ -1,3 +1,10 @@
+-- LuaJIT環境で math.tointeger がない場合の互換用パッチ
+if not math.tointeger then
+  math.tointeger = function(x)
+    return (type(x) == "number" and x == math.floor(x)) and x or nil
+  end
+end
+
 require("config.lazy")
 -- Python（後で仮想環境対応版に変更）
 vim.lsp.config.pyright = {
