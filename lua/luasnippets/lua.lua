@@ -54,11 +54,32 @@ return {
         if {} then
             {}
         end
-    ]], { i(1, ""), d(2, get_visual), })),
+    ]], { i(2, ""), d(1, get_visual), })),
     s({trig = "test", name="test",}, fmt([[
         if {} then
             {}
         end
     ]], { i(1, ""), d(2, get_visual), })),
+
+    s(  "ret", 
+        fmt("return {}", 
+        { i(1, "value") })),
+    s(
+        "img",
+            fmt(
+                [[
+                <Image
+                width="500"
+                src="{}"
+                alt="{}"
+                />
+                ]],
+                { i(1, "src"), i(2, "alt") },
+                { dedent = false }
+            )
+        ),
+        s(  "text", 
+            fmt([[]]))
 }
+
 
