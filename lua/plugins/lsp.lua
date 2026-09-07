@@ -55,7 +55,7 @@ return {
                 else
                     return cmp.select_next()
                 end
-            end, 'snippet_forward', 'fallback' },
+            end, "select_next",'snippet_forward', 'fallback' },
         ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
         ['<C-j>'] = {
             function(cmp)
