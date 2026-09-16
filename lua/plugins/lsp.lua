@@ -53,7 +53,7 @@ return {
 --     --
 --     -- See :h blink-cmp-config-keymap for defining your own keymap
     keymap = {
-        preset = 'enter', -- または 'default'
+        preset = 'default', -- または 'default'
         ['<Tab>'] = {
             function(cmp)
                 if cmp.snippet_active() then
@@ -63,8 +63,20 @@ return {
                 else
                     return cmp.select_next()
                 end
-            end, "select_next",'snippet_forward', 'fallback' },
+            end, "accept", "select_next",'snippet_forward', 'fallback' },
         ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+        ["<Up>"] = { "select_prev", "fallback" },
+        ["<Down>"] = { "select_next", "fallback" },
+        ["<C-p>"] = { "select_prev", "fallback" },
+        ["<C-n>"] = { "select_next", "fallback" },
+        ["<C-y>"] = { "accept", "fallback" },
+
+        ["<S-k>"] = { "scroll_documentation_up", "fallback" },
+        ["<S-j>"] = { "scroll_documentation_down", "fallback" },
+
+        ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-e>"] = { "hide", "fallback" },
+        [ "<CR>" ] = { "fallback", },
         ['<C-j>'] = {
             function(cmp)
                 cmp.hide()
@@ -84,43 +96,7 @@ return {
           -- border = "padded",
         },
       },
-
-        menu = {
-        draw = {
-      components = {
-        kind_icon = {
-          text = function(ctx)
-            local icon = ctx.kind_icon
-            if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
-                if dev_icon then
-                    icon = dev_icon
-                end
-            else
-                icon = require("lspkind").symbol_map[ctx.kind] or ""
-            end
-
-            return icon .. ctx.icon_gap
-          end,
-
-          -- Optionally, use the highlight groups from nvim-web-devicons
-          -- You can also add the same function for `kind.highlight` if you want to
-          -- keep the highlight groups in sync with the icons.
-          highlight = function(ctx)
-            local hl = ctx.kind_hl
-            if vim.tbl_contains({ "Path" }, ctx.source_name) then
-              local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
-              if dev_icon then
-                hl = dev_hl
-              end
-            end
-            return hl
-          end,
-        }
-      }
-    }
-  }
-},
+    },
       -- ドキュメントウィンドウの設定
 --     -- ensure you have the `snippets` source (enabled by default)
 --     appearance = {
@@ -169,7 +145,7 @@ return {
 --       'hrsh7th/cmp-buffer',
 --       'hrsh7th/cmp-path',
 --       'hrsh7th/cmp-cmdline',
-    },
+},
 },
 {
     "mason-org/mason.nvim",
@@ -184,4 +160,5 @@ return {
     },
 },
 }
+
 
