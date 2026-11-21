@@ -7,7 +7,7 @@ return {
 			local ms = require("migemo-search")
 			ms.setup({
 			  cmigemo_exec_path = "/usr/local/bin/cmigemo",
-			  migemo_dict_path = "/usr/local/share/migemo/utf-8/migemo-dict",
+			  migemo_dict_path = "/usr/local/share/cmigemo/utf-8/migemo-dict",
 			})
 			vim.keymap.set("c", "<CR>", ms.cr)
 -- " migemo
